@@ -173,6 +173,28 @@
     .sidenav{display:flex}
     body{padding-left:196px}
   }
+  /* detail panel */
+  .detail-trigger{cursor:pointer}
+  .detailpanel{position:fixed;top:0;right:0;width:360px;height:100vh;
+    padding:64px 30px 30px;background:var(--panel);border-left:1px solid var(--line);
+    overflow-y:auto;z-index:90;display:none;
+    transform:translateX(100%);transition:transform .3s ease;
+    box-shadow:-16px 0 30px rgba(0,0,0,.15)}
+  .detailpanel.open{transform:translateX(0)}
+  @media(min-width:1240px){ .detailpanel{display:block} }
+  .detailpanel-close{position:absolute;top:20px;right:20px;width:32px;height:32px;
+    border-radius:50%;border:1px solid var(--line);background:var(--panel2);color:var(--mut);
+    font-size:13px;cursor:pointer;display:none;align-items:center;justify-content:center;line-height:1}
+  .detailpanel.pinned .detailpanel-close{display:flex}
+  .detailpanel-item{display:none}
+  .detailpanel-item.active{display:block}
+  .detailpanel-item .kick{margin-bottom:8px}
+  .detailpanel-item h4{font-size:19px;margin:.2em 0 .6em;letter-spacing:-.01em;color:var(--tx)}
+  .detailpanel-item p{font-size:14px;line-height:1.95;color:var(--mut)}
+  .detailpanel-hint{position:fixed;top:24px;right:24px;font-size:11px;color:var(--mut);
+    background:var(--panel2);border:1px solid var(--line);border-radius:999px;
+    padding:5px 12px;z-index:80;display:none}
+  @media(min-width:1240px){ .detailpanel-hint{display:block} }
 </style>
 </head>
 <body>
@@ -190,6 +212,36 @@
   </div>
   <div class="sidenav-foot"><a href="mailto:superchance1986@outlook.jp">Contact →</a></div>
 </nav>
+
+<div class="detailpanel-hint">◀ Featuredの4つはホバーで詳細</div>
+<aside class="detailpanel" id="detailpanel">
+  <button class="detailpanel-close" id="detailpanel-close" aria-label="閉じる">✕</button>
+
+  <div class="detailpanel-item" data-panel="anicra">
+    <div class="kick">FDE ・ CrestLab</div>
+    <h4>ANICRA — 仕事の中身</h4>
+    <p>CrestLabは代表・CTO・堀部の3人体制。アニメ制作の非効率をAIで解決するプロダクト「ANICRA」を、原画・動画・仕上げといった工程からAI駆動で開発している。堀部の仕事は商談でのニーズヒアリングから始まる。クライアントであるアニメスタジオの制作工程を実際に聞き取り、非効率なポイントを特定してソリューションを提案する。困りごとを解決するPoCをその場で用意し、商談の場でデモを見せることも多い。契約後は客先常駐でシステムを構築・提供し、汎用性の高いものはマイクロサービス化して自社SaaSへ組み込み、全ユーザーが使える機能に育てる。FDEとして現場で集めた声と商談でのヒアリングから業界全体のニーズを把握し、SaaSとしてPMFへ向かう道筋を描く事業戦略の立案、さらに経営会議でのビジョン策定・ミッション定義まで、開発の最前線から経営レイヤーまでを一気通貫で担っている。</p>
+  </div>
+
+  <div class="detailpanel-item" data-panel="lumina">
+    <div class="kick">開発Dir/PO ・ AI Impulse</div>
+    <h4>LuminaLive — 仕事の中身</h4>
+    <p>2名体制のAI Impulseで、堀部は開発ディレクター兼プロダクトオーナーとしてLuminaLiveの開発全体を率いた。アウトゲーム・インゲームのゲーム設計から入り、2週間スプリントのスクラムではスクラムマスターも兼務。ユーザーストーリーや受け入れ条件を文章に落とし込み、システム全体のアーキテクチャを把握しながらスプリントプランニングを進行する。AI領域では、プロンプト設計とベクトル検索によるテキスト生成システム、SoVITS等を使った独自キャラクターの音声合成システムを整備し、AWS(EC2)のインフラコストとパフォーマンスのバランス調整まで担当した。リリース後は同じ基盤をBtoBへ横展開。ECライブコマース、YouTubeショート動画自動生成、展示会向けAIキャラ説明システムなど4つの派生プロダクトを企画・開発し、展示会システムはTiB有楽町で2025年8月に実際に展示された。オフショアの開発チームとupworkのネットワークチームをマネジメントしながら、日々のデータ分析をアプリ運用にフィードバックし、四半期・月次の分析から開発ロードマップを調整するPOの役割も兼ねている。</p>
+  </div>
+
+  <div class="detailpanel-item" data-panel="comdesk">
+    <div class="kick">プロダクトマネージャー ・ Widsley</div>
+    <h4>Comdesk Lead — 仕事の中身</h4>
+    <p>Widsleyでは、携帯回線とIP回線を併用できるCTI SaaS「Comdesk Lead」のプロダクトマネージャーを務めた。核となったのは、AIによるテキスト解析でアウトバウンド営業の通話内容から"商談成功に繋がる要因"を捉えるソリューション。テレアポの良し悪しを算出するスコアリングの計算ロジックを自ら考案し、開発・実装・リリースまで担当した。既存機能の改善では、ビジネス要件を設計に落とし込み、開発・検証・デバッグ・本番確認までを一貫して担当。新規開発では各マイクロサービスの企画・設計から要件定義（機能／UI／データ）、開発マネジメント、リリース対応まで手掛けた。開発チームにはスクラムを新規導入し、スクラムマスターとしてデイリースクラムやリファインメント、スプリントレビューをファシリテーション（厳密にはSAFeのリリーストレイン方式を自社の組織特性に合わせてローカライズしたもの）。ビジネス・CS10名、開発10名の体制で、ChatGPTを使った業務自動化やテキストスコアリングの検証も並行して進めていた。</p>
+  </div>
+
+  <div class="detailpanel-item" data-panel="iruna">
+    <div class="kick">プロデューサー／ディレクター ・ アソビモ</div>
+    <h4>イルーナ戦記Online — 仕事の中身</h4>
+    <p>約38名の体制で運営していたイルーナ戦記Onlineに、プロデューサー／ディレクターとして就任。ジョインしてわずか3ヶ月で消費を最大化し、その後も半年以上にわたりMoM100%超の成長を継続、就任時と比べて月商は約1.5倍に到達した。掲げたミッションは「会社の利益」「アプリの持続可能性」「ユーザー満足」の3つの両立。コラボ企画書や契約書の作成から交渉・実施までを担当し、消費を伸ばしてストアランキング2桁復帰を実現した。新レイドや新アイテム、新ダンジョンの企画といったディレクター業務に加え、企画スタッフへのゲームデザイン指導、マップスタッフへのレベルデザイン指導など人材育成も担った。組織面では部署間の縦割りを解消するユニット化、Confluence導入によるナレッジ集約、PD承認フローの確立、関係会社との発注フロー整備など、リリースフローそのものを再構築。DAUも140%UPし、運営タイトル全体のKPIを底上げした。</p>
+  </div>
+</aside>
+
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">Maker × Growth PM × AI-FDE</div>
@@ -219,7 +271,7 @@
     <div class="kick">Featured</div>
 
     <!-- ANICRA : FDE -->
-    <div class="card" style="margin-bottom:34px">
+    <div class="card detail-trigger" data-detail="anicra" style="margin-bottom:34px">
       <div class="frame" style="aspect-ratio:16/9">
         <img src="anicra-hero.jpg" alt="ANICRA — アニメスタジオ向けAI制作基盤（CrestLab公式サイトより）" style="width:100%;height:100%;object-fit:cover;display:block">
       </div>
@@ -233,7 +285,7 @@
     </div>
 
     <!-- LuminaLive : hero -->
-    <div class="card" style="margin-bottom:34px">
+    <div class="card detail-trigger" data-detail="lumina" style="margin-bottom:34px">
       <div class="split">
       <div>
         <div class="shorts2">
@@ -278,7 +330,7 @@
     </div>
 
     <!-- Comdesk Lead : BtoB SaaS -->
-    <div class="card" style="margin-bottom:34px">
+    <div class="card detail-trigger" data-detail="comdesk" style="margin-bottom:34px">
       <div class="shot"><img src="comdesk-lead.jpg" alt="Comdesk Lead 管理画面（公式サイトより）"></div>
       <div class="role" style="margin-top:16px">プロダクトマネージャー ・ Widsley（正社員）</div>
       <h3>Comdesk Lead — IP回線×携帯回線を横断するCTI SaaS</h3>
@@ -289,7 +341,7 @@
     </div>
 
     <!-- イルーナ growth -->
-    <div class="card" style="background:var(--panel2)">
+    <div class="card detail-trigger" data-detail="iruna" style="background:var(--panel2)">
       <div class="role">プロデューサー／ディレクター ・ アソビモ（約38名）</div>
       <h3>イルーナ戦記Online — 運営タイトルのグロース</h3>
       <p class="lead">「会社の利益／アプリの持続可能性／ユーザー満足」の3つの両立をミッションに、コラボ交渉・新機能企画・リリースフロー再構築（縦割り解消）まで。就任わずか3ヶ月で消費最大化、伸ばして"維持"した。</p>
@@ -469,6 +521,58 @@
   window.addEventListener('scroll', update, {passive:true});
   window.addEventListener('resize', update);
   update();
+})();
+</script>
+<script>
+(function(){
+  var triggers = Array.prototype.slice.call(document.querySelectorAll('.detail-trigger'));
+  var panel = document.getElementById('detailpanel');
+  var closeBtn = document.getElementById('detailpanel-close');
+  if(!triggers.length || !panel) return;
+
+  var items = {};
+  Array.prototype.slice.call(panel.querySelectorAll('.detailpanel-item')).forEach(function(el){
+    items[el.getAttribute('data-panel')] = el;
+  });
+
+  var pinned = false;
+
+  function show(key){
+    Object.keys(items).forEach(function(k){ items[k].classList.toggle('active', k === key); });
+    panel.classList.add('open');
+  }
+  function hide(){
+    if(pinned) return;
+    panel.classList.remove('open');
+  }
+  function unpin(){
+    pinned = false;
+    panel.classList.remove('open', 'pinned');
+  }
+
+  triggers.forEach(function(card){
+    var key = card.getAttribute('data-detail');
+    card.addEventListener('mouseenter', function(){ if(!pinned) show(key); });
+    card.addEventListener('mouseleave', function(){ hide(); });
+    card.addEventListener('click', function(){
+      if(pinned && items[key] && items[key].classList.contains('active')){
+        unpin();
+        return;
+      }
+      pinned = true;
+      show(key);
+      panel.classList.add('pinned');
+    });
+  });
+
+  if(closeBtn){ closeBtn.addEventListener('click', unpin); }
+
+  document.addEventListener('click', function(e){
+    if(!pinned) return;
+    if(panel.contains(e.target)) return;
+    if(e.target.closest && e.target.closest('.detail-trigger')) return;
+    unpin();
+  });
 })();
 </script>
 </body>
