@@ -173,8 +173,14 @@
     .sidenav{display:flex}
     body{padding-left:196px}
   }
+  html{transition:padding-right .32s ease}
   /* detail panel */
-  .detail-trigger{cursor:pointer}
+  .detail-trigger{cursor:pointer;position:relative;overflow:hidden;transition:transform .15s,border-color .15s,box-shadow .2s}
+  .detail-trigger::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(94,234,212,.16),transparent 70%);
+    opacity:0;transition:opacity .3s ease}
+  .detail-trigger:hover::before{opacity:1}
+  .detail-trigger.card-active{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc),0 12px 30px rgba(94,234,212,.12)}
   .detailpanel{position:fixed;top:0;right:0;width:360px;height:100vh;
     padding:64px 30px 30px;background:var(--panel);border-left:1px solid var(--line);
     overflow-y:auto;z-index:90;display:none;
@@ -366,9 +372,9 @@
       <h3>イルーナ戦記Online — 運営タイトルのグロース</h3>
       <p class="lead">「会社の利益／アプリの持続可能性／ユーザー満足」の3つの両立をミッションに、コラボ交渉・新機能企画・リリースフロー再構築（縦割り解消）まで。就任わずか3ヶ月で消費最大化、伸ばして"維持"した。</p>
       <div class="stats">
-        <div class="stat"><div class="n">月商 約1.5倍</div><div class="l">就任 → 9ヶ月目（MoM100%超を半年継続）</div></div>
-        <div class="stat"><div class="n">消費 130%↑</div><div class="l">を6ヶ月間 維持 ・ ストアランク2桁復帰</div></div>
-        <div class="stat"><div class="n">DAU 140%↑</div><div class="l">KPI全体を底上げ</div></div>
+        <div class="stat"><div class="n">月商 約<span class="count" data-target="1.5" data-decimals="1">0</span>倍</div><div class="l">就任 → 9ヶ月目（MoM100%超を半年継続）</div></div>
+        <div class="stat"><div class="n">消費 <span class="count" data-target="130" data-decimals="0">0</span>%↑</div><div class="l">を6ヶ月間 維持 ・ ストアランク2桁復帰</div></div>
+        <div class="stat"><div class="n">DAU <span class="count" data-target="140" data-decimals="0">0</span>%↑</div><div class="l">KPI全体を底上げ</div></div>
       </div>
       <div class="frame" style="margin-top:16px">
         <iframe src="https://www.youtube-nocookie.com/embed/NNYPhQ67fAY?start=10" title="イルーナ戦記Online ワールドボスレイド プレイ映像（JUNさん撮影）"
@@ -575,24 +581,42 @@
   });
 
   var pinned = false;
+  var cardByKey = {};
+  triggers.forEach(function(card){ cardByKey[card.getAttribute('data-detail')] = card; });
 
+  function isWide(){ return window.matchMedia('(min-width:1240px)').matches; }
   function show(key){
     Object.keys(items).forEach(function(k){ items[k].classList.toggle('active', k === key); });
+    triggers.forEach(function(c){ c.classList.remove('card-active'); });
+    if(cardByKey[key]) cardByKey[key].classList.add('card-active');
     panel.classList.add('open');
+    document.documentElement.classList.add('panel-open');
+    if(isWide()) document.documentElement.style.paddingRight = '360px';
   }
   function hide(){
     if(pinned) return;
     panel.classList.remove('open');
+    document.documentElement.classList.remove('panel-open');
+    document.documentElement.style.paddingRight = '';
+    triggers.forEach(function(c){ c.classList.remove('card-active'); });
   }
   function unpin(){
     pinned = false;
     panel.classList.remove('open', 'pinned');
+    document.documentElement.classList.remove('panel-open');
+    document.documentElement.style.paddingRight = '';
+    triggers.forEach(function(c){ c.classList.remove('card-active'); });
   }
 
   triggers.forEach(function(card){
     var key = card.getAttribute('data-detail');
     card.addEventListener('mouseenter', function(){ if(!pinned) show(key); });
     card.addEventListener('mouseleave', function(){ hide(); });
+    card.addEventListener('mousemove', function(e){
+      var rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width * 100).toFixed(1) + '%');
+      card.style.setProperty('--my', ((e.clientY - rect.top) / rect.height * 100).toFixed(1) + '%');
+    });
     card.addEventListener('click', function(){
       if(pinned && items[key] && items[key].classList.contains('active')){
         unpin();
@@ -632,6 +656,44 @@
     });
   }, {threshold:0.1, rootMargin:'0px 0px -60px 0px'});
   els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var counts = Array.prototype.slice.call(document.querySelectorAll('.count'));
+  if(!counts.length) return;
+
+  function animate(el){
+    var target = parseFloat(el.getAttribute('data-target'));
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var duration = 1100;
+    var stepTime = 20;
+    var steps = duration / stepTime;
+    var increment = target / steps;
+    var current = 0;
+    var timer = setInterval(function(){
+      current += increment;
+      if(current >= target){
+        current = target;
+        clearInterval(timer);
+      }
+      el.textContent = current.toFixed(decimals);
+    }, stepTime);
+  }
+
+  if(!('IntersectionObserver' in window)){
+    counts.forEach(function(el){ el.textContent = parseFloat(el.getAttribute('data-target')).toFixed(parseInt(el.getAttribute('data-decimals')||'0',10)); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        animate(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.5});
+  counts.forEach(function(el){ io.observe(el); });
 })();
 </script>
 </body>
