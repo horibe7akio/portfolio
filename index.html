@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>堀部 彰夫 ｜ Portfolio</title>
+<style>
+  :root{
+    --bg:#0d0f14; --panel:#151922; --panel2:#1b2130; --line:#252c3a;
+    --tx:#e8ecf3; --mut:#9aa6b8; --acc:#5eead4; --acc2:#818cf8; --warn:#fbbf24;
+    --maxw:1040px;
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f6f7fb; --panel:#ffffff; --panel2:#f0f2f8; --line:#e3e7f0;
+      --tx:#121722; --mut:#5a6478; --acc:#0d9488; --acc2:#4f46e5; --warn:#b45309; }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--tx);
+    font-family:-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;
+    line-height:1.75;-webkit-font-smoothing:antialiased}
+  a{color:var(--acc2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+  .draft-note{background:var(--panel2);color:var(--mut);text-align:center;font-size:12px;
+    padding:5px 12px;border-bottom:1px solid var(--line)}
+  .draft-note b{color:var(--warn)}
+  /* hero */
+  header.hero{padding:72px 0 48px;position:relative;overflow:hidden}
+  header.hero::before{content:"";position:absolute;inset:-40% -10% auto;height:420px;
+    background:radial-gradient(60% 60% at 30% 20%,rgba(94,234,212,.18),transparent 70%),
+      radial-gradient(50% 50% at 80% 0%,rgba(129,140,248,.20),transparent 70%);
+    filter:blur(10px);z-index:0}
+  .hero .wrap{position:relative;z-index:1}
+  .eyebrow{color:var(--acc);font-weight:700;letter-spacing:.14em;font-size:13px;
+    text-transform:uppercase}
+  h1{font-size:clamp(30px,6vw,52px);line-height:1.15;margin:.25em 0 .1em;letter-spacing:-.01em}
+  .tagline{font-size:clamp(16px,2.4vw,21px);color:var(--mut);max-width:44ch}
+  .cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--acc2);color:#fff;
+    padding:10px 18px;border-radius:10px;font-weight:600;font-size:14px}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--tx)}
+  .ph-inline{color:var(--warn);font-weight:600}
+  /* sections */
+  section{padding:44px 0;border-top:1px solid var(--line)}
+  .kick{color:var(--acc);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+  h2{font-size:clamp(22px,3.4vw,30px);margin:.2em 0 .6em;letter-spacing:-.01em}
+  h3{font-size:19px;margin:0 0 .3em}
+  p{margin:.4em 0}
+  .lead{color:var(--mut);max-width:64ch}
+  /* cards / grids */
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:760px){.g2,.g3{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:20px;transition:transform .15s,border-color .15s}
+  .card:hover{transform:translateY(-3px);border-color:var(--acc2)}
+  .card .role{color:var(--acc2);font-size:13px;font-weight:600;margin-bottom:6px}
+  .card p{font-size:14.5px;color:var(--mut)}
+  /* media placeholder */
+  .media{aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--panel2);
+    border:1px dashed var(--line);display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:8px;color:var(--mut);text-align:center;padding:12px}
+  .media.grad{border-style:solid;color:#0b0d12;
+    background:linear-gradient(135deg,var(--acc),var(--acc2))}
+  .media .ico{font-size:34px;line-height:1}
+  .media .cap{font-size:12.5px;font-weight:600;opacity:.9}
+  .frame{aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000;border:1px solid var(--line)}
+  .frame iframe{width:100%;height:100%;border:0;display:block}
+  .swap{display:inline-block;margin-top:8px;font-size:12px;color:var(--warn);font-weight:600}
+  /* store badges */
+  .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .badge{display:inline-flex;align-items:center;gap:7px;background:var(--panel2);
+    border:1px solid var(--line);border-radius:10px;padding:8px 13px;font-size:13px;
+    font-weight:600;color:var(--tx)}
+  .badge:hover{border-color:var(--acc2);text-decoration:none}
+  .badge .ico{font-size:16px}
+  .badge small{display:block;font-size:10.5px;color:var(--mut);font-weight:500;line-height:1}
+  .launched{display:inline-block;background:rgba(94,234,212,.14);color:var(--acc);
+    border:1px solid var(--acc);border-radius:999px;padding:3px 12px;font-size:12px;
+    font-weight:700;margin-bottom:10px}
+  /* stat highlight */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+  @media(max-width:600px){.stats{grid-template-columns:1fr}}
+  .stat{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px}
+  .stat .n{font-size:25px;font-weight:800;color:var(--acc);letter-spacing:-.02em}
+  .stat .l{font-size:12.5px;color:var(--mut);margin-top:2px}
+  /* hero product two-col */
+  .split{display:grid;grid-template-columns:1fr 1.05fr;gap:26px;align-items:center}
+  @media(max-width:820px){.split{grid-template-columns:1fr}}
+  ul.tight{margin:.4em 0;padding-left:1.1em}
+  ul.tight li{margin:.2em 0;font-size:14.5px;color:var(--mut)}
+  /* hero proof panel */
+  .proof-panel{border-radius:16px;padding:26px 22px;color:#07110f;
+    background:linear-gradient(135deg,var(--acc),var(--acc2));position:relative;overflow:hidden}
+  .proof-panel .big{font-size:44px;line-height:1;margin-bottom:10px}
+  .proof-panel h4{margin:0;font-size:17px;color:#07110f}
+  .proof-panel p{font-size:13px;color:rgba(7,17,15,.72);margin:.3em 0 0}
+  .proof-panel .plat{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .proof-panel .plat span{background:rgba(255,255,255,.5);border-radius:8px;padding:5px 11px;
+    font-size:12px;font-weight:700;color:#07110f}
+  /* credits (映像期) */
+  .credits{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:6px}
+  @media(max-width:700px){.credits{grid-template-columns:1fr}}
+  .credit{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .credit.hi{border-color:var(--acc2)}
+  .credit .t{font-weight:700;font-size:15px}
+  .credit .m{font-size:12.5px;color:var(--mut);margin-top:2px}
+  .credit .c{font-size:11.5px;color:var(--acc2);font-weight:600;margin-top:6px;letter-spacing:.03em}
+  /* timeline */
+  .tl{border-left:2px solid var(--line);margin-left:6px;padding-left:22px;display:grid;gap:18px}
+  .tl .it{position:relative}
+  .tl .it::before{content:"";position:absolute;left:-29px;top:6px;width:11px;height:11px;
+    border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px var(--bg)}
+  .tl .when{font-size:12.5px;color:var(--acc2);font-weight:700}
+  .tl .it p{font-size:14px;color:var(--mut)}
+  .tag{display:inline-block;background:var(--panel2);border:1px solid var(--line);
+    border-radius:999px;padding:3px 11px;font-size:12.5px;color:var(--tx);margin:3px 4px 0 0}
+  .nda{color:var(--warn);font-size:12px;font-weight:600}
+  footer{padding:40px 0 70px;border-top:1px solid var(--line);color:var(--mut);font-size:13px}
+  footer a{font-weight:600}
+</style>
+</head>
+<body>
+<div class="draft-note">プレビュー版 — 残タスク: <b>LuminaLive 実スクショ差し込み</b> ／ <b>GitHub・X 等の導線</b>（黄色マーカー箇所）</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Maker × Growth PM × AI-FDE</div>
+    <h1>堀部 彰夫</h1>
+    <p class="tagline">ゲーム・映像の"作り手"出身。グロースを経て、いまは生成AIプロダクトを<strong>"自分で実装まで"</strong>届ける。</p>
+    <div class="cta">
+      <a class="btn" href="#featured">代表作を見る</a>
+      <a class="btn ghost" href="#contact">連絡先</a>
+    </div>
+    <p style="margin-top:14px;font-size:14px">
+      <a href="mailto:superchance1986@outlook.jp">superchance1986@outlook.jp</a>
+      <span class="ph-inline" style="margin-left:10px">［要確認: GitHub / X 等の導線をここに追加］</span>
+    </p>
+  </div>
+</header>
+
+<section id="summary">
+  <div class="wrap">
+    <div class="kick">Summary</div>
+    <h2>作って、届ける人間</h2>
+    <div class="grid g3">
+      <div class="card"><h3>越境する作り手</h3><p>CGデザイナー／映像演出から、ゲームのディレクター／プロデューサー、対話AIのPM、生成AIのFDEまで、"作る側"のあらゆるポジションを横断。フロム・ソフトウェア〜スタートアップまで20年。</p></div>
+      <div class="card"><h3>数字で事業を動かす</h3><p>運営タイトルの月商を約1.5倍に伸ばし、新規IPをストア上位へ。KPIを底上げして、伸びた状態を"維持"してきた。</p></div>
+      <div class="card"><h3>その場で実装する</h3><p>バイブコーディングで、PMである自分がその場で作ってデリバリー。お客さんの"欲しいものの本質"を、動くもので返すFDE。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="featured">
+  <div class="wrap">
+    <div class="kick">Featured</div>
+    <h2>代表作</h2>
+
+    <!-- LuminaLive : hero -->
+    <div class="split" style="margin-bottom:34px">
+      <div>
+        <div class="proof-panel">
+          <div class="big">📱</div>
+          <span class="launched">● 2025.03 LAUNCHED</span>
+          <h4>Lumina Live（AI VTuber ライブ配信アプリ）</h4>
+          <p>AI VTuber が24時間365日ライブ配信。元キャラの個性を継承しつつ、AIならではのパーソナライズ会話・多言語対応。株式会社AI Impulse がリリース・運営。</p>
+          <div class="plat"><span>iOS</span><span>Android</span><span>Web</span></div>
+        </div>
+        <div class="badges">
+          <a class="badge" href="https://apps.apple.com/jp/app/lumina-live/id6473817194" target="_blank" rel="noopener"><span class="ico"></span>App Store<small>iOS で見る</small></a>
+          <a class="badge" href="https://play.google.com/store/apps/details?id=com.aiimpluse.product.ivyInfluencer&hl=ja" target="_blank" rel="noopener"><span class="ico">▶</span>Google Play<small>Android で見る</small></a>
+          <a class="badge" href="https://prtimes.jp/main/html/rd/p/000000002.000157556.html" target="_blank" rel="noopener"><span class="ico">📰</span>プレスリリース<small>PR TIMES</small></a>
+        </div>
+        <span class="swap">▲ ここに実スクショ／配信キャプチャを差し込むと更に強い</span>
+      </div>
+      <div>
+        <div class="role">開発ディレクター／プロダクトオーナー ・ AI Impulse（2名体制の業務委託）</div>
+        <h3>LuminaLive（Aituber）— AIキャラのライブ配信アプリを 0→1</h3>
+        <p class="lead">iOS／Android／Web でリリースしたライブ配信アプリ。ゲーム設計・2週間スプリントのスクラム運営（SM兼務）・AWSインフラ・音声合成（SoVITS等で独自キャラ音声）・テキスト生成（プロンプト＋ベクトル検索）まで開発全般をディレクション。</p>
+        <ul class="tight">
+          <li>同じ基盤を<strong>BtoBへ4展開</strong>：ECライブコマース／YouTubeショート動画自動生成／YouTube配信システム／展示会設置向けAIキャラ説明・QA</li>
+          <li>展示会システムは <strong>TiB（Tokyo Innovation Base）有楽町にて2025年8月展示</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- イルーナ growth -->
+    <div class="card" style="background:var(--panel2)">
+      <div class="role">プロデューサー／ディレクター ・ アソビモ（約38名）</div>
+      <h3>イルーナ戦記Online — 運営タイトルのグロース</h3>
+      <p class="lead">「会社の利益／アプリの持続可能性／ユーザー満足」の3つの両立をミッションに、コラボ交渉・新機能企画・リリースフロー再構築（縦割り解消）まで。就任わずか3ヶ月で消費最大化、伸ばして"維持"した。</p>
+      <div class="stats">
+        <div class="stat"><div class="n">月商 約1.5倍</div><div class="l">就任 → 9ヶ月目（MoM100%超を半年継続）</div></div>
+        <div class="stat"><div class="n">消費 130%↑</div><div class="l">を6ヶ月間 維持 ・ ストアランク2桁復帰</div></div>
+        <div class="stat"><div class="n">DAU 140%↑</div><div class="l">KPI全体を底上げ</div></div>
+      </div>
+      <div class="frame" style="margin-top:16px">
+        <iframe src="https://www.youtube-nocookie.com/embed/EMRrsiVW9ao" title="イルーナ戦記オンライン 紹介PV（ビモチャン／アソビモ 公式）"
+          loading="lazy" allow="encrypted-media" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+      <span class="swap">▲ ビモチャン（アソビモ）公式の紹介PV</span>
+    </div>
+  </div>
+</section>
+
+<section id="proof">
+  <div class="wrap">
+    <div class="kick">Proof of Work</div>
+    <h2>作って、どう届けたか</h2>
+    <div class="grid g2">
+      <div class="card">
+        <div class="role">FDE ・ CrestLab（現職・業務委託）</div>
+        <h3>アニメ制作 × AI の FDE</h3>
+        <p>アニメ制作現場の非効率をヒアリング → PoC/MVPをマイクロサービス化してその場でデリバリー、自社SaaSにも実装。商談〜客先常駐開発〜経営戦略まで。<span class="nda">［NDA: クライアント名・内部詳細は伏せる］</span></p>
+      </div>
+      <div class="card">
+        <div class="role">開発Dir/PO ・ AI Impulse</div>
+        <h3>LuminaLive ＋ BtoB派生4種</h3>
+        <p>AIキャラ配信アプリを0→1、同じ基盤をBtoB（ECライブコマース／YouTubeショート生成／展示会AIキャラQA）へ横展開・展示会実装まで。</p>
+      </div>
+      <div class="card">
+        <div class="role">PM兼テックアドバイザー / 開発Dir ・ rinna</div>
+        <h3>RCP（Rinna Character Platform）/ Chararu</h3>
+        <p>クライアント向けAIキャラの企画〜導入支援（プレスリリース案件）。対話AIモデル・分類モデル・音声合成モデルの準備〜接続仕様〜デバッグ。対話AIチャットアプリ Chararu をリリース〜運営。</p>
+      </div>
+      <div class="card">
+        <div class="role">プロダクトマネージャー ・ Widsley</div>
+        <h3>Comdesk Lead（CTI SaaS）</h3>
+        <p>通話テキスト解析AIで"商談成功に繋がる要因"をスコアリング。ロジック考案〜実装〜リリース。スクラム（SAFe基盤）を導入しSM兼務。</p>
+      </div>
+      <div class="card">
+        <div class="role">PdM（SES）・ AI INNOVATION</div>
+        <h3>営業特化 マルチエージェントAI SaaS</h3>
+        <p>CRM/SFA連携の営業支援AI SaaSのPdM（エンジニア60名規模）。開発ロードマップ・ROI試算・スクラム・Looker分析基盤。商談デモはVibeコーディングで高速プロトタイピング。<span class="nda">［NDA: 派遣先SaaS名は伏せる］</span></p>
+      </div>
+      <div class="card" style="border-style:dashed">
+        <div class="role">個人開発 ・ vibe coding</div>
+        <h3>自作ツール（面談トラッカー 等）</h3>
+        <p>PM である自分が Claude Code 等で実装・運用まで一気通貫。"自分で実装して届けた"FDEの直接証明。<span class="ph-inline">［要確認: リポ/デモURLを載せるか］</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="games">
+  <div class="wrap">
+    <div class="kick">Works ・ Maker軸</div>
+    <h2>作品（ゲーム）</h2>
+    <p class="lead" style="margin-bottom:16px">プロデューサー／ディレクターとして手がけた運営・新規タイトル。担当タイトルの公開映像を埋め込み。</p>
+    <div class="grid g2">
+      <div class="card">
+        <div class="frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/SWS26hENGds" title="SAOIF 公式映像（SAOゲーム公式）"
+            loading="lazy" allow="encrypted-media" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <h3 style="margin-top:12px">ソードアート・オンライン インテグラル・ファクター</h3>
+        <div class="role">新規IP MMORPG ・ プロデューサー／ディレクター（アソビモ側・総勢60名）</div>
+        <p>IP新規スマホMMORPGを立ち上げ。<strong>リリース直後 iOSトップセールス最高8位</strong>。企画・事業計画・インフラ設計・プロトタイプ監修まで。</p>
+      </div>
+      <div class="card">
+        <div class="media"><div class="ico">🎮</div><div class="cap">［画像さしかえ可: ゲートオブリベリオン キービジュアル］</div></div>
+        <h3 style="margin-top:12px">ゲートオブリベリオン</h3>
+        <div class="role">オリジナル新規 MMORPG ・ P兼D（アソビモ・総勢14名）</div>
+        <p>企画立案から事業計画、ゲームデザイン監修、TGS対応（ノベルティ／WEB／PV制作）まで。</p>
+      </div>
+      <div class="card">
+        <div class="media"><div class="ico">🎣</div><div class="cap">［画像さしかえ可: 釣り★スタ 画面］</div></div>
+        <h3 style="margin-top:12px">釣り★スタ for dゲーム</h3>
+        <div class="role">PM兼企画ディレクション（グリー）</div>
+        <p>データ分析ドリブンでゲームサイクルを再設計。<strong>北斗の拳イチゴ味コラボで前月比120%↑ → 社内消費No1、社内MVP受賞</strong>。</p>
+      </div>
+      <div class="card">
+        <div class="media"><div class="ico">🤖</div><div class="cap">［画像さしかえ可: VOIDCRISIS ストア画像］</div></div>
+        <h3 style="margin-top:12px">VOIDCRISIS（Steam）</h3>
+        <div class="role">プロモーション／データ分析（ヘキサドライブ）</div>
+        <p>3Dタワーオフェンスのプロモ担当。Steamストア流入・回遊のGA分析で施策効果を検証、京都BitSummit説明員・開発者ブログ運営。<br><a href="https://voidcrisis.net" target="_blank" rel="noopener">公式サイト →</a></p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:30px">映像期 ・ AAAタイトルのCGデザイナー／カットシーン演出／レベルデザイン <span style="font-weight:400;color:var(--mut);font-size:14px">（2003–2013）</span></h3>
+    <p class="lead" style="margin:.2em 0 14px">家庭用ゲームのOPムービー・ゲーム内カットシーン演出から、レベルデザインまで。"作り手"としての原点。</p>
+    <div class="credits">
+      <div class="credit hi"><div class="t">ファイナルファンタジー13</div><div class="m">カットシーン制作／絵コンテ／モーションキャプチャー演技指導</div><div class="c">スクウェア・エニックス</div></div>
+      <div class="credit hi"><div class="t">サイコブレイク（PsychoBreak）</div><div class="m">レベルデザイン（マップ／敵AI／ギミック仕様・エンジン改良）</div><div class="c">Tango Gameworks / ゼニマックスアジア</div></div>
+      <div class="credit hi"><div class="t">アーマードコア4 ／ ACシリーズ 他</div><div class="m">OP・タイトルムービー制作（モデリング／演出／コンセプトデザイン）</div><div class="c">フロム・ソフトウェア</div></div>
+      <div class="credit"><div class="t">インフィニットアンディスカバリー</div><div class="m">演出／絵コンテ・ビデオコンテ／スクリプターリーダー</div><div class="c">トライエース</div></div>
+      <div class="credit"><div class="t">A.C.E ／ メタルウルフカオス ／ クロムハウンズ 他</div><div class="m">OPムービー制作（CGデザイナー）</div><div class="c">フロム・ソフトウェア</div></div>
+      <div class="credit"><div class="t">女神転生オンライン ／ メタルギアオンライン</div><div class="m">カットシーン制作／オンラインイベント企画・運営</div><div class="c">ケイブ ／ コナミ</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="career">
+  <div class="wrap">
+    <div class="kick">Career</div>
+    <h2>職務経歴（逆順）</h2>
+    <div class="tl">
+      <div class="it"><div class="when">2026.05 – 現在 ・ CrestLab（業務委託）</div><p><strong>FDE。</strong>アニメ制作領域のAI活用プロダクトを、客先で"その場で開発"してデリバリー＋自社SaaSへ実装。ビジョン/事業戦略/営業戦略の経営MTGまで。<span class="nda">［NDA: クライアント名・内部詳細は伏せる］</span></p></div>
+      <div class="it"><div class="when">2025.09 – 2026.04 ・ AI INNOVATION（正社員）</div><p><strong>PdM（SES）。</strong>営業特化・マルチエージェント/マルチプロバイダーのAI SaaS。開発ロードマップ・ROI試算・スクラム・Looker分析基盤。<span class="nda">［NDA: 派遣先SaaS名は伏せる］</span></p></div>
+      <div class="it"><div class="when">2024.02 – 2025.08 ・ AI Impulse（業務委託）</div><p><strong>開発Dir/PO。</strong>LuminaLive（AI VTuber配信アプリ）を0→1＋BtoB派生4種（上記）。</p></div>
+      <div class="it"><div class="when">2022.10 – 2024.01 ・ Widsley（正社員）</div><p><strong>PM。</strong>Comdesk Lead（CTI SaaS）の通話テキスト解析AI／QA自動化（MagicPod）。</p></div>
+      <div class="it"><div class="when">2022.08 – 2022.09 ・ ヘキサドライブ（業務委託）</div><p><strong>プロモーション／データ分析。</strong>Steamタイトル VOIDCRISIS のストア分析・プロモ施策。</p></div>
+      <div class="it"><div class="when">2022.05 – 2022.07 ・ ケップル（正社員）</div><p><strong>PM。</strong>KEPPLE CREATORS LAB（スタートアップ×投資家向けSaaS）のプロダクトマネジメント。</p></div>
+      <div class="it"><div class="when">2021.03 – 2022.04 ・ rinna（正社員）</div><p><strong>B2B案件PM兼テックアドバイザー。</strong>RCP（Rinna Character Platform）／対話AIアプリ Chararu。</p></div>
+      <div class="it"><div class="when">2020.02 – 2021.02 ・ emotivE（正社員）</div><p><strong>対話AIソリューションのDir/PO。</strong>対話AI基盤 OMOHIKANE。<span class="nda">［一部 未発表案件につき割愛］</span></p></div>
+      <div class="it"><div class="when">2019.11 – 2020.01 ・ ユニメディア（正社員）</div><p>ブロックチェーン（コンソーシアム型）を活用した新規事業企画・市場/売上試算。</p></div>
+      <div class="it"><div class="when">2018.03 – 2019.10 ・ デジタルガレージ → ソネット・メディア・ネットワークス（正社員）</div><p>スマホアプリ広告のクリエイティブディレクション（大型ゲームプロモを6社コンペで受注）／広告効果可視化ツール企画・マーケコンサル（新規獲得<strong>LTV 200%超</strong>）。</p></div>
+      <div class="it"><div class="when">2017.10 – 2018.02 ・ ウインライト（正社員）</div><p><strong>プロデューサー。</strong>エレメンタルナイツオンライン移植版＋新規タイトルの立ち上げ（企画〜出資者プレゼン）。</p></div>
+      <div class="it"><div class="when">2016.07 – 2017.09 ・ アソビモ（正社員）</div><p><strong>開発部部長（112名統括）／P兼D。</strong>SAOIF・ゲートオブリベリオン・イルーナ戦記（上記）。全社改革推進も。</p></div>
+      <div class="it"><div class="when">2014.01 – 2016.06 ・ グリー（派遣→契約社員）</div><p><strong>PM兼企画ディレクション。</strong>釣り★スタ（社内消費No1・社内MVP受賞）ほか新規タイトル。</p></div>
+      <div class="it"><div class="when">2013.07 – 2013.12 ・ ポケラボ（紹介予定派遣）</div><p>プランナー。魔界学園カタストロフィ（レイド設計／課金・継続率施策／KPI分析）。</p></div>
+      <div class="it"><div class="when">2011.02 – 2013.06 ・ Tango Gameworks／ゼニマックスアジア（正社員）</div><p>レベルデザイン。サイコブレイク（マップ・敵AI・ギミック仕様、エンジン改良）。</p></div>
+      <div class="it"><div class="when">2003 – 2011 ・ フロム・ソフトウェア 〜 スクウェア・エニックス 他</div><p>CGデザイナー／ゲーム内カットシーン演出／レベルデザイン。FF13・アーマードコア4・インフィニットアンディスカバリー 等（上記 Works 参照）。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="kick">Skills</div>
+    <h2>スキルマップ</h2>
+    <div class="grid g3">
+      <div class="card"><h3>マネジメント</h3>
+        <span class="tag">プロダクトマネジメント</span><span class="tag">0→1 / 1→10 / 運営グロース</span>
+        <span class="tag">スクラム(PO / SM兼務)</span><span class="tag">事業・開発・営業の3戦略統合</span>
+        <span class="tag">ROI試算 / KPI設計</span><span class="tag">チーム統括〜112名</span></div>
+      <div class="card"><h3>開発（AI / FDE）</h3>
+        <span class="tag">バイブコーディング(Claude Code / Cursor)</span><span class="tag">LLM API / RAG(ベクトル検索)</span>
+        <span class="tag">音声合成モデル運用(SoVITS等)</span><span class="tag">Python(解析/自動化)</span>
+        <span class="tag">AWS(EC2) / GCP・Firebase / Supabase</span><span class="tag">SQL / GoogleColab</span>
+        <span class="tag">Unity / Unreal Engine</span></div>
+      <div class="card"><h3>クリエイティブ</h3>
+        <span class="tag">ゲームデザイン</span><span class="tag">映像演出・カットシーン</span>
+        <span class="tag">3dsmax / MotionBuilder / AE</span><span class="tag">生成AI(画像/楽曲/SE)</span>
+        <span class="tag">デザインシンキング</span><span class="tag">図解で直観的な資料</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="wcm">
+  <div class="wrap">
+    <div class="kick">Will / Can / Must</div>
+    <h2>これから</h2>
+    <div class="grid g3">
+      <div class="card"><h3>Will</h3><p>新しい価値を作って世に届けたい。一人では難しくとも、たくさんの人とのコラボレーションから新しい価値を生み、商品化して社会に届ける。</p></div>
+      <div class="card"><h3>Can</h3><p>作り手の目線 × PMの事業目線 × FDEの実装力。ニーズを高速に実装で検証し、事業戦略・開発ロードマップ・営業戦略に落とす。生成AIで一人の生産量を圧縮しPMFへ導く。</p></div>
+      <div class="card"><h3>Must</h3><p>正社員フルコミットも、業務委託・複業も歓迎。フルリモートのスクラム開発で、ビデオ通話＋テキストのみでも高い生産性を出せます。</p></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="kick">Contact</div>
+    <p style="margin-top:10px;font-size:15px"><a href="mailto:superchance1986@outlook.jp">superchance1986@outlook.jp</a></p>
+    <p style="margin-top:4px"><span class="ph-inline">［要確認: GitHub / X / Wantedly 等の導線をここに追加］</span></p>
+    <p style="margin-top:20px;opacity:.7">© 2026 Akio Horibe — このサイトも生成AIのバイブコーディングで自作しています。</p>
+  </div>
+</footer>
+</body>
+</html>
