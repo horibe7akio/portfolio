@@ -150,9 +150,46 @@
   .nda{color:var(--warn);font-size:12px;font-weight:600}
   footer{padding:40px 0 70px;border-top:1px solid var(--line);color:var(--mut);font-size:13px}
   footer a{font-weight:600}
+  /* side nav */
+  .sidenav{position:fixed;top:0;left:0;width:196px;height:100vh;padding:40px 24px;
+    border-right:1px solid var(--line);background:var(--panel);z-index:100;
+    display:none;flex-direction:column;gap:34px;overflow-y:auto}
+  .sidenav-brand{font-weight:800;font-size:15px;letter-spacing:-.01em;color:var(--tx)}
+  .sidenav-brand span{display:block;font-weight:600;font-size:11px;color:var(--acc);
+    letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+  .sidenav-links{position:relative;display:flex;flex-direction:column;gap:1px;padding-left:15px}
+  .sidenav-links::before{content:"";position:absolute;left:3px;top:10px;bottom:10px;width:2px;background:var(--line)}
+  .sidenav-links a{position:relative;padding:8px 0;font-size:13px;font-weight:600;
+    color:var(--mut);transition:color .15s}
+  .sidenav-links a:hover{color:var(--tx);text-decoration:none}
+  .sidenav-links a::before{content:"";position:absolute;left:-15px;top:50%;transform:translateY(-50%);
+    width:7px;height:7px;border-radius:50%;background:var(--panel);border:2px solid var(--line);
+    transition:border-color .15s,background .15s,transform .15s}
+  .sidenav-links a.active{color:var(--acc)}
+  .sidenav-links a.active::before{border-color:var(--acc);background:var(--acc);
+    transform:translateY(-50%) scale(1.15);box-shadow:0 0 0 4px rgba(94,234,212,.16)}
+  .sidenav-foot{margin-top:auto;font-size:12px;color:var(--mut)}
+  @media(min-width:1240px){
+    .sidenav{display:flex}
+    body{padding-left:196px}
+  }
 </style>
 </head>
 <body>
+<nav class="sidenav" aria-label="ページ内ナビゲーション">
+  <div class="sidenav-brand">堀部 彰夫<span>Portfolio</span></div>
+  <div class="sidenav-links">
+    <a href="#summary" data-target="summary">Summary</a>
+    <a href="#featured" data-target="featured">Featured</a>
+    <a href="#proof" data-target="proof">Proof of Work</a>
+    <a href="#games" data-target="games">Works</a>
+    <a href="#career" data-target="career">Career</a>
+    <a href="#skills" data-target="skills">Skills</a>
+    <a href="#wcm" data-target="wcm">Will/Can/Must</a>
+    <a href="#contact" data-target="contact">Contact</a>
+  </div>
+  <div class="sidenav-foot"><a href="mailto:superchance1986@outlook.jp">Contact →</a></div>
+</nav>
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">Maker × Growth PM × AI-FDE</div>
@@ -338,7 +375,7 @@
     <div class="kick">Career</div>
     <h2>職務経歴（逆順）</h2>
     <div class="tl">
-      <div class="it"><div class="when">2026.05 – 現在 ・ CrestLab（業務委託）</div><p><strong>FDE。</strong>アニメ制作領域のAI活用プロダクトを、客先で"その場で開発"してデリバリー＋自社SaaSへ実装。ビジョン/事業戦略/営業戦略の経営MTGまで。<span class="nda">［NDA: クライアント名・内部詳細は伏せる］</span></p></div>
+      <div class="it"><div class="when">2026.05 – 現在 ・ CrestLab（業務委託）</div><p><strong>FDE。</strong>アニメ制作領域のAI活用プロダクトを、客先で"その場で開発"してデリバリー＋自社SaaSへ実装。ビジョン/事業戦略/営業戦略の経営MTGまで。</p></div>
       <div class="it"><div class="when">2025.09 – 2026.04 ・ AI INNOVATION（正社員）</div><p><strong>PdM（SES）。</strong>営業特化・マルチエージェント/マルチプロバイダーのAI SaaS。開発ロードマップ・ROI試算・スクラム・Looker分析基盤。<span class="nda">［NDA: 派遣先SaaS名は伏せる］</span></p></div>
       <div class="it"><div class="when">2024.02 – 2025.08 ・ AI Impulse（業務委託）</div><p><strong>開発Dir/PO。</strong>LuminaLive（AI VTuber配信アプリ）を0→1＋BtoB派生4種（上記）。</p></div>
       <div class="it"><div class="when">2022.10 – 2024.01 ・ Widsley（正社員）</div><p><strong>PM。</strong>Comdesk Lead（CTI SaaS）の通話テキスト解析AI／QA自動化（MagicPod）。</p></div>
@@ -405,5 +442,38 @@
     <p style="margin-top:20px;opacity:.7">© 2026 Akio Horibe — このサイトも生成AIのバイブコーディングで自作しています。</p>
   </div>
 </footer>
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.sidenav-links a'));
+  if(!links.length) return;
+  var map = {};
+  var sections = links.map(function(a){
+    var id = a.getAttribute('data-target');
+    var el = document.getElementById(id);
+    if(el) map[id] = a;
+    return el;
+  }).filter(Boolean);
+  if(!sections.length) return;
+
+  function update(){
+    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+    var current = sections[0];
+    if(atBottom){
+      current = sections[sections.length - 1];
+    } else {
+      var pos = 140;
+      for(var i=0;i<sections.length;i++){
+        if(sections[i].getBoundingClientRect().top <= pos) current = sections[i];
+      }
+    }
+    links.forEach(function(a){ a.classList.remove('active'); });
+    var link = map[current.id];
+    if(link) link.classList.add('active');
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
 </body>
 </html>
