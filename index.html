@@ -195,9 +195,29 @@
     background:var(--panel2);border:1px solid var(--line);border-radius:999px;
     padding:5px 12px;z-index:80;display:none}
   @media(min-width:1240px){ .detailpanel-hint{display:block} }
+  /* ambient background */
+  .ambient-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .ambient-bg span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.28;
+    animation:drift 30s ease-in-out infinite}
+  .ambient-bg span:nth-child(1){width:480px;height:480px;background:var(--acc);top:-8%;left:-6%}
+  .ambient-bg span:nth-child(2){width:560px;height:560px;background:var(--acc2);top:22%;right:-12%;animation-delay:-10s}
+  .ambient-bg span:nth-child(3){width:420px;height:420px;background:var(--acc);bottom:0%;left:20%;animation-delay:-20s}
+  @keyframes drift{
+    0%,100%{transform:translate(0,0) scale(1)}
+    33%{transform:translate(30px,-40px) scale(1.08)}
+    66%{transform:translate(-25px,30px) scale(.95)}
+  }
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:translateY(0)}
+  @media (prefers-reduced-motion: reduce){
+    .ambient-bg span{animation:none}
+    .reveal{opacity:1;transform:none;transition:none}
+  }
 </style>
 </head>
 <body>
+<div class="ambient-bg" aria-hidden="true"><span></span><span></span><span></span></div>
 <nav class="sidenav" aria-label="ページ内ナビゲーション">
   <div class="sidenav-brand">堀部 彰夫<span>Portfolio</span></div>
   <div class="sidenav-links">
@@ -442,7 +462,12 @@
       <div class="it"><div class="when">2014.01 – 2016.06 ・ グリー（派遣→契約社員）</div><p><strong>PM兼企画ディレクション。</strong>釣り★スタ（社内消費No1・社内MVP受賞）ほか新規タイトル。</p></div>
       <div class="it"><div class="when">2013.07 – 2013.12 ・ ポケラボ（紹介予定派遣）</div><p>プランナー。魔界学園カタストロフィ（レイド設計／課金・継続率施策／KPI分析）。</p></div>
       <div class="it"><div class="when">2011.02 – 2013.06 ・ Tango Gameworks／ゼニマックスアジア（正社員）</div><p>レベルデザイン。サイコブレイク（マップ・敵AI・ギミック仕様、エンジン改良）。</p></div>
-      <div class="it"><div class="when">2003 – 2011 ・ フロム・ソフトウェア 〜 スクウェア・エニックス 他</div><p>CGデザイナー／ゲーム内カットシーン演出／レベルデザイン。FF13・アーマードコア4・インフィニットアンディスカバリー 等（上記 Works 参照）。</p></div>
+      <div class="it"><div class="when">2008.09 – 2011.01 ・ パオン（派遣→正社員）</div><p>企画立案／プランナー。アーケード「ガジャレーサー」（タイトー）の企画・絵コンテ・プリプロダクションディレクター、「エレベーターアクションデスパレード」（タイトー）のレベルデザイン・スクリプト（MAYA）。</p></div>
+      <div class="it"><div class="when">2008.06 – 2008.08 ・ コナミデジタルエンタテインメント（アルバイト）</div><p>「メタルギアオンライン」のオンラインイベント企画・運営。</p></div>
+      <div class="it"><div class="when">2007.01 – 2008.03 ・ スクウェア・エニックス（アルバイト→契約社員）</div><p>「ファイナルファンタジー13」のカットシーン制作・絵コンテ・モーションキャプチャー演技指導。</p></div>
+      <div class="it"><div class="when">2006.10 – 2006.12 ・ ケイブ（紹介予定派遣）</div><p>「女神転生オンライン」のカットシーン制作（3dsmax）。</p></div>
+      <div class="it"><div class="when">2006.04 – 2006.07 ・ トライエース（正社員）</div><p>「インフィニットアンディスカバリー」の演出・絵コンテ・ビデオコンテ・スクリプターリーダー、開発エンジン改良。</p></div>
+      <div class="it"><div class="when">2003.04 – 2006.03 ・ フロム・ソフトウェア（正社員）</div><p>CGデザイナー。「アーマードコア」シリーズ（4／ラストレイヴン／ネクサス 他）・「A.C.E」シリーズ・「メタルウルフカオス」等、多数タイトルのOPムービー・タイトルムービー制作（モデリング・演出・コンセプトデザイン）。</p></div>
     </div>
   </div>
 </section>
@@ -451,20 +476,34 @@
   <div class="wrap">
     <div class="kick">Skills</div>
     <h2>スキルマップ</h2>
+    <p class="lead" style="margin-bottom:16px">61以上のスキルを3領域に整理（LinkedIn認定スキルより抜粋）。</p>
     <div class="grid g3">
       <div class="card"><h3>マネジメント</h3>
-        <span class="tag">プロダクトマネジメント</span><span class="tag">0→1 / 1→10 / 運営グロース</span>
-        <span class="tag">スクラム(PO / SM兼務)</span><span class="tag">事業・開発・営業の3戦略統合</span>
-        <span class="tag">ROI試算 / KPI設計</span><span class="tag">チーム統括〜112名</span></div>
+        <span class="tag">プロダクトマネジメント</span><span class="tag">プロダクトオペレーション</span>
+        <span class="tag">プロダクトリーダーシップ</span><span class="tag">プロジェクトマネジメント</span>
+        <span class="tag">0→1 / 1→10 / 運営グロース</span><span class="tag">スクラム(PO / SM兼務)</span>
+        <span class="tag">アジャイル / ウォーターフォール</span><span class="tag">事業計画 / 事業戦略</span>
+        <span class="tag">プロセス最適化・マネジメント</span><span class="tag">ROI試算 / KPI設計</span>
+        <span class="tag">予算編成</span><span class="tag">市場調査</span>
+        <span class="tag">データ分析 / ウェブ分析 / アナリティクス</span><span class="tag">顧客管理(CRM)</span>
+        <span class="tag">QA / QAオートメーション / 品質保証</span><span class="tag">デジタルマーケティング</span>
+        <span class="tag">コンサルティング</span><span class="tag">リーダーシップ / チームビルディング</span>
+        <span class="tag">チーム統括〜112名</span><span class="tag">R&D</span></div>
       <div class="card"><h3>開発（AI / FDE）</h3>
-        <span class="tag">バイブコーディング(Claude Code / Cursor)</span><span class="tag">LLM API / RAG(ベクトル検索)</span>
-        <span class="tag">音声合成モデル運用(SoVITS等)</span><span class="tag">Python(解析/自動化)</span>
-        <span class="tag">AWS(EC2) / GCP・Firebase / Supabase</span><span class="tag">SQL / GoogleColab</span>
-        <span class="tag">Unity / Unreal Engine</span></div>
+        <span class="tag">生成AI / 生成AIツール</span><span class="tag">バイブコーディング(Claude Code / Cursor)</span>
+        <span class="tag">LLM API / RAG(ベクトル検索)</span><span class="tag">音声合成モデル運用(SoVITS等)</span>
+        <span class="tag">SaaS開発 / SaaSセールス</span><span class="tag">ゲーム開発 / ゲーム設計</span>
+        <span class="tag">Python(解析/自動化)</span><span class="tag">SQL</span>
+        <span class="tag">AWS(EC2) / GCP・Firebase / Supabase</span><span class="tag">GoogleColab</span>
+        <span class="tag">Unity / Unreal Engine</span><span class="tag">Backlog / JIRA / Confluence / Notion</span>
+        <span class="tag">Github</span></div>
       <div class="card"><h3>クリエイティブ</h3>
-        <span class="tag">ゲームデザイン</span><span class="tag">映像演出・カットシーン</span>
-        <span class="tag">3dsmax / MotionBuilder / AE</span><span class="tag">生成AI(画像/楽曲/SE)</span>
-        <span class="tag">デザインシンキング</span><span class="tag">図解で直観的な資料</span></div>
+        <span class="tag">ゲームデザイン / ビデオゲーム制作</span><span class="tag">モデリング</span>
+        <span class="tag">映像演出・カットシーン / 絵コンテ作り</span><span class="tag">UED(ユーザーエクスペリエンスデザイン)</span>
+        <span class="tag">3dsmax / Maya / MotionBuilder</span><span class="tag">Adobe Premiere Pro / AE</span>
+        <span class="tag">Adobe Photoshop / Illustrator</span><span class="tag">生成AI(画像/楽曲/SE)</span>
+        <span class="tag">デザインシンキング</span><span class="tag">図解で直観的な資料</span>
+        <span class="tag">Officeスプレッドシート</span></div>
     </div>
   </div>
 </section>
@@ -573,6 +612,26 @@
     if(e.target.closest && e.target.closest('.detail-trigger')) return;
     unpin();
   });
+})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('#summary .card, #featured > .wrap > .card, #proof .card, #games .card, #games .credit, #career .tl .it, #skills .card, #wcm .card');
+  if(!els.length) return;
+  els.forEach(function(el){ el.classList.add('reveal'); });
+  if(!('IntersectionObserver' in window)){
+    els.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.1, rootMargin:'0px 0px -60px 0px'});
+  els.forEach(function(el){ io.observe(el); });
 })();
 </script>
 </body>
