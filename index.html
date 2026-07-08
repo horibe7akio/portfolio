@@ -674,8 +674,6 @@
     triggers.forEach(function(c){ c.classList.remove('card-active'); });
     if(cardByKey[key]) cardByKey[key].classList.add('card-active');
     panel.classList.add('open');
-    document.documentElement.classList.add('panel-open');
-    if(isWide()) document.documentElement.style.paddingRight = '360px';
     currentKey = key;
   }
   function show(key){
@@ -690,8 +688,6 @@
   function hide(){
     if(pinned) return;
     panel.classList.remove('open');
-    document.documentElement.classList.remove('panel-open');
-    document.documentElement.style.paddingRight = '';
     triggers.forEach(function(c){ c.classList.remove('card-active'); });
     currentKey = null;
   }
@@ -721,6 +717,8 @@
       pinned = true;
       show(key);
       panel.classList.add('pinned');
+      document.documentElement.classList.add('panel-open');
+      if(isWide()) document.documentElement.style.paddingRight = '360px';
     });
   });
 
