@@ -139,6 +139,8 @@
   .credit.has-thumb{display:flex;gap:12px;align-items:flex-start;padding:12px 14px}
   .credit-thumb{flex:none;width:44px;height:58px;border-radius:6px;overflow:hidden;border:1px solid var(--line);background:var(--panel2)}
   .credit-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  a.credit{display:flex;text-decoration:none;color:inherit;transition:transform .15s,border-color .15s}
+  a.credit:hover{transform:translateY(-2px);border-color:var(--acc2)}
   .credit .body{min-width:0}
   .shot{border-radius:12px;overflow:hidden;background:#eef0f5;border:1px solid var(--line);padding:14px}
   .shot img{width:100%;height:auto;display:block;border-radius:4px}
@@ -682,11 +684,10 @@
     <p style="margin-top:10px;font-size:15px">
       <a href="mailto:superchance1986@outlook.jp">superchance1986@outlook.jp</a>
     </p>
-    <div style="margin-top:18px;max-width:504px">
-      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7069707428363141122" height="900" width="504"
-        frameborder="0" allowfullscreen title="なぜ月に200km走るのか（LinkedIn投稿）" loading="lazy"
-        style="max-width:100%;width:100%;border-radius:12px;border:1px solid var(--line)"></iframe>
-    </div>
+    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7069707428363141122/" target="_blank" rel="noopener" class="credit has-thumb" style="margin-top:18px;max-width:420px">
+      <div class="credit-thumb"><img src="linkedin-running-thumb.jpg" alt="なぜ月に200km走るのか" loading="lazy"></div>
+      <div class="body"><div class="t">なぜ月に200km走るのか</div><div class="m">月200kmのランニングを続けている理由について書いたLinkedIn投稿</div><div class="c">LinkedIn投稿を読む →</div></div>
+    </a>
     <p style="margin-top:20px;opacity:.7">© 2026 Akio Horibe — このサイトも生成AIのバイブコーディングで自作しています。</p>
   </div>
 </footer>
