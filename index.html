@@ -136,6 +136,10 @@
   .credit .m{font-size:12.5px;color:var(--mut);margin-top:2px}
   .credit .c{font-size:11.5px;color:var(--acc2);font-weight:600;margin-top:6px;letter-spacing:.03em}
   .credit .c a{color:inherit}
+  .credit.has-thumb{display:flex;gap:12px;align-items:flex-start;padding:12px 14px}
+  .credit-thumb{flex:none;width:44px;height:58px;border-radius:6px;overflow:hidden;border:1px solid var(--line);background:var(--panel2)}
+  .credit-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .credit .body{min-width:0}
   .shot{border-radius:12px;overflow:hidden;background:#eef0f5;border:1px solid var(--line);padding:14px}
   .shot img{width:100%;height:auto;display:block;border-radius:4px}
   /* timeline */
@@ -542,12 +546,12 @@
       <p style="font-size:13px;color:var(--mut);margin:0">担当したOPムービーの実際の映像（モデリング／主役機体2体の質感設定）。<span class="swap" style="display:block;margin-top:4px">▲ 個人アップロード映像（YouTube「雨垂れ石を穿つ」チャンネルより）</span></p>
     </div>
     <div class="credits">
-      <div class="credit hi detail-trigger" data-detail="ff13"><div class="t">ファイナルファンタジー13</div><div class="m">カットシーン制作／絵コンテ／モーションキャプチャー演技指導</div><div class="c">スクウェア・エニックス</div></div>
-      <div class="credit hi detail-trigger" data-detail="psychobreak"><div class="t">サイコブレイク（PsychoBreak）</div><div class="m">レベルデザイン（マップ／敵AI／ギミック仕様・エンジン改良）</div><div class="c">Tango Gameworks / ゼニマックスアジア</div></div>
-      <div class="credit hi detail-trigger" data-detail="ac4"><div class="t">アーマードコア4 ／ ACシリーズ 他</div><div class="m">OP・タイトルムービー制作（モデリング／演出／コンセプトデザイン）</div><div class="c">フロム・ソフトウェア</div></div>
-      <div class="credit detail-trigger" data-detail="infinite-undiscovery"><div class="t">インフィニットアンディスカバリー</div><div class="m">演出／絵コンテ・ビデオコンテ／スクリプターリーダー</div><div class="c">トライエース</div></div>
-      <div class="credit detail-trigger" data-detail="ace-series"><div class="t">A.C.E ／ メタルウルフカオス ／ クロムハウンズ 他</div><div class="m">OPムービー制作（CGデザイナー）</div><div class="c">フロム・ソフトウェア</div></div>
-      <div class="credit detail-trigger" data-detail="megaten-mgo"><div class="t">女神転生オンライン ／ メタルギアオンライン</div><div class="m">カットシーン制作／オンラインイベント企画・運営</div><div class="c">ケイブ ／ コナミ</div></div>
+      <div class="credit hi has-thumb detail-trigger" data-detail="ff13"><div class="credit-thumb"><img src="ff13-thumb.jpg" alt="ファイナルファンタジー13" loading="lazy"></div><div class="body"><div class="t">ファイナルファンタジー13</div><div class="m">カットシーン制作／絵コンテ／モーションキャプチャー演技指導</div><div class="c">スクウェア・エニックス</div></div></div>
+      <div class="credit hi has-thumb detail-trigger" data-detail="psychobreak"><div class="credit-thumb"><img src="psychobreak-thumb.jpg" alt="サイコブレイク" loading="lazy"></div><div class="body"><div class="t">サイコブレイク（PsychoBreak）</div><div class="m">レベルデザイン（マップ／敵AI／ギミック仕様・エンジン改良）</div><div class="c">Tango Gameworks / ゼニマックスアジア</div></div></div>
+      <div class="credit hi has-thumb detail-trigger" data-detail="ac4"><div class="credit-thumb"><img src="ac4-thumb.jpg" alt="アーマードコア4" loading="lazy"></div><div class="body"><div class="t">アーマードコア4 ／ ACシリーズ 他</div><div class="m">OP・タイトルムービー制作（モデリング／演出／コンセプトデザイン）</div><div class="c">フロム・ソフトウェア</div></div></div>
+      <div class="credit has-thumb detail-trigger" data-detail="infinite-undiscovery"><div class="credit-thumb"><img src="infinite-undiscovery-thumb.jpg" alt="インフィニットアンディスカバリー" loading="lazy"></div><div class="body"><div class="t">インフィニットアンディスカバリー</div><div class="m">演出／絵コンテ・ビデオコンテ／スクリプターリーダー</div><div class="c">トライエース</div></div></div>
+      <div class="credit has-thumb detail-trigger" data-detail="ace-series"><div class="credit-thumb"><img src="ace-series-thumb.jpg" alt="メタルウルフカオス" loading="lazy"></div><div class="body"><div class="t">A.C.E ／ メタルウルフカオス ／ クロムハウンズ 他</div><div class="m">OPムービー制作（CGデザイナー）</div><div class="c">フロム・ソフトウェア</div></div></div>
+      <div class="credit has-thumb detail-trigger" data-detail="megaten-mgo"><div class="credit-thumb"><img src="megaten-mgo-thumb.jpg" alt="メタルギアオンライン" loading="lazy"></div><div class="body"><div class="t">女神転生オンライン ／ メタルギアオンライン</div><div class="m">カットシーン制作／オンラインイベント企画・運営</div><div class="c">ケイブ ／ コナミ</div></div></div>
     </div>
   </div>
 </section>
