@@ -207,24 +207,28 @@
   @media (prefers-reduced-motion: reduce){
     .reveal{opacity:1;transform:none;transition:none}
   }
-  /* featured: conclusion-first */
-  .feat-conclusion{font-family:var(--font);font-weight:900;font-size:clamp(19px,2.6vw,23px);
-    letter-spacing:-.01em;line-height:1.35;color:var(--tx)}
-  .feat-conclusion .sub{display:block;font-weight:500;font-size:13px;color:var(--mut);margin-top:5px;letter-spacing:0}
-  .feat-role{color:var(--acc);font-size:13px;font-weight:600;margin-top:10px}
-  ul.feat-points{margin:12px 0;padding-left:1.1em}
-  ul.feat-points li{font-size:14.5px;color:var(--mut);margin:.35em 0}
-  .feat-learn{font-size:13px;color:var(--mut);margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
-  .feat-learn b{color:var(--tx);font-weight:700}
-  .feat-media{margin-top:18px;max-width:440px}
-  /* skills: readable list */
-  .skill-list{margin:0;padding:0;list-style:none}
-  .skill-list li{font-size:14px;color:var(--mut);padding:7px 0;border-bottom:1px solid var(--line)}
-  .skill-list li:last-child{border-bottom:0}
-  .skill-list b{color:var(--tx);font-weight:700}
+  /* ambient background — 作り手 × AI の静かな空気感 */
+  .ambient-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .ambient-bg::before{content:"";position:absolute;inset:0;
+    background-image:radial-gradient(currentColor 1px,transparent 1px);
+    background-size:26px 26px;color:var(--tx);opacity:.03;
+    mask-image:radial-gradient(120% 90% at 50% 0%,#000 0%,transparent 72%);
+    -webkit-mask-image:radial-gradient(120% 90% at 50% 0%,#000 0%,transparent 72%)}
+  .ambient-bg span{position:absolute;border-radius:50%;filter:blur(100px);
+    animation:drift 42s ease-in-out infinite}
+  .ambient-bg span:nth-child(1){width:440px;height:440px;background:var(--acc);opacity:.16;top:-10%;left:-4%}
+  .ambient-bg span:nth-child(2){width:520px;height:520px;background:var(--acc);opacity:.10;top:34%;right:-14%;animation-delay:-14s}
+  .ambient-bg span:nth-child(3){width:380px;height:380px;background:var(--acc);opacity:.08;bottom:-6%;left:26%;animation-delay:-28s}
+  @keyframes drift{
+    0%,100%{transform:translate(0,0) scale(1)}
+    33%{transform:translate(26px,-34px) scale(1.06)}
+    66%{transform:translate(-22px,26px) scale(.96)}
+  }
+  @media (prefers-reduced-motion: reduce){ .ambient-bg span{animation:none} }
 </style>
 </head>
 <body>
+<div class="ambient-bg" aria-hidden="true"><span></span><span></span><span></span></div>
 <nav class="sidenav" aria-label="ページ内ナビゲーション">
   <div class="sidenav-brand">堀部 彰夫<span>Maker × Growth PM × AI-FDE</span></div>
   <div class="sidenav-links">
@@ -426,16 +430,9 @@
     <div class="kick">Featured</div>
 
     <!-- ANICRA : FDE -->
-    <div class="card detail-trigger" data-detail="anicra" style="margin-bottom:28px">
-      <div class="feat-conclusion">ANICRA — シード資金調達<span class="sub">docomo STARTUP発スピンアウト・2025年8月</span></div>
-      <div class="feat-role">FDE（商談〜要件定義〜実装〜経営戦略） ・ CrestLab（現職・業務委託）</div>
-      <ul class="feat-points">
-        <li>客先ヒアリング〜PoC開発〜自社SaaS実装まで一気通貫で担当</li>
-        <li>原画・動画・仕上げ工程をAIで自動化するアニメ制作基盤<span class="nda">［個別クライアントの制作進行ツールの詳細はNDAのため割愛］</span></li>
-        <li>事業戦略立案・経営会議でのビジョン策定も担当</li>
-      </ul>
-      <div class="feat-learn"><b>学び：</b>現場の声から事業戦略まで、FDEとして一気通貫で動かす力</div>
-      <div class="feat-media">
+    <div class="card detail-trigger" data-detail="anicra" style="margin-bottom:34px">
+      <div class="split">
+      <div>
         <div class="frame" style="aspect-ratio:16/9">
           <img src="anicra-hero.jpg" alt="ANICRA — アニメスタジオ向けAI制作基盤（CrestLab公式サイトより）" style="width:100%;height:100%;object-fit:cover;display:block">
         </div>
@@ -444,19 +441,18 @@
           <a class="badge" href="https://prtimes.jp/main/html/rd/p/000000001.000166859.html" target="_blank" rel="noopener"><span class="ico">📰</span>資金調達<small>PR TIMES</small></a>
         </div>
       </div>
+      <div>
+        <div class="role">FDE（商談〜要件定義〜実装〜経営戦略） ・ CrestLab（現職・業務委託）</div>
+        <h3>ANICRA — アニメ制作AI基盤を客先でその場開発、自社SaaSへ実装</h3>
+        <p class="lead">原画から動画・仕上げ工程をAIで自動化する、アニメスタジオ向けAI制作基盤。docomo STARTUP発のスピンアウトとして2025年8月にシード資金調達。FDEとして客先ヒアリング〜PoC開発〜自社SaaS実装〜事業戦略まで一気通貫で担当。<span class="nda">［個別クライアントの制作進行ツールの詳細はNDAのため割愛］</span></p>
+      </div>
+      </div>
     </div>
 
     <!-- LuminaLive : hero -->
-    <div class="card detail-trigger" data-detail="lumina" style="margin-bottom:28px">
-      <div class="feat-conclusion">LuminaLive — 0→1リリース、BtoBへ4展開<span class="sub">iOS/Android/Web ・ 2025.03 LAUNCHED</span></div>
-      <div class="feat-role">開発ディレクター／プロダクトオーナー ・ AI Impulse（2名体制の業務委託）</div>
-      <ul class="feat-points">
-        <li>ゲーム設計〜2週間スプリントのスクラム運営（SM兼務）まで開発全般をディレクション</li>
-        <li>音声合成（SoVITS等）・テキスト生成（プロンプト＋ベクトル検索）を自社開発</li>
-        <li>ECライブコマース等BtoBへ4展開、TiB有楽町にて2025年8月展示</li>
-      </ul>
-      <div class="feat-learn"><b>学び：</b>ひとつの基盤を複数事業へ横展開する設計力</div>
-      <div class="feat-media">
+    <div class="card detail-trigger" data-detail="lumina" style="margin-bottom:34px">
+      <div class="split">
+      <div>
         <div class="shorts2">
           <div>
             <div class="short">
@@ -475,49 +471,56 @@
             <p class="vlabel">TikTok ・ 本体PR（@lumina8008）</p>
           </div>
         </div>
-        <div class="badges" style="justify-content:center;margin-top:12px">
+        <div style="text-align:center;margin-top:12px">
+          <span class="launched">● 2025.03 LAUNCHED ・ iOS / Android / Web</span>
+        </div>
+        <div class="badges" style="justify-content:center">
           <a class="badge" href="https://apps.apple.com/jp/app/lumina-live/id6473817194" target="_blank" rel="noopener"><span class="ico">🍎</span>App Store<small>iOS で見る</small></a>
           <a class="badge" href="https://play.google.com/store/apps/details?id=com.aiimpluse.product.ivyInfluencer&hl=ja" target="_blank" rel="noopener"><span class="ico">▶</span>Google Play<small>Android で見る</small></a>
           <a class="badge" href="https://prtimes.jp/main/html/rd/p/000000002.000157556.html" target="_blank" rel="noopener"><span class="ico">📰</span>プレスリリース<small>PR TIMES</small></a>
           <a class="badge" href="https://x.com/lumina4943" target="_blank" rel="noopener"><span class="ico">𝕏</span>公式X<small>@lumina4943</small></a>
         </div>
+        <p style="text-align:center;font-size:12px;color:var(--mut);margin-top:10px">▲ LuminaLive を YouTube／TikTok で多媒体配信（各公式チャンネル）</p>
+      </div>
+      <div>
+        <div class="role">開発ディレクター／プロダクトオーナー ・ AI Impulse（2名体制の業務委託）</div>
+        <h3>LuminaLive（Aituber）— AIキャラのライブ配信アプリを 0→1</h3>
+        <p class="lead">iOS／Android／Web でリリースしたライブ配信アプリ。ゲーム設計・2週間スプリントのスクラム運営（SM兼務）・AWSインフラ・音声合成（SoVITS等で独自キャラ音声）・テキスト生成（プロンプト＋ベクトル検索）まで開発全般をディレクション。</p>
+        <ul class="tight">
+          <li>同じ基盤を<strong>BtoBへ4展開</strong>：ECライブコマース／YouTubeショート動画自動生成／YouTube配信システム／展示会設置向けAIキャラ説明・QA</li>
+          <li>展示会システムは <strong>TiB（Tokyo Innovation Base）有楽町にて2025年8月展示</strong></li>
+        </ul>
+      </div>
       </div>
     </div>
 
     <!-- Comdesk Lead : BtoB SaaS -->
-    <div class="card detail-trigger" data-detail="comdesk" style="margin-bottom:28px">
-      <div class="feat-conclusion">Comdesk Lead — ChatGPT連携をメイン開発者として実装<span class="sub">2023年4月</span></div>
-      <div class="feat-role">プロダクトマネージャー ・ Widsley（正社員）</div>
-      <ul class="feat-points">
-        <li>通話解析AIで"商談成功に繋がる要因"をスコアリングするロジックを考案〜実装〜リリース</li>
-        <li>CRM連携エディションを追加、Salesforce／Kintone／HubSpot／Zapier等へ自動連携</li>
-        <li>スクラム未導入だったチームにSAFe基盤を新規導入、SM兼務</li>
-      </ul>
-      <div class="feat-learn"><b>学び：</b>数字（スコアリング）とAI実装を両立させるPMの視点</div>
-      <div class="feat-media">
+    <div class="card detail-trigger" data-detail="comdesk" style="margin-bottom:34px">
+      <div class="split">
+      <div>
         <div class="shot"><img src="comdesk-lead.jpg" alt="Comdesk Lead ChatGPT連携機能（公式プレスリリースより）"></div>
         <div class="badges" style="margin-top:14px">
           <a class="badge" href="https://comdesk.com/" target="_blank" rel="noopener"><span class="ico">🌐</span>Comdesk Lead<small>公式サイト</small></a>
           <a class="badge" href="https://prtimes.jp/main/html/rd/p/000000034.000012305.html" target="_blank" rel="noopener"><span class="ico">📰</span>ChatGPT連携<small>PR TIMES</small></a>
         </div>
-        <a href="https://www.linkedin.com/feed/update/urn:li:activity:7118623270534275073/" target="_blank" rel="noopener" class="credit has-thumb" style="margin-top:14px;max-width:100%">
+      </div>
+      <div>
+        <div class="role">プロダクトマネージャー ・ Widsley（正社員）</div>
+        <h3>Comdesk Lead — IP回線×携帯回線を横断するCTI SaaS</h3>
+        <p class="lead">通話テキスト解析AIで"商談成功に繋がる要因"をスコアリングするロジックを考案〜実装〜リリース。既存機能改善から新規マイクロサービス開発まで、スクラム（SAFe基盤）を導入しSM兼務。</p>
+        <p style="margin-top:8px;font-size:14.5px;color:var(--mut)">メイン開発者としてChatGPT連携を実装（2023年4月）：通話の自動文字起こしをChatGPTが要約（文章形式／箇条書き形式を選択可）。同年8月にはCRM連携エディションを追加し、発信者情報・通話時間・文字起こし・自動要約データをSalesforce／Kintone／HubSpot／Zapier等へ自動連携。</p>
+        <a href="https://www.linkedin.com/feed/update/urn:li:activity:7118623270534275073/" target="_blank" rel="noopener" class="credit has-thumb" style="margin-top:18px;max-width:420px">
           <div class="credit-thumb"><img src="comdesk-insidesales-thumb.jpg" alt="インサイドセールス研究会 月例会" loading="lazy"></div>
           <div class="body"><div class="t">インサイドセールス研究会（月例）</div><div class="m">製品開発とは別に、インサイドセールスという職種の解像度を上げるため月例会に継続参加</div><div class="c">LinkedIn投稿を読む →</div></div>
         </a>
       </div>
+      </div>
     </div>
 
     <!-- イルーナ growth -->
-    <div class="card detail-trigger" data-detail="iruna" style="background:var(--panel2);margin-bottom:28px">
-      <div class="feat-conclusion">イルーナ戦記Online — 月商 約<span class="count" data-target="1.5" data-decimals="1">0</span>倍<span class="sub">就任9ヶ月でMoM100%超を半年継続</span></div>
-      <div class="feat-role">プロデューサー／ディレクター ・ アソビモ（約38名）</div>
-      <ul class="feat-points">
-        <li>就任わずか3ヶ月で消費最大化、その後MoM100%超を半年継続</li>
-        <li>コラボ交渉・新機能企画・リリースフロー再構築（縦割り解消）</li>
-        <li>消費130%↑を6ヶ月維持・ストアランク2桁復帰、DAU140%↑</li>
-      </ul>
-      <div class="feat-learn"><b>学び：</b>「会社の利益・持続可能性・ユーザー満足」3つの両立という意思決定軸</div>
-      <div class="feat-media">
+    <div class="card detail-trigger" data-detail="iruna" style="background:var(--panel2)">
+      <div class="split">
+      <div>
         <div class="shorts2" style="grid-template-columns:1fr;max-width:100%">
           <div>
             <div class="frame">
@@ -535,19 +538,23 @@
           <a class="badge" href="https://gamebiz.jp/news/178656" target="_blank" rel="noopener"><span class="ico">📰</span>豆しばコラボ記事<small>gamebiz</small></a>
         </div>
       </div>
+      <div>
+        <div class="role">プロデューサー／ディレクター ・ アソビモ（約38名）</div>
+        <h3>イルーナ戦記Online — 運営タイトルのグロース</h3>
+        <p class="lead">「会社の利益／アプリの持続可能性／ユーザー満足」の3つの両立をミッションに、コラボ交渉・新機能企画・リリースフロー再構築（縦割り解消）まで。就任わずか3ヶ月で消費最大化、伸ばして"維持"した。</p>
+        <div class="stats">
+          <div class="stat"><div class="n">月商 約<span class="count" data-target="1.5" data-decimals="1">0</span>倍</div><div class="l">就任 → 9ヶ月目（MoM100%超を半年継続）</div></div>
+          <div class="stat"><div class="n">消費 <span class="count" data-target="130" data-decimals="0">0</span>%↑</div><div class="l">を6ヶ月間 維持 ・ ストアランク2桁復帰</div></div>
+          <div class="stat"><div class="n">DAU <span class="count" data-target="140" data-decimals="0">0</span>%↑</div><div class="l">KPI全体を底上げ</div></div>
+        </div>
+      </div>
+      </div>
     </div>
 
     <!-- 釣りスタ growth -->
     <div class="card detail-trigger" data-detail="tsurisuta" style="background:var(--panel2)">
-      <div class="feat-conclusion">釣り★スタ for dゲーム — 前月比<span class="count" data-target="120" data-decimals="0">0</span>%<span class="sub">北斗の拳イチゴ味コラボ</span></div>
-      <div class="feat-role">PM兼企画ディレクション（dゲーム版ディレクター） ・ グリー</div>
-      <ul class="feat-points">
-        <li>北斗の拳（イチゴ味）コラボを企画〜IPホルダー折衝まで牽引</li>
-        <li>データ分析を起点にイベント設計・レベルデザインまで担当</li>
-        <li>オフラインイベント（ファン感謝祭）も実施、社内消費No.1・社内MVP受賞</li>
-      </ul>
-      <div class="feat-learn"><b>学び：</b>IP折衝から現場実装まで、PMとして一気通貫で動く経験</div>
-      <div class="feat-media">
+      <div class="split">
+      <div>
         <div class="shorts2" style="grid-template-columns:1fr 1fr;max-width:100%">
           <div>
             <div class="shot" style="padding:0"><img src="tsurisuta-collab-thumb.jpg" alt="北斗の拳イチゴ味×釣り★スタ コラボ（gamebiz.jpより）"></div>
@@ -563,6 +570,16 @@
           <a class="badge" href="https://gamebiz.jp/news/151762" target="_blank" rel="noopener"><span class="ico">📰</span>コラボ記事<small>gamebiz</small></a>
           <a class="badge" href="https://campaign.gree.net/thanksgiving/2015/96/detail" target="_blank" rel="noopener"><span class="ico">📰</span>ファン感謝祭<small>GREE公式</small></a>
         </div>
+      </div>
+      <div>
+        <div class="role">PM兼企画ディレクション（dゲーム版ディレクター） ・ グリー</div>
+        <h3>釣り★スタ for dゲーム — 北斗の拳コラボで前月比120%</h3>
+        <p class="lead">データ分析を起点に、イベント設計・デバッグ・テストプレイ・レベルデザイン・グラフィック発注までを担当。dゲーム版ディレクターとして北斗の拳（イチゴ味）コラボの企画〜IPホルダー折衝を牽引し、売上前月比120%を達成。仕上げにオフラインイベントも実施し、社内消費No.1・社内MVPを受賞。</p>
+        <div class="stats" style="grid-template-columns:1fr 1fr">
+          <div class="stat"><div class="n">前月比 <span class="count" data-target="120" data-decimals="0">0</span>%</div><div class="l">北斗の拳イチゴ味コラボ・売上</div></div>
+          <div class="stat"><div class="n">社内 No.1</div><div class="l">消費実績・社内MVP受賞</div></div>
+        </div>
+      </div>
       </div>
     </div>
 
@@ -689,38 +706,38 @@
 <section id="skills">
   <div class="wrap">
     <div class="kick">Skills</div>
-    <h2>スキル</h2>
+    <h2>スキルマップ</h2>
     <p class="lead" style="margin-bottom:16px">61以上のスキルを3領域に整理（LinkedIn認定スキルより抜粋）。</p>
     <div class="grid g3">
-      <div class="card"><h3>Build <span style="font-weight:400;color:var(--mut);font-size:13px">・制作力</span></h3>
-        <ul class="skill-list">
-          <li>ゲームデザイン・ビデオゲーム制作／映像演出・カットシーン・絵コンテ作り</li>
-          <li>モデリング／3dsmax・Maya・MotionBuilder</li>
-          <li>Adobe Premiere Pro・AE／Photoshop・Illustrator／VroidStudio・Blender(VRM)</li>
-          <li>生成AI(画像・楽曲・SE)／UED(ユーザーエクスペリエンスデザイン)／デザインシンキング</li>
-          <li>図解で直観的な資料／Officeスプレッドシート</li>
-        </ul>
-      </div>
-      <div class="card"><h3>Growth <span style="font-weight:400;color:var(--mut);font-size:13px">・グロース/PM</span></h3>
-        <ul class="skill-list">
-          <li>プロダクトマネジメント／プロダクトオペレーション／プロダクトリーダーシップ／プロジェクトマネジメント</li>
-          <li>0→1・1→10・運営グロース／グロースハック・マネタイズ</li>
-          <li>スクラム(PO/SM兼務)／アジャイル・ウォーターフォール／高速MVP検証(2週間サイクル)</li>
-          <li>事業計画・事業戦略／ROI試算・KPI設計／予算編成／市場調査</li>
-          <li>データ分析・ウェブ分析・アナリティクス／分析→施策のPDCA／顧客管理(CRM)</li>
-          <li>QA・QAオートメーション・品質保証／プロセス最適化・マネジメント／デジタルマーケティング／コンサルティング</li>
-          <li>リーダーシップ・チームビルディング／開発部統括（人事評価含む）／R&D</li>
-        </ul>
-      </div>
-      <div class="card"><h3>AI-FDE <span style="font-weight:400;color:var(--mut);font-size:13px">・開発</span></h3>
-        <ul class="skill-list">
-          <li>生成AI・生成AIツール／バイブコーディング(Claude Code・Cursor)</li>
-          <li>LLM API・RAG(ベクトル検索)／Genspark／OpenClaw・Ollama・Gemma</li>
-          <li>音声合成モデル運用(SoVITS等)／SaaS開発・SaaSセールス／ゲーム開発・ゲーム設計</li>
-          <li>Python(解析・自動化)／SQL／AWS(EC2)・GCP・Firebase・Supabase／GoogleColab</li>
-          <li>Unity／Unreal Engine／Backlog・JIRA・Confluence・Notion／Github</li>
-        </ul>
-      </div>
+      <div class="card"><h3>マネジメント</h3>
+        <span class="tag">プロダクトマネジメント</span><span class="tag">プロダクトオペレーション</span>
+        <span class="tag">プロダクトリーダーシップ</span><span class="tag">プロジェクトマネジメント</span>
+        <span class="tag">0→1 / 1→10 / 運営グロース</span><span class="tag">グロースハック / マネタイズ</span>
+        <span class="tag">スクラム(PO / SM兼務)</span><span class="tag">アジャイル / ウォーターフォール</span>
+        <span class="tag">事業計画 / 事業戦略</span><span class="tag">高速MVP検証(2週間サイクル)</span>
+        <span class="tag">分析→施策のPDCA</span><span class="tag">プロセス最適化・マネジメント</span>
+        <span class="tag">ROI試算 / KPI設計</span><span class="tag">予算編成</span>
+        <span class="tag">市場調査</span><span class="tag">データ分析 / ウェブ分析 / アナリティクス</span>
+        <span class="tag">顧客管理(CRM)</span><span class="tag">QA / QAオートメーション / 品質保証</span>
+        <span class="tag">デジタルマーケティング</span><span class="tag">コンサルティング</span>
+        <span class="tag">リーダーシップ / チームビルディング</span><span class="tag">開発部統括（人事評価含む）</span>
+        <span class="tag">R&D</span></div>
+      <div class="card"><h3>開発（AI / FDE）</h3>
+        <span class="tag">生成AI / 生成AIツール</span><span class="tag">バイブコーディング(Claude Code / Cursor)</span>
+        <span class="tag">LLM API / RAG(ベクトル検索)</span><span class="tag">Genspark</span>
+        <span class="tag">OpenClaw / Ollama・Gemma</span><span class="tag">音声合成モデル運用(SoVITS等)</span>
+        <span class="tag">SaaS開発 / SaaSセールス</span><span class="tag">ゲーム開発 / ゲーム設計</span>
+        <span class="tag">Python(解析/自動化)</span><span class="tag">SQL</span>
+        <span class="tag">AWS(EC2) / GCP・Firebase / Supabase</span><span class="tag">GoogleColab</span>
+        <span class="tag">Unity / Unreal Engine</span><span class="tag">Backlog / JIRA / Confluence / Notion</span>
+        <span class="tag">Github</span></div>
+      <div class="card"><h3>クリエイティブ</h3>
+        <span class="tag">ゲームデザイン / ビデオゲーム制作</span><span class="tag">モデリング</span>
+        <span class="tag">映像演出・カットシーン / 絵コンテ作り</span><span class="tag">UED(ユーザーエクスペリエンスデザイン)</span>
+        <span class="tag">3dsmax / Maya / MotionBuilder</span><span class="tag">Adobe Premiere Pro / AE</span>
+        <span class="tag">Adobe Photoshop / Illustrator</span><span class="tag">VroidStudio / Blender(VRM)</span>
+        <span class="tag">生成AI(画像/楽曲/SE)</span><span class="tag">デザインシンキング</span>
+        <span class="tag">図解で直観的な資料</span><span class="tag">Officeスプレッドシート</span></div>
     </div>
   </div>
 </section>
