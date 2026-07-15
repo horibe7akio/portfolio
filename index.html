@@ -225,13 +225,53 @@
     66%{transform:translate(-22px,26px) scale(.96)}
   }
   @media (prefers-reduced-motion: reduce){ .ambient-bg span{animation:none} }
+  /* page switch (portfolio ⇄ resume) */
+  .page[hidden]{display:none}
+  .sidenav-switch{display:flex;flex-direction:column;gap:5px}
+  .sidenav-switch button{width:100%;text-align:left;font-family:inherit;font-weight:700;
+    font-size:12.5px;padding:9px 12px;border-radius:9px;border:1px solid var(--line);
+    background:var(--panel2);color:var(--mut);cursor:pointer;transition:.15s;letter-spacing:.01em}
+  .sidenav-switch button:hover{color:var(--tx);border-color:var(--acc)}
+  .sidenav-switch button.active{background:var(--acc);color:#0b1410;border-color:var(--acc)}
+  .sidenav-links[hidden]{display:none}
+  /* mobile page-switch bar (<1240px) */
+  .mobilebar{position:sticky;top:0;z-index:95;display:flex;gap:8px;background:var(--panel);
+    border-bottom:1px solid var(--line);padding:9px 14px}
+  .mobilebar button{flex:1;font-family:inherit;font-weight:700;font-size:13px;padding:8px;
+    border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--mut);cursor:pointer}
+  .mobilebar button.active{background:var(--acc);color:#0b1410;border-color:var(--acc)}
+  @media(min-width:1240px){ .mobilebar{display:none} }
+  /* resume (職務経歴書) view */
+  .rzhead .role-line{color:var(--mut);font-weight:600}
+  .rzstats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0}
+  @media(max-width:820px){.rzstats{grid-template-columns:repeat(2,1fr)}}
+  .rzlist{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+  .rzlist li{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);
+    border-radius:8px;padding:12px 15px;font-size:14px;color:var(--mut);line-height:1.75}
+  .rzlist li b{color:var(--tx)}
+  .rztable-wrap{overflow-x:auto;margin-top:8px;border:1px solid var(--line);border-radius:10px}
+  .rztable{width:100%;border-collapse:collapse;font-size:13px;min-width:600px}
+  .rztable th,.rztable td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);
+    padding:8px 11px;text-align:left;vertical-align:top;line-height:1.5}
+  .rztable th{background:var(--panel2);color:var(--tx);font-weight:700;font-size:12px}
+  .rztable td{color:var(--mut)}
+  .rztable tr:last-child td{border-bottom:0}
+  .rztable th:last-child,.rztable td:last-child{border-right:0}
+  .rztable tbody tr:hover td{background:var(--panel)}
+  .rznote{font-size:12.5px;color:var(--mut);margin-top:10px;line-height:1.8}
+  .rzpr{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;
+    font-size:15px;line-height:1.95;color:var(--tx)}
 </style>
 </head>
 <body>
 <div class="ambient-bg" aria-hidden="true"><span></span><span></span><span></span></div>
-<nav class="sidenav" aria-label="ページ内ナビゲーション">
+<nav class="sidenav" aria-label="グローバルナビゲーション">
   <div class="sidenav-brand">堀部 彰夫<span>Maker × Growth PM × AI-FDE</span></div>
-  <div class="sidenav-links">
+  <div class="sidenav-switch" role="tablist" aria-label="ページ切り替え">
+    <button type="button" data-page-btn="portfolio" class="active">ポートフォリオ</button>
+    <button type="button" data-page-btn="resume">職務経歴書</button>
+  </div>
+  <div class="sidenav-links" data-page="portfolio">
     <a href="#summary" data-target="summary">Summary</a>
     <a href="#featured" data-target="featured">Featured</a>
     <a href="#proof" data-target="proof">Proof of Work</a>
@@ -241,8 +281,24 @@
     <a href="#wcm" data-target="wcm">Will/Can/Must</a>
     <a href="#contact" data-target="contact">Contact</a>
   </div>
+  <div class="sidenav-links" data-page="resume" hidden>
+    <a href="#r-summary" data-target="r-summary">職務要約</a>
+    <a href="#r-strength" data-target="r-strength">活かせる経験</a>
+    <a href="#r-achievements" data-target="r-achievements">主な実績</a>
+    <a href="#r-history" data-target="r-history">職務経歴</a>
+    <a href="#r-skills" data-target="r-skills">スキル</a>
+    <a href="#r-pr" data-target="r-pr">自己PR</a>
+    <a href="#r-contact" data-target="r-contact">Contact</a>
+  </div>
   <div class="sidenav-foot"><a href="mailto:superchance1986@outlook.jp">Contact →</a></div>
 </nav>
+
+<div class="mobilebar" role="tablist" aria-label="ページ切り替え">
+  <button type="button" data-page-btn="portfolio" class="active">ポートフォリオ</button>
+  <button type="button" data-page-btn="resume">職務経歴書</button>
+</div>
+
+<main class="page" data-page="portfolio">
 
 <div class="detailpanel-hint">◀ Featuredの5つはホバーで詳細</div>
 <aside class="detailpanel" id="detailpanel">
@@ -769,37 +825,237 @@
     <p style="margin-top:20px;opacity:.7">© 2026 Akio Horibe — このサイトも生成AIのバイブコーディングで自作しています。</p>
   </div>
 </footer>
+</main>
+
+<main class="page" data-page="resume" hidden>
+  <header class="hero rzhead">
+    <div class="wrap">
+      <h1>職務経歴書</h1>
+      <div class="role-line">堀部 彰夫　・　2026年7月15日現在</div>
+      <p class="tagline">CG出身の"作り手"が、事業を数字で伸ばし、いまは<strong>非エンジニアながら自分でAIを実装して届ける</strong>FDE。</p>
+      <div class="cta">
+        <a class="btn" href="#r-history">職務経歴を見る</a>
+        <a class="btn ghost" href="#" data-goto="portfolio">ポートフォリオへ →</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="r-summary">
+    <div class="wrap">
+      <div class="kick">Summary</div>
+      <h2>職務要約</h2>
+      <p class="lead" style="max-width:70ch">CGデザイナーからキャリアを始め、企画・ディレクター・プロデューサー・開発部長（112名統括）、広告マーケティング、新規事業、対話AI・生成AIのPM／FDEへ——23年で職種と業界を越え続けてきました。プロデューサーとしては月商8,000万円のタイトルを9ヶ月で1.25億円に伸ばし、広告では総額10億円のコンペを6社競合で受注、マーケでは新規ユーザーLTVを他対比200%超に改善。事業を数字で伸ばす一方、いまはCGデザイナー出身の非エンジニアながらClaude Code・Cursorで自らコードを書き、アニメ制作現場へのAI導入を企画から実装・リリースまで一人で回すFDEです。越境してきた軌跡すべてが、AI領域を事業と実装の両面から解く力になっています。</p>
+      <h3 style="margin-top:22px">現在の取り組みとキャリア志向</h3>
+      <p class="lead" style="max-width:70ch">「何を作るべきか」を事業目線で決め、生成AIで自分の手で作って届ける——それが今の仕事です。CTI SaaSのAIスコアリングは考案から実装・リリースまで単独で完遂し、直近はアニメ制作へのAI導入をFDEとして推進しています。事業を伸ばす嗅覚と、AIで自分で作り切る実装力の両方を一人で持つこと。この二刀流を、AI×事業開発の最前線で磨き続けたいと考えています。</p>
+    </div>
+  </section>
+
+  <section id="r-strength">
+    <div class="wrap">
+      <div class="kick">Strengths</div>
+      <h2>活かせる経験・知識・スキル</h2>
+      <ul class="tight" style="max-width:70ch">
+        <li>生成AI実装／AI駆動開発：Claude Code・Cursorで設計〜実装〜リリースまで自分で回す（CG出身の非エンジニア）</li>
+        <li>FDE：クライアント現場のヒアリング〜PoC/MVP開発〜SaaS組込・定着まで一気通貫</li>
+        <li>PdM／PM：エンジニア60名規模のスクラム運用、ロードマップ・ROI試算・優先度設計</li>
+        <li>0→1事業とグロース：新規タイトルの立ち上げからPMF・収益化、KPI運用による売上改善</li>
+        <li>組織マネジメント：開発部112名の統括（人事評価・全社改革推進）、オフショア／リモート運営</li>
+        <li>マーケティング／広告：ネット広告のクリエイティブディレクション、データ分析にもとづく施策設計</li>
+        <li>データ分析：ソーシャルゲームのKPI運用、通話テキスト解析による見込み度スコアリング設計</li>
+        <li>越境・適応力：職種と業界を越えて、変化の速い現場を短期で立ち上げる</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="r-achievements">
+    <div class="wrap">
+      <div class="kick">Achievements</div>
+      <h2>主な実績</h2>
+      <div class="stats rzstats">
+        <div class="stat"><div class="n">1.25億</div><div class="l">月商（イルーナ・就任9ヶ月）</div></div>
+        <div class="stat"><div class="n">10億</div><div class="l">広告コンペ受注（6社競合・DG）</div></div>
+        <div class="stat"><div class="n">200%超</div><div class="l">新規獲得LTV（他対比・SMN）</div></div>
+        <div class="stat"><div class="n">112名</div><div class="l">開発部 統括（アソビモ）</div></div>
+      </div>
+      <ul class="rzlist">
+        <li><b>CTI SaaSへのAI実装（Widsley「Comdesk Lead」）</b>：通話テキスト解析による見込み度スコアリングを考案し、実装・リリースまで一人称で完遂。</li>
+        <li><b>生成AIによる少人数・高速開発（CrestLab／AI Impulse）</b>：Claude Code・CursorによるAI駆動開発でPoC/MVPをマイクロサービスとして高速実装。アニメ制作AIツールやAITuberアプリ等を少人数体制で開発・運用。</li>
+        <li><b>MMORPG運用の立て直し（アソビモ「イルーナ戦記Online」）</b>：就任時月商8,000万円→3ヶ月で1億円、半年間MoM100%超を維持し9ヶ月目に1.25億円達成。KPI約125%改善。</li>
+        <li><b>ソーシャルゲーム運用グロース（グリー「釣り★スタ」）</b>：ゲームサイクル見直し＋モデル拡張＋コラボ企画により売上前月比110%・社内No.1プロダクト化、社内MVP受賞。</li>
+        <li><b>広告プロモーションの大型受注（デジタルガレージ）</b>：総額10億円のゲームプロモーション案件を6社コンペで受注。データ分析にもとづく動画クリエイティブ改善で貢献。</li>
+        <li><b>マーケティングコンサルティング（SMN）</b>：スポーツポータルサイト内EC購買増進施策をトータル提案・配信し、新規獲得ユーザーLTVが他対比200%超。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="r-history">
+    <div class="wrap">
+      <div class="kick">Career</div>
+      <h2>経歴一覧（全22社）</h2>
+      <div class="rztable-wrap">
+        <table class="rztable">
+          <thead><tr><th>期間</th><th>企業名</th><th>雇用形態</th><th>役割</th></tr></thead>
+          <tbody>
+            <tr><td>2026年5月〜現在</td><td>株式会社CrestLab</td><td>業務委託</td><td>FDE（アニメ制作AI導入）</td></tr>
+            <tr><td>2025年9月〜2026年4月</td><td>株式会社AI INNOVATION</td><td>正社員</td><td>PdM（AI-SaaS）</td></tr>
+            <tr><td>2024年2月〜2025年8月</td><td>株式会社AI Impulse</td><td>業務委託</td><td>開発ディレクター</td></tr>
+            <tr><td>2022年10月〜2024年1月</td><td>株式会社Widsley</td><td>正社員</td><td>プロダクトマネージャー</td></tr>
+            <tr><td>2022年8月〜2022年9月</td><td>株式会社ヘキサドライブ</td><td>業務委託</td><td>プロモーション担当</td></tr>
+            <tr><td>2022年5月〜2022年7月</td><td>株式会社ケップル</td><td>正社員</td><td>Project Manager</td></tr>
+            <tr><td>2021年3月〜2022年4月</td><td>rinna株式会社</td><td>正社員</td><td>PM（対話AI）</td></tr>
+            <tr><td>2020年2月〜2021年2月</td><td>株式会社emotivE</td><td>正社員</td><td>ソリューションディレクター</td></tr>
+            <tr><td>2019年11月〜2020年1月</td><td>株式会社ユニメディア</td><td>正社員</td><td>新規事業企画</td></tr>
+            <tr><td>2018年11月〜2019年10月</td><td>ソネット・メディア・ネットワークス（現SMN）</td><td>正社員</td><td>アドテク事業 事業戦略室</td></tr>
+            <tr><td>2018年3月〜2018年10月</td><td>株式会社デジタルガレージ</td><td>正社員</td><td>クリエイティブディレクター</td></tr>
+            <tr><td>2017年10月〜2018年2月</td><td>株式会社ウインライト</td><td>正社員</td><td>プロデューサー</td></tr>
+            <tr><td>2016年7月〜2017年9月</td><td>アソビモ株式会社</td><td>正社員</td><td>プロデューサー／開発部 部長</td></tr>
+            <tr><td>2014年1月〜2016年6月</td><td>グリー株式会社</td><td>派遣→契約社員</td><td>PM</td></tr>
+            <tr><td>2013年7月〜2013年12月</td><td>株式会社ポケラボ</td><td>紹介予定派遣</td><td>運営プランナー</td></tr>
+            <tr><td>2011年2月〜2013年6月</td><td>ゼニマックスアジア TangoGameworks</td><td>派遣→正社員</td><td>ゲームデザイナー</td></tr>
+            <tr><td>2008年9月〜2011年1月</td><td>株式会社パオン</td><td>派遣→正社員</td><td>プランナー／ディレクター</td></tr>
+            <tr><td>2008年6月〜2008年9月</td><td>株式会社コナミデジタルエンタテインメント</td><td>アルバイト</td><td>オンラインチーム</td></tr>
+            <tr><td>2007年1月〜2008年3月</td><td>株式会社スクウェア・エニックス</td><td>アルバイト→契約社員</td><td>プランナー（カットシーン）</td></tr>
+            <tr><td>2006年10月〜2006年12月</td><td>株式会社ケイブ</td><td>紹介予定派遣</td><td>カットシーン制作</td></tr>
+            <tr><td>2006年4月〜2006年7月</td><td>株式会社トライエース</td><td>正社員</td><td>企画部 演出</td></tr>
+            <tr><td>2003年4月〜2006年3月</td><td>株式会社フロム・ソフトウェア</td><td>正社員</td><td>CGデザイナー</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="rznote">※ キャリア前半のゲーム業界では、タイトル開発単位での派遣・契約による参画が一般的な就業形態でした。直近の業務委託は、フリーランスとしてのAI開発・導入プロジェクトへの参画です。</p>
+
+      <h3 style="margin-top:26px">職務経歴（直近｜AI領域）</h3>
+      <div class="tl" style="margin-top:12px">
+        <div class="it"><div class="when">2026.05 – 現在 ・ 株式会社CrestLab（業務委託）｜FDE</div><p>アニメ制作へのAI活用プロダクトの開発・販売・運営（3名体制）。制作現場の非効率工程をAI実装で支援し、商談ヒアリング〜PoC/MVP開発〜自社SaaSへの組込・運用まで一気通貫。業界ニーズを事業戦略・ロードマップへ反映。</p></div>
+        <div class="it"><div class="when">2025.09 – 2026.04 ・ 株式会社AI INNOVATION（正社員）｜PdM</div><p>AI-SaaS（営業特化SALESプラットフォーム）のPdM。ユーザーニーズの開発フィードバック、ロードマップ・ROI試算・優先度設計、スクラム運用（PO/PdM 9名・エンジニア60名・QA 4名体制）。開発ディレクター兼エンジニアも兼務。</p></div>
+        <div class="it"><div class="when">2024.02 – 2025.08 ・ 株式会社AI Impulse（業務委託）｜開発ディレクター</div><p>AITuberライブ配信アプリ「LuminaLive」（iOS/Android/Web）の開発全般ディレクション。ゲーム設計・スクラム・音声/キャラクター生成・AIアーキテクチャ・AWS調整。ECライブコマース等のBtoB派生プロダクトも企画・開発。</p></div>
+        <div class="it"><div class="when">2022.10 – 2024.01 ・ 株式会社Widsley（正社員）｜プロダクトマネージャー</div><p>CTI SaaS「Comdesk Lead」のPM。通話テキスト解析による見込み度スコアリングのロジックを考案し、実装・リリースまで一人称で完遂。QA自動化（MagicPod/Selenium）のQAリーダーも担当。</p></div>
+      </div>
+
+      <h3 style="margin-top:22px">職務経歴（ゲーム・広告での代表的な経歴）</h3>
+      <div class="tl" style="margin-top:12px">
+        <div class="it"><div class="when">2016.07 – 2017.09 ・ アソビモ株式会社（正社員）｜プロデューサー／開発部 部長</div><p>「イルーナ戦記Online」PでMoM100%超を半年維持し月商1.25億円達成（KPI約125%改善）。「SAO インテグラル・ファクター」P/DでiOSトップセールス最高8位。開発部112名を統括し全社改革を推進。</p></div>
+        <div class="it"><div class="when">2014.01 – 2016.06 ・ グリー株式会社（派遣→契約社員）｜PM</div><p>「釣り★スタ」運用PM。コラボ企画で月売上前月比120%UP、ゲームサイクル見直し＋モデル拡張で売上前月比110%・社内No.1プロダクト化→社内MVP受賞。</p></div>
+        <div class="it"><div class="when">2018.11 – 2019.10 ・ ソネット・メディア・ネットワークス（現SMN／正社員）｜アドテク事業戦略室</div><p>広告効果可視化ツールの機能拡張プランニング・アライアンス営業。マーケコンサルとして、EC購買増進施策をトータル提案・配信し新規獲得ユーザーLTVが他対比200%超。</p></div>
+        <div class="it"><div class="when">2018.03 – 2018.10 ・ 株式会社デジタルガレージ（正社員）｜クリエイティブディレクター</div><p>スマホアプリ広告のクリエイティブディレクション。総額10億円のゲームプロモーション案件を6社コンペで受注。CV/ROAS分析にもとづく動画クリエイティブ改善。</p></div>
+      </div>
+      <p class="rznote">各社の詳しい職務内容は、上部メニュー「<a href="#" data-goto="portfolio">ポートフォリオ</a>」の Featured / Career / Works に記載しています。</p>
+    </div>
+  </section>
+
+  <section id="r-skills">
+    <div class="wrap">
+      <div class="kick">Skills</div>
+      <h2>スキル</h2>
+      <div class="grid g3">
+        <div class="card"><h3>マネジメント</h3>
+          <span class="tag">プロダクトマネジメント</span><span class="tag">0→1 / グロース</span>
+          <span class="tag">スクラム（PO / SM兼務）</span><span class="tag">事業計画 / 事業戦略</span>
+          <span class="tag">ROI試算 / KPI設計</span><span class="tag">データ分析</span>
+          <span class="tag">開発部統括（112名）</span><span class="tag">QA / 品質保証</span></div>
+        <div class="card"><h3>開発（AI / FDE）</h3>
+          <span class="tag">生成AI / AI駆動開発（Claude Code / Cursor）</span><span class="tag">LLM API / RAG</span>
+          <span class="tag">SaaS開発</span><span class="tag">Python</span><span class="tag">SQL</span>
+          <span class="tag">AWS / GCP・Firebase / Supabase</span><span class="tag">Unity / Unreal Engine</span>
+          <span class="tag">GitHub</span></div>
+        <div class="card"><h3>クリエイティブ</h3>
+          <span class="tag">ゲームデザイン</span><span class="tag">映像演出・カットシーン / 絵コンテ</span>
+          <span class="tag">モデリング</span><span class="tag">3dsmax / Maya</span>
+          <span class="tag">Photoshop / Illustrator</span><span class="tag">AfterEffects / Premiere</span>
+          <span class="tag">Blender（VRM）</span><span class="tag">生成AI（画像 / 楽曲）</span></div>
+      </div>
+      <p class="rznote">資格：普通自動車第一種運転免許（2012年10月）</p>
+    </div>
+  </section>
+
+  <section id="r-pr">
+    <div class="wrap">
+      <div class="kick">Self PR</div>
+      <h2>自己PR</h2>
+      <div class="rzpr">最も力を出せるのは、現場で意思決定できる裁量があるときです。CGデザイナーからプロデューサー・開発部長、そしてAI実装まで——職種を越えて現場を立ち上げ続けてきたので、前例のないテーマでも臆せず飛び込み、短期で形にできます。プロダクトは「売れてなんぼ」。事業として伸びる方向＝ニーズを探し、生成AIで検証用の機能を高速に作って確かめる。この繰り返しで、事業戦略・開発ロードマップ・営業戦略を経営目線で描きながら、経営貢献につながる開発をその場で回します。</div>
+    </div>
+  </section>
+
+  <footer id="r-contact">
+    <div class="wrap">
+      <div class="kick">Contact</div>
+      <p style="margin-top:10px;font-weight:700;font-size:16px">堀部 彰夫</p>
+      <p style="margin-top:6px;font-size:15px"><a href="mailto:superchance1986@outlook.jp">superchance1986@outlook.jp</a></p>
+      <p style="margin-top:14px;font-size:13px;color:var(--mut)">これは職務経歴書のWeb版です。作品・詳細は「<a href="#" data-goto="portfolio">ポートフォリオ</a>」をご覧ください。</p>
+      <p style="margin-top:20px;opacity:.7">© 2026 Akio Horibe</p>
+    </div>
+  </footer>
+</main>
+
 <script>
 (function(){
-  var links = Array.prototype.slice.call(document.querySelectorAll('.sidenav-links a'));
-  if(!links.length) return;
-  var map = {};
-  var sections = links.map(function(a){
-    var id = a.getAttribute('data-target');
-    var el = document.getElementById(id);
-    if(el) map[id] = a;
-    return el;
-  }).filter(Boolean);
-  if(!sections.length) return;
-
-  function update(){
-    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
-    var current = sections[0];
-    if(atBottom){
-      current = sections[sections.length - 1];
-    } else {
-      var pos = 140;
-      for(var i=0;i<sections.length;i++){
-        if(sections[i].getBoundingClientRect().top <= pos) current = sections[i];
+  var spyCleanup = null;
+  function initSpy(){
+    if(spyCleanup){ spyCleanup(); spyCleanup = null; }
+    var group = document.querySelector('.sidenav-links:not([hidden])');
+    if(!group) return;
+    var links = Array.prototype.slice.call(group.querySelectorAll('a'));
+    if(!links.length) return;
+    var map = {};
+    var sections = links.map(function(a){
+      var id = a.getAttribute('data-target');
+      var el = document.getElementById(id);
+      if(el) map[id] = a;
+      return el;
+    }).filter(Boolean);
+    if(!sections.length) return;
+    function update(){
+      var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      var current = sections[0];
+      if(atBottom){
+        current = sections[sections.length - 1];
+      } else {
+        var pos = 140;
+        for(var i=0;i<sections.length;i++){
+          if(sections[i].getBoundingClientRect().top <= pos) current = sections[i];
+        }
       }
+      links.forEach(function(a){ a.classList.remove('active'); });
+      var link = map[current.id];
+      if(link) link.classList.add('active');
     }
-    links.forEach(function(a){ a.classList.remove('active'); });
-    var link = map[current.id];
-    if(link) link.classList.add('active');
+    window.addEventListener('scroll', update, {passive:true});
+    window.addEventListener('resize', update);
+    update();
+    spyCleanup = function(){
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
   }
-  window.addEventListener('scroll', update, {passive:true});
-  window.addEventListener('resize', update);
-  update();
+
+  function setPage(name, opts){
+    opts = opts || {};
+    Array.prototype.slice.call(document.querySelectorAll('.page')).forEach(function(p){
+      p.hidden = (p.getAttribute('data-page') !== name);
+    });
+    Array.prototype.slice.call(document.querySelectorAll('.sidenav-links')).forEach(function(g){
+      g.hidden = (g.getAttribute('data-page') !== name);
+    });
+    Array.prototype.slice.call(document.querySelectorAll('[data-page-btn]')).forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-page-btn') === name);
+    });
+    initSpy();
+    if(opts.scroll) window.scrollTo(0, 0);
+    if(opts.hash){
+      if(name === 'resume'){ history.replaceState(null, '', '#resume'); }
+      else { history.replaceState(null, '', location.pathname + location.search); }
+    }
+  }
+
+  Array.prototype.slice.call(document.querySelectorAll('[data-page-btn]')).forEach(function(b){
+    b.addEventListener('click', function(){ setPage(b.getAttribute('data-page-btn'), {scroll:true, hash:true}); });
+  });
+  Array.prototype.slice.call(document.querySelectorAll('[data-goto]')).forEach(function(a){
+    a.addEventListener('click', function(e){ e.preventDefault(); setPage(a.getAttribute('data-goto'), {scroll:true, hash:true}); });
+  });
+
+  var h = location.hash.replace('#','');
+  var start = (h === 'resume' || h.indexOf('r-') === 0) ? 'resume' : 'portfolio';
+  setPage(start, {});
 })();
 </script>
 <script>
