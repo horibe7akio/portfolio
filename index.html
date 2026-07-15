@@ -32,7 +32,7 @@
   :root{
     --bg:#0d0f14; --panel:#151922; --panel2:#1b2130; --line:#252c3a;
     --tx:#e8ecf3; --mut:#9aa6b8; --acc:#5eead4; --acc2:var(--acc); --warn:#fbbf24;
-    --maxw:800px; --font:"Zen Kaku Gothic New",-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;
+    --maxw:940px; --font:"Zen Kaku Gothic New",-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;
   }
   @media (prefers-color-scheme: light){
     :root{ --bg:#f8f9fb; --panel:#ffffff; --panel2:#f0f2f6; --line:#e3e7ef;
@@ -282,12 +282,10 @@
     <a href="#contact" data-target="contact">Contact</a>
   </div>
   <div class="sidenav-links" data-page="resume" hidden>
-    <a href="#r-summary" data-target="r-summary">職務要約</a>
-    <a href="#r-strength" data-target="r-strength">活かせる経験</a>
-    <a href="#r-achievements" data-target="r-achievements">主な実績</a>
-    <a href="#r-history" data-target="r-history">職務経歴</a>
+    <a href="#r-summary" data-target="r-summary">概要</a>
+    <a href="#r-categories" data-target="r-categories">カテゴリ別</a>
+    <a href="#r-history" data-target="r-history">全経歴</a>
     <a href="#r-skills" data-target="r-skills">スキル</a>
-    <a href="#r-pr" data-target="r-pr">自己PR</a>
     <a href="#r-contact" data-target="r-contact">Contact</a>
   </div>
   <div class="sidenav-foot"><a href="mailto:superchance1986@outlook.jp">Contact →</a></div>
@@ -843,102 +841,103 @@
   <section id="r-summary">
     <div class="wrap">
       <div class="kick">Summary</div>
-      <h2>職務要約</h2>
+      <h2>概要</h2>
       <p class="lead" style="max-width:70ch">CGデザイナーからキャリアを始め、企画・ディレクター・プロデューサー・開発部長（112名統括）、広告マーケティング、新規事業、対話AI・生成AIのPM／FDEへ——23年で職種と業界を越え続けてきました。プロデューサーとしては運営タイトルの月商を9ヶ月で約1.5倍に伸ばし、広告では大型ゲームプロモーションを6社競合で受注、マーケでは新規ユーザーLTVを他対比200%超に改善。事業を数字で伸ばす一方、いまはCGデザイナー出身の非エンジニアながらClaude Code・Cursorで自らコードを書き、アニメ制作現場へのAI導入を企画から実装・リリースまで一人で回すFDEです。越境してきた軌跡すべてが、AI領域を事業と実装の両面から解く力になっています。</p>
-      <h3 style="margin-top:22px">現在の取り組みとキャリア志向</h3>
-      <p class="lead" style="max-width:70ch">「何を作るべきか」を事業目線で決め、生成AIで自分の手で作って届ける——それが今の仕事です。CTI SaaSのAIスコアリングは考案から実装・リリースまで単独で完遂し、直近はアニメ制作へのAI導入をFDEとして推進しています。事業を伸ばす嗅覚と、AIで自分で作り切る実装力の両方を一人で持つこと。この二刀流を、AI×事業開発の最前線で磨き続けたいと考えています。</p>
-    </div>
-  </section>
-
-  <section id="r-strength">
-    <div class="wrap">
-      <div class="kick">Strengths</div>
-      <h2>活かせる経験・知識・スキル</h2>
-      <ul class="tight" style="max-width:70ch">
-        <li>生成AI実装／AI駆動開発：Claude Code・Cursorで設計〜実装〜リリースまで自分で回す（CG出身の非エンジニア）</li>
-        <li>FDE：クライアント現場のヒアリング〜PoC/MVP開発〜SaaS組込・定着まで一気通貫</li>
-        <li>PdM／PM：エンジニア60名規模のスクラム運用、ロードマップ・ROI試算・優先度設計</li>
-        <li>0→1事業とグロース：新規タイトルの立ち上げからPMF・収益化、KPI運用による売上改善</li>
-        <li>組織マネジメント：開発部112名の統括（人事評価・全社改革推進）、オフショア／リモート運営</li>
-        <li>マーケティング／広告：ネット広告のクリエイティブディレクション、データ分析にもとづく施策設計</li>
-        <li>データ分析：ソーシャルゲームのKPI運用、通話テキスト解析による見込み度スコアリング設計</li>
-        <li>越境・適応力：職種と業界を越えて、変化の速い現場を短期で立ち上げる</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="r-achievements">
-    <div class="wrap">
-      <div class="kick">Achievements</div>
-      <h2>主な実績</h2>
       <div class="stats rzstats">
         <div class="stat"><div class="n">約1.5倍</div><div class="l">月商グロース（イルーナ・就任9ヶ月）</div></div>
         <div class="stat"><div class="n">6社コンペ</div><div class="l">大型広告案件を受注（DG）</div></div>
         <div class="stat"><div class="n">200%超</div><div class="l">新規獲得LTV（他対比・SMN）</div></div>
         <div class="stat"><div class="n">112名</div><div class="l">開発部 統括（アソビモ）</div></div>
       </div>
-      <ul class="rzlist">
-        <li><b>CTI SaaSへのAI実装（Widsley「Comdesk Lead」）</b>：通話テキスト解析による見込み度スコアリングを考案し、実装・リリースまで一人称で完遂。</li>
-        <li><b>生成AIによる少人数・高速開発（CrestLab／AI Impulse）</b>：Claude Code・CursorによるAI駆動開発でPoC/MVPをマイクロサービスとして高速実装。アニメ制作AIツールやAITuberアプリ等を少人数体制で開発・運用。</li>
-        <li><b>MMORPG運用の立て直し（アソビモ「イルーナ戦記Online」）</b>：就任9ヶ月で月商を約1.5倍に。半年間MoM100%超を維持し、KPI約125%改善・ストアランキング2桁復帰。</li>
-        <li><b>ソーシャルゲーム運用グロース（グリー「釣り★スタ」）</b>：ゲームサイクル見直し＋モデル拡張＋コラボ企画により売上前月比110%・社内No.1プロダクト化、社内MVP受賞。</li>
-        <li><b>広告プロモーションの大型受注（デジタルガレージ）</b>：大型ゲームプロモーション案件を6社コンペで受注。データ分析にもとづく動画クリエイティブ改善で貢献。</li>
-        <li><b>マーケティングコンサルティング（SMN）</b>：スポーツポータルサイト内EC購買増進施策をトータル提案・配信し、新規獲得ユーザーLTVが他対比200%超。</li>
-      </ul>
+      <p class="lead" style="max-width:70ch;margin-top:16px">「何を作るべきか」を事業目線で決め、生成AIで自分の手で作って検証を高速に回す——現場で意思決定できる裁量の中で最も力を発揮します。事業を伸ばす嗅覚と、AIで自分で作り切る実装力の二刀流を、AI×事業開発の最前線で磨き続けます。</p>
+    </div>
+  </section>
+
+  <section id="r-categories">
+    <div class="wrap">
+      <div class="kick">Category Summary</div>
+      <h2>大カテゴリ別サマリー</h2>
+      <p class="lead" style="max-width:70ch;margin-bottom:18px">23年の経歴を、4つの大きな領域に整理しています。</p>
+
+      <div class="card" style="margin-bottom:16px">
+        <div class="role">2020年〜現在</div>
+        <h3>生成AI・AI駆動開発 / FDE</h3>
+        <ul class="tight">
+          <li>Claude Code・CursorによるAI駆動開発で、PoC/MVPから本番リリースまで一人称で完遂（CG出身の非エンジニア）</li>
+          <li>FDEとして、クライアント現場のヒアリング〜実装〜自社SaaS組込・定着まで一気通貫（アニメ制作へのAI導入）</li>
+          <li>AI-SaaSのPdM（エンジニア60名規模のスクラム）、AITuberライブ配信アプリの0→1、CTIのAIスコアリングを考案〜実装〜リリース</li>
+          <li>対話AI（rinna RCP／emotivE）のPM・クライアント導入支援</li>
+        </ul>
+      </div>
+
+      <div class="card" style="margin-bottom:16px">
+        <div class="role">2013年〜2020年</div>
+        <h3>ゲームプロデュース・事業グロース・組織マネジメント</h3>
+        <ul class="tight">
+          <li>運営タイトルの月商を約1.5倍にグロース（MoM100%超を半年維持、KPI約125%改善、ストアランク2桁復帰）</li>
+          <li>新規IP MMORPGのプロデューサー／ディレクターとしてiOSトップセールス最高8位</li>
+          <li>開発部112名を統括（人事評価・全社改革推進）</li>
+          <li>「釣り★スタ」で社内No.1プロダクト化・社内MVP受賞</li>
+        </ul>
+      </div>
+
+      <div class="card" style="margin-bottom:16px">
+        <div class="role">2018年〜2019年 ほか</div>
+        <h3>広告マーケティング・クリエイティブディレクション</h3>
+        <ul class="tight">
+          <li>大型ゲームプロモーションを6社コンペで受注、CV/ROAS分析にもとづく動画クリエイティブ改善</li>
+          <li>マーケティングコンサルで新規獲得ユーザーLTVを他対比200%超に</li>
+          <li>広告効果可視化ツールの機能拡張プランニング・アライアンス営業</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="role">2003年〜2013年</div>
+        <h3>ゲーム制作（CG・映像演出・レベルデザイン）</h3>
+        <ul class="tight">
+          <li>フロム・ソフトウェアで「アーマードコア」等のOP/タイトルムービー制作（モデリング・演出・コンセプトデザイン）</li>
+          <li>「FF13」等のカットシーン制作・絵コンテ・モーションキャプチャー演技指導</li>
+          <li>「サイコブレイク」等のレベルデザイン（マップ／敵AI／ギミック仕様・エンジン改良）</li>
+        </ul>
+      </div>
     </div>
   </section>
 
   <section id="r-history">
     <div class="wrap">
-      <div class="kick">Career</div>
-      <h2>経歴一覧（全22社）</h2>
-      <div class="rztable-wrap">
-        <table class="rztable">
-          <thead><tr><th>期間</th><th>企業名</th><th>雇用形態</th><th>役割</th></tr></thead>
-          <tbody>
-            <tr><td>2026年5月〜現在</td><td>株式会社CrestLab</td><td>業務委託</td><td>FDE（アニメ制作AI導入）</td></tr>
-            <tr><td>2025年9月〜2026年4月</td><td>株式会社AI INNOVATION</td><td>正社員</td><td>PdM（AI-SaaS）</td></tr>
-            <tr><td>2024年2月〜2025年8月</td><td>株式会社AI Impulse</td><td>業務委託</td><td>開発ディレクター</td></tr>
-            <tr><td>2022年10月〜2024年1月</td><td>株式会社Widsley</td><td>正社員</td><td>プロダクトマネージャー</td></tr>
-            <tr><td>2022年8月〜2022年9月</td><td>株式会社ヘキサドライブ</td><td>業務委託</td><td>プロモーション担当</td></tr>
-            <tr><td>2022年5月〜2022年7月</td><td>株式会社ケップル</td><td>正社員</td><td>Project Manager</td></tr>
-            <tr><td>2021年3月〜2022年4月</td><td>rinna株式会社</td><td>正社員</td><td>PM（対話AI）</td></tr>
-            <tr><td>2020年2月〜2021年2月</td><td>株式会社emotivE</td><td>正社員</td><td>ソリューションディレクター</td></tr>
-            <tr><td>2019年11月〜2020年1月</td><td>株式会社ユニメディア</td><td>正社員</td><td>新規事業企画</td></tr>
-            <tr><td>2018年11月〜2019年10月</td><td>ソネット・メディア・ネットワークス（現SMN）</td><td>正社員</td><td>アドテク事業 事業戦略室</td></tr>
-            <tr><td>2018年3月〜2018年10月</td><td>株式会社デジタルガレージ</td><td>正社員</td><td>クリエイティブディレクター</td></tr>
-            <tr><td>2017年10月〜2018年2月</td><td>株式会社ウインライト</td><td>正社員</td><td>プロデューサー</td></tr>
-            <tr><td>2016年7月〜2017年9月</td><td>アソビモ株式会社</td><td>正社員</td><td>プロデューサー／開発部 部長</td></tr>
-            <tr><td>2014年1月〜2016年6月</td><td>グリー株式会社</td><td>派遣→契約社員</td><td>PM</td></tr>
-            <tr><td>2013年7月〜2013年12月</td><td>株式会社ポケラボ</td><td>紹介予定派遣</td><td>運営プランナー</td></tr>
-            <tr><td>2011年2月〜2013年6月</td><td>ゼニマックスアジア TangoGameworks</td><td>派遣→正社員</td><td>ゲームデザイナー</td></tr>
-            <tr><td>2008年9月〜2011年1月</td><td>株式会社パオン</td><td>派遣→正社員</td><td>プランナー／ディレクター</td></tr>
-            <tr><td>2008年6月〜2008年9月</td><td>株式会社コナミデジタルエンタテインメント</td><td>アルバイト</td><td>オンラインチーム</td></tr>
-            <tr><td>2007年1月〜2008年3月</td><td>株式会社スクウェア・エニックス</td><td>アルバイト→契約社員</td><td>プランナー（カットシーン）</td></tr>
-            <tr><td>2006年10月〜2006年12月</td><td>株式会社ケイブ</td><td>紹介予定派遣</td><td>カットシーン制作</td></tr>
-            <tr><td>2006年4月〜2006年7月</td><td>株式会社トライエース</td><td>正社員</td><td>企画部 演出</td></tr>
-            <tr><td>2003年4月〜2006年3月</td><td>株式会社フロム・ソフトウェア</td><td>正社員</td><td>CGデザイナー</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="rznote">※ キャリア前半のゲーム業界では、タイトル開発単位での派遣・契約による参画が一般的な就業形態でした。直近の業務委託は、フリーランスとしてのAI開発・導入プロジェクトへの参画です。</p>
+      <div class="kick">Full History</div>
+      <h2>全経歴（22社）</h2>
+      <p class="lead" style="max-width:70ch;margin-bottom:8px">在籍したすべての会社と、それぞれで担当した職務内容です（逆年代順）。</p>
+      <div class="tl" style="margin-top:16px">
+        <h3 style="margin:2px 0 -4px">AI・PM期 <span style="font-weight:400;color:var(--mut);font-size:14px">（2020–現在）</span></h3>
+        <div class="it"><div class="when">2026.05 – 現在 ・ 株式会社CrestLab（業務委託）｜FDE</div><p>アニメ制作へのAI活用プロダクト（ANICRA）を客先で開発し、自社SaaSへ実装。商談ヒアリング〜PoC/MVP開発〜運用、業界ニーズを反映した事業戦略・経営MTGまで一気通貫（3名体制）。</p></div>
+        <div class="it"><div class="when">2025.09 – 2026.04 ・ 株式会社AI INNOVATION（正社員）｜PdM</div><p>営業特化AI-SaaSのPdM。ロードマップ・ROI試算・優先度設計・スクラム運用（PO/PdM 9名・エンジニア60名・QA 4名体制）。開発ディレクター兼エンジニアも兼務。</p></div>
+        <div class="it"><div class="when">2024.02 – 2025.08 ・ 株式会社AI Impulse（業務委託）｜開発ディレクター／PO</div><p>AITuberライブ配信アプリ「LuminaLive」（iOS/Android/Web）を0→1。ゲーム設計・スクラム・音声/キャラクター生成・AIアーキテクチャ・AWS調整。ECライブコマース等のBtoB派生プロダクト4種も企画・開発。</p></div>
+        <div class="it"><div class="when">2022.10 – 2024.01 ・ 株式会社Widsley（正社員）｜プロダクトマネージャー</div><p>CTI SaaS「Comdesk Lead」のPM。通話テキスト解析による見込み度スコアリングを考案〜実装〜リリース。既存機能改善・新規マイクロサービス開発、QA自動化（MagicPod/Selenium）のリーダーも担当。</p></div>
+        <div class="it"><div class="when">2022.08 – 2022.09 ・ 株式会社ヘキサドライブ（業務委託）｜プロモーション担当</div><p>Steam配信タイトル「VOIDCRISIS」のストア分析・プロモーション施策。京都BitSummit（オフラインイベント）説明員。</p></div>
+        <div class="it"><div class="when">2022.05 – 2022.07 ・ 株式会社ケップル（正社員）｜Project Manager</div><p>KEPPLE CREATORS LAB（スタートアップ×投資家向けSaaS）のプロダクトマネジメント。</p></div>
+        <div class="it"><div class="when">2021.03 – 2022.04 ・ rinna株式会社（正社員）｜PM兼テックアドバイザー</div><p>RCP（Rinna Character Platform）のクライアント向けAIキャラクター企画・作成・導入支援（対話AI・分類・音声合成の3モデルを横断）。対話AIチャットアプリ「Chararu」の開発ディレクション。</p></div>
+        <div class="it"><div class="when">2020.02 – 2021.02 ・ 株式会社emotivE（正社員）｜ソリューションディレクター兼プロデューサー</div><p>対話AI活用ソリューションの提案企画統括。対話AIを活用したプロダクト・サービスの提案ベースを構築し、社外企業・クライアントへ展開。</p></div>
 
-      <h3 style="margin-top:26px">職務経歴（直近｜AI領域）</h3>
-      <div class="tl" style="margin-top:12px">
-        <div class="it"><div class="when">2026.05 – 現在 ・ 株式会社CrestLab（業務委託）｜FDE</div><p>アニメ制作へのAI活用プロダクトの開発・販売・運営（3名体制）。制作現場の非効率工程をAI実装で支援し、商談ヒアリング〜PoC/MVP開発〜自社SaaSへの組込・運用まで一気通貫。業界ニーズを事業戦略・ロードマップへ反映。</p></div>
-        <div class="it"><div class="when">2025.09 – 2026.04 ・ 株式会社AI INNOVATION（正社員）｜PdM</div><p>AI-SaaS（営業特化SALESプラットフォーム）のPdM。ユーザーニーズの開発フィードバック、ロードマップ・ROI試算・優先度設計、スクラム運用（PO/PdM 9名・エンジニア60名・QA 4名体制）。開発ディレクター兼エンジニアも兼務。</p></div>
-        <div class="it"><div class="when">2024.02 – 2025.08 ・ 株式会社AI Impulse（業務委託）｜開発ディレクター</div><p>AITuberライブ配信アプリ「LuminaLive」（iOS/Android/Web）の開発全般ディレクション。ゲーム設計・スクラム・音声/キャラクター生成・AIアーキテクチャ・AWS調整。ECライブコマース等のBtoB派生プロダクトも企画・開発。</p></div>
-        <div class="it"><div class="when">2022.10 – 2024.01 ・ 株式会社Widsley（正社員）｜プロダクトマネージャー</div><p>CTI SaaS「Comdesk Lead」のPM。通話テキスト解析による見込み度スコアリングのロジックを考案し、実装・リリースまで一人称で完遂。QA自動化（MagicPod/Selenium）のQAリーダーも担当。</p></div>
-      </div>
-
-      <h3 style="margin-top:22px">職務経歴（ゲーム・広告での代表的な経歴）</h3>
-      <div class="tl" style="margin-top:12px">
-        <div class="it"><div class="when">2016.07 – 2017.09 ・ アソビモ株式会社（正社員）｜プロデューサー／開発部 部長</div><p>「イルーナ戦記Online」PでMoM100%超を半年維持し月商を約1.5倍に（KPI約125%改善）。「SAO インテグラル・ファクター」P/DでiOSトップセールス最高8位。開発部112名を統括し全社改革を推進。</p></div>
-        <div class="it"><div class="when">2014.01 – 2016.06 ・ グリー株式会社（派遣→契約社員）｜PM</div><p>「釣り★スタ」運用PM。コラボ企画で月売上前月比120%UP、ゲームサイクル見直し＋モデル拡張で売上前月比110%・社内No.1プロダクト化→社内MVP受賞。</p></div>
-        <div class="it"><div class="when">2018.11 – 2019.10 ・ ソネット・メディア・ネットワークス（現SMN／正社員）｜アドテク事業戦略室</div><p>広告効果可視化ツールの機能拡張プランニング・アライアンス営業。マーケコンサルとして、EC購買増進施策をトータル提案・配信し新規獲得ユーザーLTVが他対比200%超。</p></div>
+        <h3 style="margin:12px 0 -4px">マーケティング・新規事業期 <span style="font-weight:400;color:var(--mut);font-size:14px">（2018–2020）</span></h3>
+        <div class="it"><div class="when">2019.11 – 2020.01 ・ 株式会社ユニメディア（正社員）｜新規事業企画</div><p>コンソーシアム型ブロックチェーンエンジンを用いた新規事業企画。市場調査・成長性/売上試算。</p></div>
+        <div class="it"><div class="when">2018.11 – 2019.10 ・ ソネット・メディア・ネットワークス（現SMN／正社員）｜アドテク事業 事業戦略室</div><p>広告効果可視化ツールの機能拡張プランニング・ビジネス試算・アライアンス営業。マーケティングコンサルとして、EC購買増進施策をトータル提案・配信し新規獲得ユーザーLTVが他対比200%超。</p></div>
         <div class="it"><div class="when">2018.03 – 2018.10 ・ 株式会社デジタルガレージ（正社員）｜クリエイティブディレクター</div><p>スマホアプリ広告のクリエイティブディレクション。大型ゲームプロモーション案件を6社コンペで受注。CV/ROAS分析にもとづく動画クリエイティブ改善。</p></div>
+
+        <h3 style="margin:12px 0 -4px">ゲーム制作期 <span style="font-weight:400;color:var(--mut);font-size:14px">（2003–2018）</span></h3>
+        <div class="it"><div class="when">2017.10 – 2018.02 ・ 株式会社ウインライト（正社員）｜プロデューサー</div><p>「エレメンタルナイツオンライン」移植版＋新規タイトルの立ち上げ（企画書作成・社内外プレゼン・工程管理・スタッフマネジメント）。</p></div>
+        <div class="it"><div class="when">2016.07 – 2017.09 ・ アソビモ株式会社（正社員）｜プロデューサー／ディレクター・開発部 部長</div><p>「イルーナ戦記Online」でMoM100%超を半年維持し月商を約1.5倍に（KPI約125%改善・ストアランク2桁復帰）。「SAO インテグラル・ファクター」P/DでiOSトップセールス最高8位。「ゲートオブリベリオン」P兼D。開発部112名を統括し全社改革を推進。</p></div>
+        <div class="it"><div class="when">2014.01 – 2016.06 ・ グリー株式会社（派遣→契約社員）｜PM</div><p>「釣り★スタ」運用。データ分析・イベントディレクション・業務改善。コラボ企画で前月比120%UP、ゲームサイクル見直し＋モデル拡張で社内No.1プロダクト化→社内MVP受賞。dゲーム版ディレクションも担当。</p></div>
+        <div class="it"><div class="when">2013.07 – 2013.12 ・ 株式会社ポケラボ（紹介予定派遣）｜運営プランナー</div><p>「魔界学園カタストロフィ」運営。課金施策・継続率施策・KPI/離脱分析・イベント作成・DAU対策・TGS出展対応。</p></div>
+        <div class="it"><div class="when">2011.02 – 2013.06 ・ Tango Gameworks／ゼニマックスアジア（派遣→正社員）｜ゲームデザイナー</div><p>「サイコブレイク（PsychoBreak）」のレベルデザイン。マップ・敵AI・ギミック仕様、サウンドリスト、レベル組込、エンジン改良（約100名体制）。</p></div>
+        <div class="it"><div class="when">2008.09 – 2011.01 ・ 株式会社パオン（派遣→正社員）｜プランナー／ディレクター</div><p>アーケード「ガジャレーサー」（タイトー）の企画立案〜プレゼン・絵コンテ・プリプロダクションディレクター、「エレベーターアクションデスパレード」（タイトー）のステージ設計・スクリプト・カットシーン作成。</p></div>
+        <div class="it"><div class="when">2008.06 – 2008.09 ・ 株式会社コナミデジタルエンタテインメント（アルバイト）｜オンラインチーム</div><p>「メタルギアオンライン」（PS3）のオンラインゲームのイベント企画・運営。</p></div>
+        <div class="it"><div class="when">2007.01 – 2008.03 ・ 株式会社スクウェア・エニックス（アルバイト→契約社員）｜プランナー（カットシーン）</div><p>「ファイナルファンタジー13」（PS3）のカットシーン制作・絵コンテ作成・モーションキャプチャー収録（アクターへの演技指導）。</p></div>
+        <div class="it"><div class="when">2006.10 – 2006.12 ・ 株式会社ケイブ（紹介予定派遣）｜カットシーン制作</div><p>「女神転生オンライン」（PC MMO）のカットシーン制作（3dsmax・SE/テロップ付け・専用ツール編集）。</p></div>
+        <div class="it"><div class="when">2006.04 – 2006.07 ・ 株式会社トライエース（正社員）｜企画部 演出</div><p>「インフィニットアンディスカバリー」（Xbox360 RPG）の絵コンテ/ビデオコンテ制作・スクリプターリーダー・カットシーン制作・開発エンジン改良。</p></div>
+        <div class="it"><div class="when">2003.04 – 2006.03 ・ 株式会社フロム・ソフトウェア（正社員）｜CGデザイナー</div><p>「アーマードコア4／ラストレイヴン／ナインブレイカー」「A.C.E」シリーズ「メタルウルフカオス」「クロムハウンズ」等のOP/タイトルムービー制作（モデリング・質感設定・演出）＋ゲームコンセプトデザイン（絵コンテ・動画コンテ）。</p></div>
       </div>
-      <p class="rznote">各社の詳しい職務内容は、上部メニュー「<a href="#" data-goto="portfolio">ポートフォリオ</a>」の Featured / Career / Works に記載しています。</p>
+      <p class="rznote">※ キャリア前半のゲーム業界では、タイトル開発単位での派遣・契約による参画が一般的な就業形態でした。直近の業務委託は、フリーランスとしてのAI開発・導入プロジェクトへの参画です。各タイトルの詳細・映像は「<a href="#" data-goto="portfolio">ポートフォリオ</a>」を参照。</p>
     </div>
   </section>
 
@@ -964,14 +963,6 @@
           <span class="tag">Blender（VRM）</span><span class="tag">生成AI（画像 / 楽曲）</span></div>
       </div>
       <p class="rznote">資格：普通自動車第一種運転免許（2012年10月）</p>
-    </div>
-  </section>
-
-  <section id="r-pr">
-    <div class="wrap">
-      <div class="kick">Self PR</div>
-      <h2>自己PR</h2>
-      <div class="rzpr">最も力を出せるのは、現場で意思決定できる裁量があるときです。CGデザイナーからプロデューサー・開発部長、そしてAI実装まで——職種を越えて現場を立ち上げ続けてきたので、前例のないテーマでも臆せず飛び込み、短期で形にできます。プロダクトは「売れてなんぼ」。事業として伸びる方向＝ニーズを探し、生成AIで検証用の機能を高速に作って確かめる。この繰り返しで、事業戦略・開発ロードマップ・営業戦略を経営目線で描きながら、経営貢献につながる開発をその場で回します。</div>
     </div>
   </section>
 
