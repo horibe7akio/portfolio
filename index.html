@@ -234,35 +234,6 @@
     .hover-bg img{transition:opacity .2s linear;transform:none}
     .hover-bg img.on{transform:none}
   }
-  /* ---- 消費カーブ・シミュレータ（その場で動くデモ） ---- */
-  .sim{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
-  .sim-ctrls{display:grid;grid-template-columns:1fr 1fr;gap:16px 22px;margin-bottom:6px}
-  @media(max-width:700px){.sim-ctrls{grid-template-columns:1fr}}
-  .sim-ctrl label{display:flex;justify-content:space-between;align-items:baseline;
-    font-size:12.5px;font-weight:700;color:var(--mut);margin-bottom:6px;gap:10px}
-  .sim-ctrl label b{color:var(--acc);font-size:15px;font-variant-numeric:tabular-nums}
-  .sim-ctrl input[type=range]{width:100%;accent-color:var(--acc);cursor:pointer;margin:0}
-  .sim-chart{margin-top:16px;background:var(--panel2);border:1px solid var(--line);
-    border-radius:10px;padding:12px 10px 6px}
-  .sim-chart svg{display:block;width:100%;height:auto}
-  .sim-grid{stroke:var(--line);stroke-width:1}
-  .sim-base{stroke:var(--mut);stroke-width:2;fill:none;stroke-dasharray:5 4;opacity:.75}
-  .sim-fix{stroke:var(--acc);stroke-width:2.5;fill:none;stroke-linejoin:round}
-  .sim-area{fill:var(--acc);opacity:.10}
-  .sim-axis{fill:var(--mut);font-size:10px}
-  .sim-marker{stroke:var(--acc);stroke-width:1;stroke-dasharray:3 3;opacity:.55}
-  .sim-out{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-  @media(max-width:520px){.sim-out{grid-template-columns:1fr}}
-  .sim-out div{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
-  .sim-out .n{font-size:22px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-  .sim-out .bad .n{color:var(--warn)}
-  .sim-out .good .n{color:var(--acc)}
-  .sim-out .l{font-size:11.5px;color:var(--mut);margin-top:2px}
-  .sim-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--mut);margin-top:10px}
-  .sim-legend i{display:inline-block;width:16px;height:0;vertical-align:middle;margin-right:5px}
-  .sim-legend .k1 i{border-top:2px dashed var(--mut)}
-  .sim-legend .k2 i{border-top:3px solid var(--acc)}
-  .sim-note{font-size:11.5px;color:var(--mut);margin-top:12px;line-height:1.7}
   /* scroll progress bar */
   .progress-bar{position:fixed;top:0;left:0;height:2px;width:100%;z-index:200;
     background:linear-gradient(90deg,var(--acc),var(--acc));transform:scaleX(0);
@@ -354,7 +325,6 @@
   <div class="sidenav-links" data-page="portfolio">
     <a href="#summary" data-target="summary">Summary</a>
     <a href="#featured" data-target="featured">Featured</a>
-    <a href="#demo" data-target="demo">Demo</a>
     <a href="#proof" data-target="proof">Proof of Work</a>
     <a href="#games" data-target="games">Works</a>
     <a href="#career" data-target="career">Career</a>
@@ -720,51 +690,6 @@
       </div>
     </div>
 
-  </div>
-</section>
-
-<section id="demo">
-  <div class="wrap">
-    <div class="kick">Demo ・ その場で作る</div>
-    <h2>「月次93%の減衰」が何を意味するか、触って確かめる</h2>
-    <p class="lead" style="margin-bottom:18px">釣り★スタで直面した課題を、その場で動くものにしました。商談でも、困りごとをこうしてPoCにして見せています。<strong>スライダーを動かしてください。</strong></p>
-
-    <div class="sim" id="sim">
-      <div class="sim-ctrls">
-        <div class="sim-ctrl">
-          <label for="sim-rate">何もしない場合の月次継続率 <b><span id="sim-rate-v">93</span>%</b></label>
-          <input type="range" id="sim-rate" min="80" max="100" step="1" value="93">
-        </div>
-        <div class="sim-ctrl">
-          <label for="sim-month">立て直しにかけた期間 <b><span id="sim-month-v">6</span>ヶ月</b></label>
-          <input type="range" id="sim-month" min="1" max="11" step="1" value="6">
-        </div>
-      </div>
-
-      <div class="sim-chart">
-        <svg id="sim-svg" viewBox="0 0 640 260" role="img" aria-labelledby="sim-svg-title">
-          <title id="sim-svg-title">月次消費の推移シミュレーション</title>
-          <g id="sim-gridlines"></g>
-          <path id="sim-area" class="sim-area"></path>
-          <path id="sim-path-base" class="sim-base"></path>
-          <path id="sim-path-fix" class="sim-fix"></path>
-          <line id="sim-vline" class="sim-marker"></line>
-          <g id="sim-labels"></g>
-        </svg>
-      </div>
-
-      <div class="sim-legend">
-        <span class="k1"><i></i>放置した場合</span>
-        <span class="k2"><i></i>ゲームサイクルを見直した場合</span>
-      </div>
-
-      <div class="sim-out">
-        <div class="bad"><div class="n" id="sim-out-base">–</div><div class="l">放置した場合の12ヶ月後（開始月＝100%）</div></div>
-        <div class="good"><div class="n" id="sim-out-fix">–</div><div class="l">見直した場合の12ヶ月後</div></div>
-      </div>
-
-      <p class="sim-note">※ 当時直面した減衰率（月次93%前後）と、立て直し後に到達した水準（コラボ月に前月比110〜120%、以降は社内消費No.1を維持）をもとにした<strong>概念シミュレーション</strong>です。実測値のプロットではありません。開始月を100%として、複利で推移させています。</p>
-    </div>
   </div>
 </section>
 
@@ -1414,93 +1339,6 @@
 })();
 </script>
 <script>
-/* 消費カーブ・シミュレータ ---------------------------------------------
-   放置した場合: 毎月 rate% の複利で減衰
-   見直した場合: 立て直し期間中はゆるやかに底打ちさせ、完了月に前月比+18%の
-                 コラボを当て、以降は微増で維持（＝実際に起きた形をなぞる） */
-(function(){
-  var root = document.getElementById('sim');
-  if(!root) return;
-  var W = 640, H = 260, PAD_L = 46, PAD_R = 14, PAD_T = 14, PAD_B = 30;
-  var MONTHS = 12;
-  var rateEl = document.getElementById('sim-rate');
-  var monthEl = document.getElementById('sim-month');
-
-  function series(rate, fixMonth){
-    var base = [], fix = [], b = 100, f = 100;
-    for(var m = 0; m <= MONTHS; m++){
-      if(m > 0){
-        b *= rate;
-        if(m < fixMonth){
-          // 立て直し中：減衰をだんだん緩める（rate → 1.0 へ線形に寄せる）
-          var t = m / fixMonth;
-          f *= rate + (1 - rate) * t;
-        } else if(m === fixMonth){
-          f *= 1.18;              // 総仕上げのコラボ
-        } else {
-          f *= 1.01;              // 拡張したモデルで維持
-        }
-      }
-      base.push(b); fix.push(f);
-    }
-    return {base: base, fix: fix};
-  }
-
-  function scale(vals){
-    var max = 0;
-    vals.forEach(function(a){ a.forEach(function(v){ if(v > max) max = v; }); });
-    max = Math.max(120, Math.ceil(max / 20) * 20);
-    return {
-      x: function(i){ return PAD_L + (W - PAD_L - PAD_R) * (i / MONTHS); },
-      y: function(v){ return PAD_T + (H - PAD_T - PAD_B) * (1 - v / max); },
-      max: max
-    };
-  }
-
-  function path(arr, s){
-    return arr.map(function(v, i){ return (i ? 'L' : 'M') + s.x(i).toFixed(1) + ' ' + s.y(v).toFixed(1); }).join(' ');
-  }
-
-  function render(){
-    var rate = parseInt(rateEl.value, 10) / 100;
-    var fixMonth = parseInt(monthEl.value, 10);
-    document.getElementById('sim-rate-v').textContent = rateEl.value;
-    document.getElementById('sim-month-v').textContent = monthEl.value;
-
-    var d = series(rate, fixMonth);
-    var s = scale([d.base, d.fix]);
-
-    // 目盛り
-    var grid = '', labels = '';
-    for(var v = 0; v <= s.max; v += 20){
-      var y = s.y(v).toFixed(1);
-      grid += '<line class="sim-grid" x1="' + PAD_L + '" y1="' + y + '" x2="' + (W - PAD_R) + '" y2="' + y + '"></line>';
-      labels += '<text class="sim-axis" x="' + (PAD_L - 8) + '" y="' + (parseFloat(y) + 3.5) + '" text-anchor="end">' + v + '%</text>';
-    }
-    for(var m = 0; m <= MONTHS; m += 3){
-      labels += '<text class="sim-axis" x="' + s.x(m).toFixed(1) + '" y="' + (H - 10) + '" text-anchor="middle">' + m + 'ヶ月</text>';
-    }
-    document.getElementById('sim-gridlines').innerHTML = grid;
-    document.getElementById('sim-labels').innerHTML = labels;
-
-    document.getElementById('sim-path-base').setAttribute('d', path(d.base, s));
-    document.getElementById('sim-path-fix').setAttribute('d', path(d.fix, s));
-    document.getElementById('sim-area').setAttribute('d',
-      path(d.fix, s) + ' L' + s.x(MONTHS).toFixed(1) + ' ' + s.y(0).toFixed(1) +
-      ' L' + s.x(0).toFixed(1) + ' ' + s.y(0).toFixed(1) + ' Z');
-
-    var vl = document.getElementById('sim-vline');
-    vl.setAttribute('x1', s.x(fixMonth).toFixed(1)); vl.setAttribute('x2', s.x(fixMonth).toFixed(1));
-    vl.setAttribute('y1', PAD_T); vl.setAttribute('y2', H - PAD_B);
-
-    document.getElementById('sim-out-base').textContent = Math.round(d.base[MONTHS]) + '%';
-    document.getElementById('sim-out-fix').textContent = Math.round(d.fix[MONTHS]) + '%';
-  }
-
-  rateEl.addEventListener('input', render);
-  monthEl.addEventListener('input', render);
-  render();
-})();
 /* キーボードでセクション送り（画面共有しながら話す用）: J/K または ↓/↑ */
 (function(){
   function visibleSections(){
