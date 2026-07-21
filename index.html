@@ -181,13 +181,24 @@
   .detail-trigger{cursor:pointer;position:relative;transition:border-color .15s}
   .detail-trigger:hover{border-color:var(--acc)}
   .detail-trigger.card-active{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
-  .detailpanel{position:fixed;top:0;right:0;width:360px;height:100vh;
+  /* 開閉のtransformは変数で持つ（メディアクエリ側では変数だけ差し替える）*/
+  .detailpanel{--tf-closed:translateX(100%);--tf-open:translateX(0);
+    position:fixed;top:0;right:0;width:360px;height:100vh;
     padding:64px 30px 30px;background:var(--panel);border-left:1px solid var(--line);
     overflow-y:auto;z-index:90;display:none;
-    transform:translateX(100%);transition:transform .3s ease;
+    transform:var(--tf-closed);transition:transform .3s ease;
     box-shadow:-16px 0 30px rgba(0,0,0,.15)}
-  .detailpanel.open{transform:translateX(0)}
+  .detailpanel.open{transform:var(--tf-open)}
   @media(min-width:1240px){ .detailpanel{display:block} }
+  /* 狭幅は下からのボトムシート（1240px未満で詳細が全く読めない問題の解消） */
+  @media(max-width:1239px){
+    .detailpanel{--tf-closed:translateY(100%);--tf-open:translateY(0);
+      display:block;top:auto;bottom:0;left:0;right:0;width:auto;height:auto;
+      max-height:74vh;border-left:0;border-top:1px solid var(--line);
+      border-radius:16px 16px 0 0;padding:46px 20px 26px;
+      box-shadow:0 -14px 34px rgba(0,0,0,.18)}
+    .detailpanel .detailpanel-close{display:flex}
+  }
   .detailpanel-close{position:absolute;top:20px;right:20px;width:32px;height:32px;
     border-radius:50%;border:1px solid var(--line);background:var(--panel2);color:var(--mut);
     font-size:13px;cursor:pointer;display:none;align-items:center;justify-content:center;line-height:1}
@@ -206,6 +217,28 @@
   .reveal.in{opacity:1;transform:translateY(0)}
   @media (prefers-reduced-motion: reduce){
     .reveal{opacity:1;transform:none;transition:none}
+  }
+  /* scroll progress bar */
+  .progress-bar{position:fixed;top:0;left:0;height:2px;width:100%;z-index:200;
+    background:linear-gradient(90deg,var(--acc),var(--acc));transform:scaleX(0);
+    transform-origin:0 50%;will-change:transform;pointer-events:none;opacity:.9}
+  /* career timeline: scroll-fill line */
+  .tl{position:relative}
+  .tl-fill{position:absolute;left:-2px;top:0;width:2px;background:var(--acc);
+    height:0;will-change:height;pointer-events:none;border-radius:2px}
+  .tl .it::before{transition:background .3s ease,box-shadow .3s ease}
+  .tl .it.past::before{box-shadow:0 0 0 4px var(--bg),0 0 10px rgba(94,234,212,.5)}
+  /* career era filter */
+  .era-filter{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
+  .era-filter button{font-family:inherit;font-weight:700;font-size:12.5px;padding:7px 14px;
+    border-radius:999px;border:1px solid var(--line);background:var(--panel2);
+    color:var(--mut);cursor:pointer;transition:.15s}
+  .era-filter button:hover{color:var(--tx);border-color:var(--acc)}
+  .era-filter button.active{background:var(--acc);border-color:var(--acc);color:#0b1410}
+  .tl .it.era-hidden,.tl h3.era-hidden{display:none}
+  @media (prefers-reduced-motion: reduce){
+    .progress-bar{transition:none}
+    .tl .it::before{transition:none}
   }
   /* ambient background — 作り手 × AI の静かな空気感 */
   .ambient-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
@@ -265,6 +298,7 @@
 </head>
 <body>
 <div class="ambient-bg" aria-hidden="true"><span></span><span></span><span></span></div>
+<div class="progress-bar" id="progress-bar" aria-hidden="true"></div>
 <nav class="sidenav" aria-label="グローバルナビゲーション">
   <div class="sidenav-brand">堀部 彰夫<span>Maker × Growth PM × AI-FDE</span></div>
   <div class="sidenav-switch" role="tablist" aria-label="ページ切り替え">
@@ -730,8 +764,15 @@
   <div class="wrap">
     <div class="kick">Career</div>
     <h2>職務経歴（逆順）</h2>
+    <div class="era-filter" id="era-filter" role="group" aria-label="時代で絞り込み">
+      <button type="button" data-era="all" class="active">すべて</button>
+      <button type="button" data-era="ai">AI・PM期</button>
+      <button type="button" data-era="mk">マーケティング期</button>
+      <button type="button" data-era="game">ゲーム制作期</button>
+    </div>
     <div class="tl">
-      <h3 style="margin:2px 0 -4px">AI・PM期 <span style="font-weight:400;color:var(--mut);font-size:14px">（2020–現在）</span></h3>
+      <div class="tl-fill" id="tl-fill" aria-hidden="true"></div>
+      <h3 data-era-head="ai" style="margin:2px 0 -4px">AI・PM期 <span style="font-weight:400;color:var(--mut);font-size:14px">（2020–現在）</span></h3>
       <div class="it"><div class="when">2026.05 – 現在 ・ CrestLab（業務委託）</div><p><strong>FDE。</strong>アニメ制作領域のAI活用プロダクトを、客先で"その場で開発"してデリバリー＋自社SaaSへ実装。ビジョン/事業戦略/営業戦略の経営MTGまで。</p><div><span class="tag">FDE</span><span class="tag">生成AI</span><span class="tag">事業戦略</span></div></div>
       <div class="it"><div class="when">2025.09 – 2026.04 ・ AI INNOVATION（正社員）</div><p><strong>PdM（SES）。</strong>営業特化・マルチエージェント/マルチプロバイダーのAI SaaS。開発ロードマップ・ROI試算・スクラム・Looker分析基盤。</p><div><span class="tag">PdM</span><span class="tag">AI SaaS</span><span class="tag">スクラム</span></div></div>
       <div class="it"><div class="when">2024.02 – 2025.08 ・ AI Impulse（業務委託）</div><p><strong>開発Dir/PO。</strong>LuminaLive（AI VTuber配信アプリ）を0→1＋BtoB派生4種（上記）。</p><div><span class="tag">開発Dir/PO</span><span class="tag">0→1</span><span class="tag">AI VTuber</span></div></div>
@@ -741,9 +782,9 @@
       <div class="it"><div class="when">2021.03 – 2022.04 ・ rinna（正社員）</div><p><strong>B2B案件PM兼テックアドバイザー。</strong>RCP（Rinna Character Platform）／対話AIアプリ Chararu。</p><div><span class="tag">PM</span><span class="tag">対話AI</span><span class="tag">テックアドバイザー</span></div></div>
       <div class="it"><div class="when">2020.02 – 2021.02 ・ emotivE（正社員）</div><p><strong>対話AIソリューションのDir/PO。</strong>対話AI基盤 OMOHIKANE。<span class="nda">［一部 未発表案件につき割愛］</span></p><div><span class="tag">Dir/PO</span><span class="tag">対話AI</span></div></div>
       <div class="it"><div class="when">2019.11 – 2020.01 ・ ユニメディア（正社員）</div><p>ブロックチェーン（コンソーシアム型）を活用した新規事業企画・市場/売上試算。</p><div><span class="tag">新規事業企画</span><span class="tag">ブロックチェーン</span></div></div>
-      <h3 style="margin:8px 0 -4px">マーケティング期 <span style="font-weight:400;color:var(--mut);font-size:14px">（2018–2020）</span></h3>
+      <h3 data-era-head="mk" style="margin:8px 0 -4px">マーケティング期 <span style="font-weight:400;color:var(--mut);font-size:14px">（2018–2020）</span></h3>
       <div class="it"><div class="when">2018.03 – 2019.10 ・ デジタルガレージ → ソネット・メディア・ネットワークス（正社員）</div><p>スマホアプリ広告のクリエイティブディレクション（大型ゲームプロモを6社コンペで受注）／広告効果可視化ツール企画・マーケコンサル（新規獲得<strong>LTV 200%超</strong>）。</p><div><span class="tag">クリエイティブディレクション</span><span class="tag">マーケコンサル</span></div></div>
-      <h3 style="margin:8px 0 -4px">ゲーム制作期 <span style="font-weight:400;color:var(--mut);font-size:14px">（2003–2018）</span></h3>
+      <h3 data-era-head="game" style="margin:8px 0 -4px">ゲーム制作期 <span style="font-weight:400;color:var(--mut);font-size:14px">（2003–2018）</span></h3>
       <div class="it"><div class="when">2017.10 – 2018.02 ・ ウインライト（正社員）</div><p><strong>プロデューサー。</strong>エレメンタルナイツオンライン移植版＋新規タイトルの立ち上げ（企画〜出資者プレゼン）。</p><div><span class="tag">プロデューサー</span><span class="tag">新規タイトル立ち上げ</span></div></div>
       <div class="it"><div class="when">2016.07 – 2017.09 ・ アソビモ（正社員）</div><p><strong>開発部部長（112名統括）／P兼D。</strong>SAOIF・ゲートオブリベリオン・イルーナ戦記（上記）。全社改革推進も。</p><div><span class="tag">開発部長</span><span class="tag">P兼D</span><span class="tag">組織改革</span></div></div>
       <div class="it"><div class="when">2014.01 – 2016.06 ・ グリー（派遣→契約社員）</div><p><strong>PM兼企画ディレクション。</strong>釣り★スタ（社内消費No1・社内MVP受賞）ほか新規タイトル。</p><div><span class="tag">PM</span><span class="tag">企画ディレクション</span></div></div>
@@ -1102,8 +1143,20 @@
 
   triggers.forEach(function(card){
     var key = card.getAttribute('data-detail');
-    card.addEventListener('mouseenter', function(){ if(!pinned) show(key); });
-    card.addEventListener('mouseleave', function(){ hide(); });
+    // 狭幅（ボトムシート）ではタップのみ。hoverは wide 限定＋130msのintentで
+    // カードの上を通り過ぎただけのチカつきを止める
+    var intent = null;
+    card.addEventListener('mouseenter', function(){
+      if(!isWide() || pinned) return;
+      clearTimeout(intent);
+      var delay = panel.classList.contains('open') ? 0 : 130;
+      intent = setTimeout(function(){ if(!pinned) show(key); }, delay);
+    });
+    card.addEventListener('mouseleave', function(){
+      clearTimeout(intent);
+      if(!isWide()) return;
+      hide();
+    });
     card.addEventListener('click', function(){
       if(pinned && items[key] && items[key].classList.contains('active')){
         unpin();
@@ -1136,12 +1189,21 @@
     els.forEach(function(el){ el.classList.add('in'); });
     return;
   }
+  var slow = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // 同時に視界へ入った兄弟は少しずつ遅らせて出す（横並びカードが階段状に立ち上がる）
   var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
+    var batch = entries.filter(function(e){ return e.isIntersecting; });
+    var perParent = {};
+    batch.forEach(function(entry){
+      var el = entry.target;
+      if(!slow){
+        var key = el.parentNode ? (el.parentNode.className || 'x') : 'x';
+        perParent[key] = (perParent[key] || 0) + 1;
+        var i = perParent[key] - 1;
+        if(i > 0) el.style.transitionDelay = Math.min(i * 70, 350) + 'ms';
       }
+      el.classList.add('in');
+      io.unobserve(el);
     });
   }, {threshold:0.1, rootMargin:'0px 0px -60px 0px'});
   els.forEach(function(el){ io.observe(el); });
@@ -1183,6 +1245,117 @@
     });
   }, {threshold:0.5});
   counts.forEach(function(el){ io.observe(el); });
+})();
+</script>
+<script>
+/* スクロール進捗バー + Careerタイムラインの進捗ライン */
+(function(){
+  var bar = document.getElementById('progress-bar');
+  var fill = document.getElementById('tl-fill');
+  var tl = fill ? fill.parentNode : null;
+  var ticking = false;
+
+  function paint(){
+    ticking = false;
+    if(bar){
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - window.innerHeight;
+      var p = max > 0 ? Math.min(1, Math.max(0, window.pageYOffset / max)) : 0;
+      bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    }
+    if(tl && fill && tl.offsetParent !== null){
+      var r = tl.getBoundingClientRect();
+      // 画面中央がタイムラインのどこまで来たかで線を伸ばす
+      var mid = window.innerHeight * 0.5;
+      var h = Math.min(r.height, Math.max(0, mid - r.top));
+      fill.style.height = h + 'px';
+      var items = tl.querySelectorAll('.it');
+      for(var i=0;i<items.length;i++){
+        var ir = items[i].getBoundingClientRect();
+        items[i].classList.toggle('past', (ir.top - r.top) <= h);
+      }
+    }
+  }
+  function onScroll(){
+    if(ticking) return;
+    ticking = true;
+    (window.requestAnimationFrame || function(f){ setTimeout(f,16); })(paint);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  paint();
+  window.__paintProgress = paint;
+})();
+</script>
+<script>
+/* Career: 時代で絞り込み（面接で「AIのところだけ見せて」に即応する用） */
+(function(){
+  var filter = document.getElementById('era-filter');
+  var tl = document.querySelector('#career .tl');
+  if(!filter || !tl) return;
+
+  // 見出し(h3[data-era-head])を境に、各行へ era を割り当てる
+  var era = null;
+  Array.prototype.slice.call(tl.children).forEach(function(node){
+    if(node.tagName === 'H3' && node.hasAttribute('data-era-head')){
+      era = node.getAttribute('data-era-head');
+    } else if(node.classList && node.classList.contains('it') && era){
+      node.setAttribute('data-era', era);
+    }
+  });
+
+  filter.addEventListener('click', function(e){
+    var btn = e.target.closest('button[data-era]');
+    if(!btn) return;
+    var want = btn.getAttribute('data-era');
+    filter.querySelectorAll('button').forEach(function(b){ b.classList.toggle('active', b === btn); });
+    tl.querySelectorAll('.it').forEach(function(it){
+      var hide = want !== 'all' && it.getAttribute('data-era') !== want;
+      it.classList.toggle('era-hidden', hide);
+      if(!hide){ it.classList.add('in'); it.style.transitionDelay = ''; }
+    });
+    tl.querySelectorAll('h3[data-era-head]').forEach(function(h){
+      h.classList.toggle('era-hidden', want !== 'all' && h.getAttribute('data-era-head') !== want);
+    });
+    if(window.__paintProgress) window.__paintProgress();
+  });
+})();
+</script>
+<script>
+/* キーボードでセクション送り（画面共有しながら話す用）: J/K または ↓/↑ */
+(function(){
+  function visibleSections(){
+    return Array.prototype.slice.call(document.querySelectorAll('main.page:not([hidden]) section, main.page:not([hidden]) header.hero, main.page:not([hidden]) footer'));
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target;
+    if(t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    var k = e.key;
+    var fwd = (k === 'j' || k === 'J' || k === 'ArrowDown');
+    var back = (k === 'k' || k === 'K' || k === 'ArrowUp');
+    if(!fwd && !back) return;
+    var secs = visibleSections();
+    if(!secs.length) return;
+    e.preventDefault();
+    var y = window.pageYOffset;
+    var target = null;
+    if(fwd){
+      for(var i=0;i<secs.length;i++){
+        var top = secs[i].getBoundingClientRect().top + y;
+        if(top > y + 8){ target = top; break; }
+      }
+      if(target === null) target = document.documentElement.scrollHeight;
+    } else {
+      for(var j=secs.length-1;j>=0;j--){
+        var t2 = secs[j].getBoundingClientRect().top + y;
+        if(t2 < y - 8){ target = t2; break; }
+      }
+      if(target === null) target = 0;
+    }
+    // html{scroll-behavior:smooth} が効くので2引数形式で滑らかに動く
+    window.scrollTo(0, target);
+  });
 })();
 </script>
 </body>
