@@ -218,6 +218,22 @@
   @media (prefers-reduced-motion: reduce){
     .reveal{opacity:1;transform:none;transition:none}
   }
+  /* ---- ホバーした案件のイメージを背景にブラーで滲ませる ---- */
+  .hover-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .hover-bg img{position:absolute;top:-6%;left:-6%;width:112%;height:112%;
+    object-fit:cover;opacity:0;transform:scale(1.02);
+    filter:blur(38px) saturate(1.2);
+    transition:opacity .55s ease,transform 7s ease-out;will-change:opacity,transform}
+  .hover-bg img.on{opacity:.30;transform:scale(1.12)}
+  /* 明るい配色では本文が負けるので薄めに＋白いベールを敷く */
+  @media (prefers-color-scheme: light){
+    .hover-bg img.on{opacity:.20}
+    .hover-bg::after{content:"";position:absolute;inset:0;background:var(--bg);opacity:.35}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hover-bg img{transition:opacity .2s linear;transform:none}
+    .hover-bg img.on{transform:none}
+  }
   /* ---- 消費カーブ・シミュレータ（その場で動くデモ） ---- */
   .sim{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
   .sim-ctrls{display:grid;grid-template-columns:1fr 1fr;gap:16px 22px;margin-bottom:6px}
@@ -328,6 +344,7 @@
 <body>
 <div class="ambient-bg" aria-hidden="true"><span></span><span></span><span></span></div>
 <div class="progress-bar" id="progress-bar" aria-hidden="true"></div>
+<div class="hover-bg" id="hover-bg" aria-hidden="true"><img alt=""><img alt=""></div>
 <nav class="sidenav" aria-label="グローバルナビゲーション">
   <div class="sidenav-brand">堀部 彰夫<span>Maker × Growth PM × AI-FDE</span></div>
   <div class="sidenav-switch" role="tablist" aria-label="ページ切り替え">
@@ -1517,6 +1534,79 @@
     }
     // html{scroll-behavior:smooth} が効くので2引数形式で滑らかに動く
     window.scrollTo(0, target);
+  });
+})();
+</script>
+<script>
+/* ホバーした案件のイメージを背景へ。2枚のimgを交互に使ってクロスフェードする */
+(function(){
+  var layer = document.getElementById('hover-bg');
+  if(!layer) return;
+  var imgs = layer.querySelectorAll('img');
+  if(imgs.length < 2) return;
+
+  var BG = {
+    'anicra':'anicra-hero.jpg',
+    'lumina':'lumina-bg.jpg',
+    'comdesk':'comdesk-lead.jpg',
+    'iruna':'iruna-mameshiba-thumb.jpg',
+    'tsurisuta':'tsurisuta-thumb.jpg',
+    'rcp':'pluslinks-thumb.jpg',
+    'saoif':'saoif-bg.jpg',
+    'gate-rebellion':'gate-rebellion-thumb.jpg',
+    'voidcrisis':'voidcrisis-thumb.jpg',
+    'ac-lastraven':'aclast-bg.jpg',
+    'ff13':'ff13-thumb.jpg',
+    'psychobreak':'psychobreak-thumb.jpg',
+    'ac4':'ac4-thumb.jpg',
+    'infinite-undiscovery':'infinite-undiscovery-thumb.jpg',
+    'ace-series':'ace-series-thumb.jpg',
+    'megaten-mgo':'megaten-mgo-thumb.jpg'
+  };
+
+  var slot = 0, currentKey = null, timer = null;
+
+  function show(key){
+    var src = BG[key];
+    if(!src || currentKey === key) return;
+    currentKey = key;
+    var next = imgs[slot ^ 1], prev = imgs[slot];
+    function reveal(){
+      if(currentKey !== key) return;   // 待っている間に別カードへ移った
+      next.classList.add('on');
+      prev.classList.remove('on');
+      slot ^= 1;
+    }
+    if(next.getAttribute('src') === src){ reveal(); return; }
+    next.classList.remove('on');
+    next.setAttribute('src', src);
+    // decode() は環境によって解決しないことがあるので complete/onload で判定する
+    if(next.complete && next.naturalWidth){ reveal(); }
+    else { next.onload = reveal; next.onerror = reveal; }
+  }
+  function hide(){
+    currentKey = null;
+    imgs[0].classList.remove('on');
+    imgs[1].classList.remove('on');
+  }
+
+  document.querySelectorAll('[data-detail]').forEach(function(card){
+    var key = card.getAttribute('data-detail');
+    if(!BG[key]) return;
+    card.addEventListener('mouseenter', function(){
+      clearTimeout(timer);
+      timer = setTimeout(function(){ show(key); }, 90);  // 通過しただけでは焚かない
+    });
+    card.addEventListener('mouseleave', function(){
+      clearTimeout(timer);
+      timer = setTimeout(hide, 140);
+    });
+  });
+
+  // 先読みしておく（初回ホバーで間が空かないように）
+  var idle = window.requestIdleCallback || function(f){ setTimeout(f, 1200); };
+  idle(function(){
+    Object.keys(BG).forEach(function(k){ var i = new Image(); i.src = BG[k]; });
   });
 })();
 </script>
