@@ -190,6 +190,11 @@
   html{transition:padding-right .32s ease}
   /* detail panel */
   .detail-trigger{cursor:pointer;position:relative;transition:border-color .15s}
+  /* フォーカスリング。:focus-visible 非対応ブラウザでも必ず出るよう素の :focus を先に置く */
+  .detail-trigger:focus{outline:2px solid var(--acc);outline-offset:3px;border-radius:10px}
+  .detail-trigger:focus:not(:focus-visible){outline:none}
+  .detail-trigger:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:10px}
+  .detailpanel-close:focus{outline:2px solid var(--acc);outline-offset:2px}
   .detail-trigger:hover{border-color:var(--acc)}
   .detail-trigger.card-active{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
   /* 開閉のtransformは変数で持つ（メディアクエリ側では変数だけ差し替える）*/
@@ -375,7 +380,7 @@
 <main class="page" data-page="portfolio">
 
 <div class="detailpanel-hint">◀ Featuredの5つはホバーで詳細</div>
-<aside class="detailpanel" id="detailpanel">
+<aside class="detailpanel" id="detailpanel" aria-hidden="true" aria-label="選択した項目の詳細">
   <button class="detailpanel-close" id="detailpanel-close" aria-label="閉じる">✕</button>
 
   <div class="detailpanel-item" data-panel="anicra">
@@ -1543,11 +1548,13 @@
   var currentKey = null;
   var retract = null;   // 引っ込めてから出す遷移のタイマー
   var gen = 0;          // 世代トークン。閉じ操作で進め、予約済みの再オープンを無効化する
+  var lastTrigger = null;   // キーボードで開いた元の要素（閉じたらここへフォーカスを戻す）
   function apply(key){
     Object.keys(items).forEach(function(k){ items[k].classList.toggle('active', k === key); });
-    triggers.forEach(function(c){ c.classList.remove('card-active'); });
-    if(cardByKey[key]) cardByKey[key].classList.add('card-active');
+    triggers.forEach(function(c){ c.classList.remove('card-active'); c.setAttribute('aria-expanded','false'); });
+    if(cardByKey[key]){ cardByKey[key].classList.add('card-active'); cardByKey[key].setAttribute('aria-expanded','true'); }
     panel.classList.add('open');
+    panel.setAttribute('aria-hidden','false');
     currentKey = key;
   }
   function show(key){
@@ -1566,7 +1573,8 @@
     if(pinned) return;
     gen++; clearTimeout(retract);
     panel.classList.remove('open');
-    triggers.forEach(function(c){ c.classList.remove('card-active'); });
+    panel.setAttribute('aria-hidden','true');
+    triggers.forEach(function(c){ c.classList.remove('card-active'); c.setAttribute('aria-expanded','false'); });
     currentKey = null;
   }
   function unpin(){
@@ -1575,12 +1583,34 @@
     panel.classList.remove('open', 'pinned');
     document.documentElement.classList.remove('panel-open');
     document.documentElement.style.paddingRight = '';
-    triggers.forEach(function(c){ c.classList.remove('card-active'); });
+    triggers.forEach(function(c){ c.classList.remove('card-active'); c.setAttribute('aria-expanded','false'); });
     currentKey = null;
+    // フォーカスを先に戻してから隠す（aria-hidden内にフォーカスを残さない）
+    if(lastTrigger && panel.contains(document.activeElement)){ lastTrigger.focus(); }
+    lastTrigger = null;
+    panel.setAttribute('aria-hidden','true');
+  }
+
+  // キーボード/スクリーンリーダー向けにトリガーをボタン化する
+  function labelFor(card){
+    var h = card.querySelector('h3, h4, .t, .when');
+    var base = (h ? h.textContent : card.textContent).replace(/\s+/g,' ').trim().slice(0, 60);
+    return base ? base + ' の詳細を開く' : '詳細を開く';
+  }
+  function pin(key){
+    pinned = true;
+    show(key);
+    panel.classList.add('pinned');
+    document.documentElement.classList.add('panel-open');
+    if(isWide()) document.documentElement.style.paddingRight = '360px';
   }
 
   triggers.forEach(function(card){
     var key = card.getAttribute('data-detail');
+    if(!card.hasAttribute('role')) card.setAttribute('role','button');
+    if(!card.hasAttribute('tabindex')) card.setAttribute('tabindex','0');
+    card.setAttribute('aria-expanded','false');
+    if(!card.getAttribute('aria-label')) card.setAttribute('aria-label', labelFor(card));
     // 狭幅（ボトムシート）ではタップのみ。hoverは wide 限定＋130msのintentで
     // カードの上を通り過ぎただけのチカつきを止める
     var intent = null;
@@ -1600,11 +1630,16 @@
         unpin();
         return;
       }
-      pinned = true;
-      show(key);
-      panel.classList.add('pinned');
-      document.documentElement.classList.add('panel-open');
-      if(isWide()) document.documentElement.style.paddingRight = '360px';
+      pin(key);
+    });
+    // Enter / Space で開く＋パネルへフォーカス移動（キーボードで本文へ到達できるように）
+    card.addEventListener('keydown', function(e){
+      if(e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+      e.preventDefault();
+      if(pinned && items[key] && items[key].classList.contains('active')){ unpin(); return; }
+      lastTrigger = card;
+      pin(key);
+      if(closeBtn) closeBtn.focus();   // パネル内へ移動＝以降のTabで本文を読める
     });
   });
 
