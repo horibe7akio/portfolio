@@ -40,6 +40,9 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+  /* 狭幅でボトムシートを開いている間は背面をスクロールロック */
+  @media(max-width:1239px){ html.panel-open,html.panel-open body{overflow:hidden} }
   body{margin:0;background:var(--bg);color:var(--tx);
     font-family:var(--font);
     line-height:1.7;-webkit-font-smoothing:antialiased;font-weight:400}
@@ -1538,6 +1541,8 @@
 
   function isWide(){ return window.matchMedia('(min-width:1240px)').matches; }
   var currentKey = null;
+  var retract = null;   // 引っ込めてから出す遷移のタイマー
+  var gen = 0;          // 世代トークン。閉じ操作で進め、予約済みの再オープンを無効化する
   function apply(key){
     Object.keys(items).forEach(function(k){ items[k].classList.toggle('active', k === key); });
     triggers.forEach(function(c){ c.classList.remove('card-active'); });
@@ -1547,21 +1552,26 @@
   }
   function show(key){
     if(currentKey === key && panel.classList.contains('open')) return;
+    clearTimeout(retract);
+    gen++;                       // 直前の予約(引っ込め中のapply)を無効化
+    var g = gen;
     if(panel.classList.contains('open') && currentKey !== null){
       panel.classList.remove('open');
-      setTimeout(function(){ apply(key); }, 260);
+      retract = setTimeout(function(){ if(g === gen) apply(key); }, 260);
     } else {
       apply(key);
     }
   }
   function hide(){
     if(pinned) return;
+    gen++; clearTimeout(retract);
     panel.classList.remove('open');
     triggers.forEach(function(c){ c.classList.remove('card-active'); });
     currentKey = null;
   }
   function unpin(){
     pinned = false;
+    gen++; clearTimeout(retract);
     panel.classList.remove('open', 'pinned');
     document.documentElement.classList.remove('panel-open');
     document.documentElement.style.paddingRight = '';
@@ -1606,6 +1616,16 @@
     if(e.target.closest && e.target.closest('.detail-trigger')) return;
     unpin();
   });
+
+  // Escで閉じる（キーボードで詰まないように）
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && pinned) unpin();
+  });
+
+  // 幅が1240px境界を跨いだら、pin中のガター（右パネル余白）を貼り直す/外す
+  window.addEventListener('resize', function(){
+    if(pinned) document.documentElement.style.paddingRight = isWide() ? '360px' : '';
+  });
 })();
 </script>
 <script>
@@ -1642,9 +1662,11 @@
   var counts = Array.prototype.slice.call(document.querySelectorAll('.count'));
   if(!counts.length) return;
 
+  var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function animate(el){
     var target = parseFloat(el.getAttribute('data-target'));
     var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    if(noMotion){ el.textContent = target.toFixed(decimals); return; }
     var duration = 1100;
     var stepTime = 20;
     var steps = duration / stepTime;
@@ -1750,7 +1772,8 @@
 })();
 </script>
 <script>
-/* キーボードでセクション送り（画面共有しながら話す用）: J/K または ↓/↑ */
+/* キーボードでセクション送り（画面共有しながら話す用）: J/K のみ。
+   矢印キーは閲覧者の通常スクロールに残す（横取りしない） */
 (function(){
   function visibleSections(){
     return Array.prototype.slice.call(document.querySelectorAll('main.page:not([hidden]) section, main.page:not([hidden]) header.hero, main.page:not([hidden]) footer'));
@@ -1759,9 +1782,12 @@
     if(e.metaKey || e.ctrlKey || e.altKey) return;
     var t = e.target;
     if(t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    // 詳細パネル／ボトムシートが開いている間は背面を送らない
+    var dp = document.getElementById('detailpanel');
+    if(dp && dp.classList.contains('open')) return;
     var k = e.key;
-    var fwd = (k === 'j' || k === 'J' || k === 'ArrowDown');
-    var back = (k === 'k' || k === 'K' || k === 'ArrowUp');
+    var fwd = (k === 'j' || k === 'J');
+    var back = (k === 'k' || k === 'K');
     if(!fwd && !back) return;
     var secs = visibleSections();
     if(!secs.length) return;
@@ -1844,7 +1870,11 @@
     if(!BG[key]) return;
     card.addEventListener('mouseenter', function(){
       clearTimeout(timer);
-      timer = setTimeout(function(){ show(key); }, 90);  // 通過しただけでは焚かない
+      // 詳細パネルをpinしている間は、背景だけ別案件に差し替わる不整合を防ぐ
+      timer = setTimeout(function(){
+        if(document.documentElement.classList.contains('panel-open')) return;
+        show(key);
+      }, 90);  // 通過しただけでは焚かない
     });
     card.addEventListener('mouseleave', function(){
       clearTimeout(timer);
