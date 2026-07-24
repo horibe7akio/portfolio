@@ -336,6 +336,28 @@
       mix-blend-mode:overlay;animation:name-shine 2.2s ease-in-out .5s 1 both;pointer-events:none}
     @keyframes name-shine{ 0%{left:-60%} 100%{left:130%} }
   }
+  /* 職歴の行にも枠を持たせる。枠はinset shadowで描く（borderだと年表のドットがずれるため） */
+  .tl .it.detail-trigger{box-shadow:inset 0 0 0 1px var(--line);
+    transition:background .2s ease,box-shadow .3s ease,transform .25s ease}
+  .tl .it.detail-trigger::before{transition:background .3s ease,box-shadow .3s ease,transform .25s ease}
+  .tl .it.detail-trigger:hover{background:var(--panel);
+    box-shadow:inset 0 0 0 1px rgba(var(--acc-rgb),.55),0 12px 26px -16px rgba(var(--acc-rgb),.55)}
+  .tl .it.detail-trigger:hover::before{
+    box-shadow:0 0 0 4px var(--bg),0 0 12px 2px rgba(var(--acc-rgb),.75)}
+  .tl .it.detail-trigger.card-active{background:var(--panel);
+    box-shadow:inset 3px 0 0 var(--acc),inset 0 0 0 1px rgba(var(--acc-rgb),.5),
+      0 14px 30px -16px rgba(var(--acc-rgb),.5)}
+  .tl .it.detail-trigger.card-active::before{
+    box-shadow:0 0 0 4px var(--bg),0 0 12px 2px rgba(var(--acc-rgb),.75)}
+  /* 年表の縦線（スクロールで伸びる部分）にも光を通す */
+  .tl-fill{box-shadow:0 0 10px 1px rgba(var(--acc-rgb),.5)}
+  @media (prefers-reduced-motion: no-preference){
+    .tl .it.detail-trigger:hover{transform:translateX(3px)}
+    /* 行がずれてもドットは縦線の上に留める */
+    .tl .it.detail-trigger:hover::before{transform:translateX(-3px) scale(1.22)}
+    .tl .it.detail-trigger.card-active{transform:none}
+    .tl .it.detail-trigger.card-active::before{transform:scale(1.22)}
+  }
   /* page switch (portfolio ⇄ resume) */
   .page[hidden]{display:none}
   .sidenav-switch{display:flex;flex-direction:column;gap:5px}
