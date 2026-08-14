@@ -477,53 +477,6 @@
     <p>約38名の体制で運営していたイルーナ戦記Onlineに、プロデューサー／ディレクターとして就任。ジョインしてわずか3ヶ月で消費を最大化し、その後も半年以上にわたりMoM100%超の成長を継続、就任時と比べて月商は約1.5倍に到達した。掲げたミッションは「会社の利益」「アプリの持続可能性」「ユーザー満足」の3つの両立。コラボ企画書や契約書の作成から交渉・実施までを担当し、消費を伸ばしてストアランキング2桁復帰を実現した。新レイドや新アイテム、新ダンジョンの企画といったディレクター業務に加え、企画スタッフへのゲームデザイン指導、マップスタッフへのレベルデザイン指導など人材育成も担った。組織面では部署間の縦割りを解消するユニット化、Confluence導入によるナレッジ集約、PD承認フローの確立、関係会社との発注フロー整備など、リリースフローそのものを再構築。DAUも140%UPし、運営タイトル全体のKPIを底上げした。</p>
   </div>
 
-  <div class="detailpanel-item" data-panel="ashgrid">
-    <img src="ashgrid-mech.jpg" alt="ASHGRID 自機の寄り" style="width:100%;border-radius:8px;margin-bottom:14px;display:block">
-    <div class="kick">個人制作 ・ Three.js / JavaScript</div>
-    <h4>ASHGRID // BURN LINE — 詰まった所と、どう抜けたか</h4>
-    <h5>1. file:// で Three.js を動かす</h5>
-    <p>Three.js r150+ はESM専用で、<code>file://</code> から読むと相対importがCORS（origin null）で死ぬ。esbuildで本体とポストプロセスを<strong>classic scriptのIIFE（global THREE）に畳んで</strong>回避した。おかげでビルド手順もローカルサーバも要らず、ファイルを渡せばそのまま動く。「見せたい時に見せられない」を作らないための選択。</p>
-    <h5>2. 「光らない」を実測で1発で特定した</h5>
-    <p>UnrealBloomが<strong>1ビットも効かない</strong>状態から始まった。bloomと環境マップの2×2を振って1変数ずつ動かしたところ、bloom on/off で全指標が<strong>バイト単位で同一</strong>——「弱い」のではなく「効いていない」と確定した。原因は発光色 <code>0x66ccff</code> の線形輝度が約0.53で、閾値0.6に届いていなかったこと。</p>
-    <div class="cv-hit"><b>「発光は線形で1.0超に持つ」を全モジュール共通の契約に</b><span>ヘルパ関数を置いて「守るのが一番楽」な形にした。同時に、metalnessの高い材質はIBLが無いと真っ黒に落ちることも実測（輝度 5 → 38）。</span></div>
-    <h5>3. 自分で観測する仕組みを先に作った</h5>
-    <p>「人がPlayを押さないと見えない状態を残さない」ために、headless ChromeをCDPで叩く道具を自作した。フレームを進めてから撮る／HUDが実際に描かれているかを数字で出す／通しで撮って暗すぎるコマを機械的に弾く／AI自動操作で通しプレイを録画する、の4本。</p>
-    <p style="margin-top:10px">最後の1本は後から足したもの。<strong>「カメラが構造物に埋まって画面の10%が黒くなる」不具合を、短いクリップだけ見ていた時は誰も見つけられなかった</strong>ため、通しで撮って機械的に弾く形にした。入れた瞬間から、この不具合は回帰として自動検出される。</p>
-    <h5>数字</h5>
-    <ul class="cv-list">
-      <li>実装 <strong>24,449行</strong>（JavaScript・12ファイル）</li>
-      <li>依存は Three.js r185 のみ（同梱849KB）。ビルドツールなし</li>
-      <li>敵3機種（HOWLER / SKIRL / BULWARK）＋指揮官機 CASTELLAN</li>
-      <li>多段ミッション（哨戒線の排除 → 据置砲台の制圧 → 指揮官機の撃破）</li>
-      <li>検証用スクリーンショット <strong>3,682枚</strong></li>
-    </ul>
-  </div>
-
-  <div class="detailpanel-item" data-panel="axiom">
-    <img src="axiom-contact.jpg" alt="AXIOM FALL 接触シート" style="width:100%;border-radius:8px;margin-bottom:14px;display:block">
-    <div class="kick">個人制作 ・ Unity / C#</div>
-    <h4>AXIOM FALL — 何を自分に禁じたか</h4>
-    <p>この作品は「やらないこと」を先に決めて、それを最後まで守った制作になっている。禁じたのは3つ。</p>
-    <h5>1. 外部アセットを置かない</h5>
-    <p>リポジトリに <code>.fbx / .png / .wav / .mat</code> が1つも無い。メッシュもテクスチャも実行時にコードで生成している。表面のパネルラインや汚れは<strong>三面投影でワールド座標から計算</strong>していて、UVもテクスチャも持たない。</p>
-    <h5>2. プレイヤー入力を読まない</h5>
-    <p>入力を読むコードが1行も無い。回避・狙い・かすりを自前の操縦系が決める。人間の操作限界に縛られた難易度にしないための前提で、「人間には無理」が見て伝わること自体を狙っている。</p>
-    <h5>3. 実行のたびに違う結果にしない</h5>
-    <p><code>Time.deltaTime</code> を読まない／<code>UnityEngine.Random</code> を呼ばない／描画は状態を書き換えない、を契約にした。</p>
-    <div class="cv-hit"><b>同一シード2回が1バイト一致（実測 PASS）</b><span>「いい回」を撮り直せるし、描画だけ変えた時に数値が変わらないことで回帰も検出できる。60Hz固定ステップ。</span></div>
-    <h5>検証</h5>
-    <p><code>-executeMethod</code> でヘッドレスに実画を撮り、明度・コントラスト・盤面ログを数値で比較して回帰を見る仕組みを別に持っている。</p>
-    <h5>数字</h5>
-    <ul class="cv-list">
-      <li>C# <strong>26,388行</strong>（79ファイル）／実行時サブシステム20</li>
-      <li>外部アセット <strong>0</strong></li>
-      <li>ステージ2本（各210秒／215秒・3幕構成）／ボス2体（多段変形・楔ギロチン）</li>
-      <li>敵5種＋中ボス／自機の武装3種（全方位・貫通レーザー・ホーミング）</li>
-      <li>ステージを足すのはファイル1つ＋1行（7ステージ前提の構造）</li>
-    </ul>
-    <h5>正直なところ</h5>
-    <p>難易度は<strong>意図的に未調整</strong>（見た目優先の段階）。5シードで素に通した実測は、ステージ1が2/5、ステージ2が1/5。掲載した通しの録画はその完走したシードで、無敵は使っていない。ボスのコンセプト画はGPTに描かせて立体化の参考にしたが、<strong>成果物には生成画像が1枚も入っていない</strong>（外部アセット0なので、絵は全部コードが描いている）。</p>
-  </div>
 
   <div class="detailpanel-item" data-panel="rcp">
     <img src="pluslinks-thumb.jpg" alt="プラスリンクス ～キミと繋がる想い～ 公式キービジュアル（©2021 EXNOA LLC）" style="width:100%;border-radius:8px;margin-bottom:14px;display:block">
@@ -1308,10 +1261,12 @@
   <div class="wrap">
     <div class="kick">Personal Work ・ Maker軸</div>
     <h2>個人制作</h2>
-    <p class="lead" style="margin-bottom:20px">「実在しないゲームのプレイ画面を、種類ごとに1本ずつ作る」個人の取り組み。<strong>コードはAIエージェント（Claude / Cursor）に書かせ、自分は設計・描画の契約・検証手段・停止条件を決める側に回っている。</strong>下の映像はどちらも実際に動いている画面の録画で、AIの自動操作による通しプレイ。</p>
+    <p class="lead" style="margin-bottom:20px">仕事とは別に、作りたいものを最後まで自分で通したもの。<strong>コードはAIエージェント（Claude / Cursor）に書かせ、自分は設計・検証・判断を担っている。</strong>いずれも実際に動いていて、下の映像はその録画です。</p>
+
+    <div class="kick" style="font-size:11.5px;margin-bottom:12px">ゲーム</div>
 
     <!-- ASHGRID : ブラウザで動く3Dメカアクション -->
-    <div class="card detail-trigger" data-detail="ashgrid" style="margin-bottom:30px">
+    <div class="card" style="margin-bottom:30px">
       <div class="split">
         <div>
           <video class="vid" src="ashgrid-play.mp4" poster="ashgrid-poster.jpg"
@@ -1319,46 +1274,58 @@
             aria-label="ASHGRID AI自動操作による通しプレイ（30秒・無音）"></video>
           <p class="vidcap">▲ AI自動操作の通しプレイ（30秒・無音）</p>
           <div class="grid g2" style="gap:10px;margin-top:12px">
-            <div class="shot" style="padding:0"><img src="ashgrid-mech.jpg" alt="ASHGRID 自機の寄り。パネル分割と警告塗装、逆光のリムライト" loading="lazy"></div>
-            <div class="shot" style="padding:0"><img src="ashgrid-combat.jpg" alt="ASHGRID 地上戦。ロック枠・距離表記・キルティッカーが並ぶ交戦画面" loading="lazy"></div>
+            <div class="shot" style="padding:0"><img src="ashgrid-mech.jpg" alt="ASHGRID 自機の寄り" loading="lazy"></div>
+            <div class="shot" style="padding:0"><img src="ashgrid-combat.jpg" alt="ASHGRID 地上戦の交戦画面" loading="lazy"></div>
           </div>
         </div>
         <div>
           <div class="role">個人制作 ・ Three.js / JavaScript</div>
           <h3>ASHGRID // BURN LINE — ブラウザだけで動く3Dメカアクション</h3>
-          <p class="lead"><code>index.html</code> をダブルクリックすれば動く。<strong>ビルド不要・サーバ不要・依存ゼロ</strong>。クイックブースト主体の高速3D機動と工業地帯のライティングを軸に、アリーナ・敵3機種＋指揮官機・多段ミッション・勝敗までを1ステージ完結で実装した。</p>
-          <ul class="tight">
-            <li><strong>24,449行</strong>（JavaScript・12ファイル）。外部依存は Three.js r185 のみ（同梱849KB）</li>
-            <li><strong>AI自動操作モード</strong>と<strong>決定的シード</strong>を実装。同じシードなら同じ試合になるので、いい回を何度でも撮り直せる</li>
-            <li>headless Chrome を叩く<strong>観測ツールを自作</strong>し、検証用スクショ 3,682枚 で回帰を機械的に検出</li>
-          </ul>
-          <p style="font-size:12.5px;color:var(--mut);margin-top:10px">※ Armored Core 4 / for Answer は品質の基準として参照したもので、造形・名称・世界観はすべてオリジナルです。</p>
+          <p class="lead"><code>index.html</code> をダブルクリックすれば動く、ビルドもサーバも要らない3Dメカアクション。アリーナ・敵3機種＋指揮官機・多段ミッション・勝敗までを1ステージ完結で実装した。AIの自動操作モードを備えていて、映像は無人で撮っている。</p>
+          <p style="font-size:12.5px;color:var(--mut);margin-top:12px">Three.js / JavaScript・24,449行。※ Armored Core は品質の基準として参照したもので、造形・名称・世界観はオリジナルです。</p>
         </div>
       </div>
     </div>
 
     <!-- AXIOM FALL : 外部アセット0の縦STG -->
-    <div class="card detail-trigger" data-detail="axiom" style="background:var(--panel2)">
+    <div class="card" style="background:var(--panel2)">
       <div class="split">
         <div>
           <video class="vid tall" src="axiom-boss.mp4" poster="axiom-poster.jpg"
             controls preload="none" playsinline muted
             aria-label="AXIOM FALL ボス戦（40秒・無音）"></video>
           <p class="vidcap">▲ ボス戦（40秒・無音）</p>
-          <div class="shot" style="padding:0;margin-top:12px"><img src="axiom-contact.jpg" alt="AXIOM FALL 接触シート：外縁／破砕帯／搬送路／ボス戦／崩壊の5場面" loading="lazy"></div>
-          <p class="vidcap">▲ ステージ2の5場面（外縁／破砕帯／搬送路／ボス戦／崩壊）</p>
+          <div class="shot" style="padding:0;margin-top:12px"><img src="axiom-contact.jpg" alt="AXIOM FALL ステージ2の5場面" loading="lazy"></div>
         </div>
         <div>
           <div class="role">個人制作 ・ Unity / C#</div>
           <h3>AXIOM FALL — 外部アセットを1つも使わない縦シューティング</h3>
-          <p class="lead"><code>.fbx</code> も <code>.png</code> も1枚も置かず、<strong>モデル・テクスチャ・エフェクト・UIフォントまで全部コードで実行時に生成</strong>している3D縦シューティング。9:16の縦画面で、<strong>プレイヤー入力を読むコードが1行も無い</strong>——AIが操縦する「見るための」ゲーム画面として作っている。</p>
-          <ul class="tight">
-            <li><strong>26,388行</strong>（C#・79ファイル）／実行時サブシステム20／外部アセット<strong>0</strong></li>
-            <li><strong>同一シードなら1バイトも違わずに再現</strong>される（60Hz固定ステップ・専用乱数・描画は状態を書き換えない、を契約に。実測PASS）</li>
-            <li>パネルラインや汚れは<strong>三面投影でワールド座標から計算</strong>。UVもテクスチャも持たない</li>
-            <li>2ステージ（各210秒／215秒・3幕構成）・専用ボス2体・敵5種＋中ボス・自機の武装3種</li>
-          </ul>
-          <p style="font-size:12.5px;color:var(--mut);margin-top:10px">※ タイトルは仮。動画は無音です。</p>
+          <p class="lead"><code>.fbx</code> も <code>.png</code> も1枚も置かず、<strong>モデル・テクスチャ・エフェクトを全部コードで実行時に生成</strong>している3D縦シューティング。9:16の縦画面で、プレイヤー入力は存在しない——AIが操縦する「見るための」ゲーム画面として作っている。</p>
+          <p style="font-size:12.5px;color:var(--mut);margin-top:12px">Unity / C#・26,388行・外部アセット0。※ タイトルは仮。動画は無音です。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="kick" style="font-size:11.5px;margin:30px 0 12px">ユーティリティ</div>
+
+    <!-- Kagerou : ランニングコース探索アプリ -->
+    <div class="card">
+      <div class="split">
+        <div>
+          <video class="vid" style="aspect-ratio:960/452" src="kagerou-demo.mp4" poster="kagerou-poster.jpg"
+            controls preload="none" playsinline muted
+            aria-label="Kagerou デモ動画（2分27秒・無音）"></video>
+          <p class="vidcap">▲ 全機能デモ（2分27秒・無音）</p>
+          <div class="grid g2" style="gap:10px;margin-top:12px">
+            <div class="shot" style="padding:0"><img src="kagerou-traffic.jpg" alt="Kagerou 交通量の色分け表示" loading="lazy"></div>
+            <div class="shot" style="padding:0"><img src="kagerou-flythrough.jpg" alt="Kagerou 3Dフライスルーでの下見" loading="lazy"></div>
+          </div>
+        </div>
+        <div>
+          <div class="role">個人制作 ・ MapLibre GL JS / deck.gl / Python</div>
+          <h3>Kagerou — 走る前にコースを思い描けるランニングコース探索アプリ</h3>
+          <p class="lead">「信号で止まらず、日陰が多く、車が来ない」道を選んでコースを作るWebアプリ。オープンデータ7種を統合し、ブラウザ内でコース候補を提示する。経路探索そのものより、<strong>日陰・交通量・曲がり角の景色・3D下見といった判断材料の可視化</strong>に比重を置いた。</p>
+          <p style="font-size:12.5px;color:var(--mut);margin-top:12px">単一HTMLファイル・3,656行。※ 対応エリアは相模原〜横浜圏のみです。</p>
         </div>
       </div>
     </div>
