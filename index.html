@@ -399,6 +399,56 @@
   .rznote{font-size:12.5px;color:var(--mut);margin-top:10px;line-height:1.8}
   .rzpr{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;
     font-size:15px;line-height:1.95;color:var(--tx)}
+  /* ---- PDF印刷用ページ（固定ライト配色＝画面でも紙でも同じ見た目） ---- */
+  main[data-page="print"]{background:#eceef2;padding:28px 0 60px}
+  .prz{max-width:820px;margin:0 auto;padding:0 20px;color:#14181f;
+    font-size:13px;line-height:1.75}
+  .prz .sheet{background:#fff;border:1px solid #dce0e8;border-radius:6px;
+    padding:34px 38px;margin-bottom:22px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+  .prz h1{font-size:26px;font-weight:900;letter-spacing:-.01em;margin:0;color:#14181f}
+  .prz .pz-role{color:#0d9488;font-weight:700;font-size:13.5px;margin:4px 0 0}
+  .prz .pz-contact{font-size:12px;color:#5c6576;margin-top:10px;line-height:1.9}
+  .prz h2{font-size:15px;font-weight:900;color:#14181f;border-left:3px solid #0d9488;
+    padding-left:9px;margin:26px 0 10px;letter-spacing:.02em}
+  .prz h2:first-of-type{margin-top:0}
+  .prz p{margin:.35em 0;color:#3a4150}
+  .prz .pz-stats{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 2px}
+  .prz .pz-stat{flex:1;min-width:150px;background:#f4f6f9;border:1px solid #e3e7ef;
+    border-radius:6px;padding:10px 12px}
+  .prz .pz-stat b{display:block;color:#0d9488;font-size:16px;font-weight:800;letter-spacing:-.01em}
+  .prz .pz-stat span{font-size:11px;color:#5c6576}
+  .prz .pz-item{display:flex;gap:14px;align-items:flex-start;padding:11px 0;
+    border-bottom:1px solid #edf0f5}
+  .prz .pz-item:last-child{border-bottom:0}
+  .prz .pz-item img{flex:none;width:118px;border-radius:4px;border:1px solid #e3e7ef;display:block}
+  .prz .pz-item .b{min-width:0}
+  .prz .pz-item h3{font-size:13.5px;font-weight:800;margin:0;color:#14181f}
+  .prz .pz-item .r{font-size:11px;color:#0d9488;font-weight:700;margin:1px 0 3px}
+  .prz .pz-item p{font-size:12px;margin:0;color:#4a5261}
+  .prz .pz-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  @media(max-width:640px){.prz .pz-cols{grid-template-columns:1fr}}
+  .prz .pz-cols h4{font-size:12px;font-weight:800;margin:0 0 4px;color:#0d9488}
+  .prz .pz-cols p{font-size:11px;color:#4a5261;margin:0}
+  .prz .pz-era{padding:8px 0;border-bottom:1px solid #edf0f5}
+  .prz .pz-era:last-child{border-bottom:0}
+  .prz .pz-era b{font-size:12.5px;color:#14181f}
+  .prz .pz-era span{font-size:11px;color:#5c6576;display:block;margin-top:1px}
+  .prz .pz-note{font-size:10.5px;color:#8a93a3;margin-top:14px}
+  .prz .pz-hint{max-width:820px;margin:0 auto 16px;padding:0 20px;font-size:12px;color:var(--mut)}
+  /* 印刷：どのタブからでも印刷用ページだけがA4で出る */
+  @media print{
+    .sidenav,.mobilebar,.ambient-bg,.progress-bar,.hover-bg,.detailpanel,.detailpanel-hint,.draft-note{display:none !important}
+    main.page{display:none !important}
+    main.page[data-page="print"]{display:block !important;background:#fff;padding:0}
+    body{background:#fff;padding-left:0 !important}
+    .prz{max-width:none;padding:0}
+    .prz .sheet{border:0;box-shadow:none;border-radius:0;padding:0 0 6mm;margin:0;
+      break-after:page}
+    .prz .sheet:last-child{break-after:auto}
+    .pz-hint{display:none !important}
+    .prz .pz-item,.prz .pz-era,.prz .pz-stat{break-inside:avoid}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
 </style>
 </head>
 <body>
@@ -410,6 +460,7 @@
   <div class="sidenav-switch" role="tablist" aria-label="ページ切り替え">
     <button type="button" data-page-btn="portfolio" class="active">ポートフォリオ</button>
     <button type="button" data-page-btn="resume">職務経歴書</button>
+    <button type="button" data-page-btn="print">PDF印刷用</button>
   </div>
   <div class="sidenav-links" data-page="portfolio">
     <a href="#summary" data-target="summary">Summary</a>
@@ -435,6 +486,7 @@
 <div class="mobilebar" role="tablist" aria-label="ページ切り替え">
   <button type="button" data-page-btn="portfolio" class="active">ポートフォリオ</button>
   <button type="button" data-page-btn="resume">職務経歴書</button>
+    <button type="button" data-page-btn="print">PDF印刷用</button>
 </div>
 
 <main class="page" data-page="portfolio">
@@ -1440,6 +1492,143 @@
 </footer>
 </main>
 
+
+<main class="page" data-page="print" hidden>
+  <div style="height:24px"></div>
+  <p class="pz-hint">▼ この内容がそのままA4のPDFになります（ブラウザの印刷 ⌘P → PDFとして保存）。</p>
+  <div class="prz">
+
+    <div class="sheet">
+      <h1>堀部 彰夫</h1>
+      <div class="pz-role">Maker × Growth PM × AI-FDE</div>
+      <div class="pz-contact">superchance1986@outlook.jp ／ ポートフォリオ: horibe7akio.github.io/portfolio</div>
+
+      <h2 style="margin-top:22px">概要</h2>
+      <p>ゲーム・映像の"作り手"出身。CGデザイナー／映像演出から、ゲームのディレクター／プロデューサー、対話AIのPM、生成AIのFDEまで、"作る側"のあらゆるポジションを横断してきました（フロム・ソフトウェア〜スタートアップまで20年）。いまは生成AIプロダクトを、PMである自分がバイブコーディングで"実装まで"届けています。</p>
+      <p>作り手の目線 × PMの事業目線 × FDEの実装力。ニーズを高速に実装で検証し、事業戦略・開発ロードマップ・営業戦略に落とす。生成AIで一人の生産量を圧縮しPMFへ導く——が持ち味です。</p>
+
+      <div class="pz-stats">
+        <div class="pz-stat"><b>月商 約1.5倍</b><span>運営タイトルのグロース（イルーナ戦記）</span></div>
+        <div class="pz-stat"><b>iOS最高8位</b><span>新規IP MMORPGのトップセールス（SAOIF）</span></div>
+        <div class="pz-stat"><b>月次93%減衰→社内No.1</b><span>釣り★スタ for dゲーム・社内MVP</span></div>
+      </div>
+
+      <h2>いま何をしているか</h2>
+      <div class="pz-item">
+        <img src="anicra-hero.jpg" alt="ANICRA">
+        <div class="b">
+          <h3>ANICRA — アニメスタジオ向けAI制作基盤</h3>
+          <div class="r">FDE（商談〜要件定義〜実装〜経営戦略）・CrestLab</div>
+          <p>原画から動画・仕上げ工程をAIで自動化する制作基盤。客先ヒアリング〜その場でのPoC開発〜自社SaaSへの実装〜事業戦略の立案まで、開発の最前線から経営レイヤーまでを一気通貫で担当。</p>
+        </div>
+      </div>
+      <div class="pz-item">
+        <div class="b">
+          <h3>営業特化 マルチエージェントAI SaaS</h3>
+          <div class="r">PdM（SES）・AI INNOVATION</div>
+          <p>CRM/SFA連携の営業支援AI SaaSのPdM（エンジニア60名規模）。開発ロードマップ・ROI試算・スクラム・Looker分析基盤。商談デモはバイブコーディングで高速プロトタイピング。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet">
+      <h2>携わったプロダクト</h2>
+      <div class="pz-item">
+        <img src="lumina-bg.jpg" alt="LuminaLive">
+        <div class="b">
+          <h3>LuminaLive（Aituber）— AIキャラのライブ配信アプリを 0→1</h3>
+          <div class="r">開発ディレクター／PO・AI Impulse（2名体制）</div>
+          <p>iOS／Android／Webでリリース。ゲーム設計・スクラム運営（SM兼務）・AWSインフラ・音声合成・テキスト生成まで開発全般をディレクション。同じ基盤をBtoBへ4展開し、展示会システムはTiB有楽町で2025年8月に展示。</p>
+        </div>
+      </div>
+      <div class="pz-item">
+        <img src="comdesk-lead.jpg" alt="Comdesk Lead">
+        <div class="b">
+          <h3>Comdesk Lead — CTI SaaS の通話テキスト解析AI</h3>
+          <div class="r">プロダクトマネージャー・Widsley</div>
+          <p>通話テキスト解析AIで"商談成功に繋がる要因"をスコアリングするロジックを考案〜実装〜リリース。QA自動化（MagicPod）も導入。</p>
+        </div>
+      </div>
+      <div class="pz-item">
+        <img src="iruna-mameshiba-thumb.jpg" alt="イルーナ戦記">
+        <div class="b">
+          <h3>イルーナ戦記Online — 運営タイトルのグロース</h3>
+          <div class="r">プロデューサー／ディレクター・アソビモ（約38名）</div>
+          <p>「会社の利益／アプリの持続可能性／ユーザー満足」の3つの両立をミッションに、コラボ交渉・新機能・運営改善を推進。月商を約1.5倍に伸ばし、その水準を維持。</p>
+        </div>
+      </div>
+      <div class="pz-item">
+        <img src="tsurisuta-thumb.jpg" alt="釣り★スタ">
+        <div class="b">
+          <h3>釣り★スタ for dゲーム — 月次93%の減衰を止め、社内No.1へ</h3>
+          <div class="r">PM兼企画ディレクション・グリー</div>
+          <p>月初の消費が毎月93%前後へ減衰し続ける課題に対し、6ヶ月のゲームサイクルを再設計。社内消費No.1・社内MVPを受賞。</p>
+        </div>
+      </div>
+      <div class="pz-item">
+        <img src="saoif-bg.jpg" alt="SAOIF">
+        <div class="b">
+          <h3>ソードアート・オンライン インテグラル・ファクター</h3>
+          <div class="r">新規IP MMORPG・プロデューサー／ディレクター（アソビモ側・総勢60名）</div>
+          <p>リリース直後 iOSトップセールス最高8位。企画・事業計画・インフラ設計・プロトタイプ監修まで。</p>
+        </div>
+      </div>
+      <div class="pz-item">
+        <img src="pluslinks-thumb.jpg" alt="RCP">
+        <div class="b">
+          <h3>RCP（Rinna Character Platform）／ Chararu</h3>
+          <div class="r">PM兼テックアドバイザー／開発Dir・rinna</div>
+          <p>クライアント向けAIキャラの企画〜導入支援（2021年時点で9社導入）。対話・分類・音声合成の3モデルを横断。導入事例：DMM GAMES「プラスリンクス」の完全AIヒロイン実装。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet">
+      <h2>個人制作 — 生成AIエージェントとの開発</h2>
+      <p style="font-size:12px">コードはAIエージェント（Claude / Cursor）に書かせ、自分は設計・検証・判断を担当。いずれも実際に動いています（サイト上で映像を再生できます）。</p>
+      <div class="pz-item">
+        <img src="ashgrid-poster.jpg" alt="ASHGRID">
+        <div class="b">
+          <h3>ASHGRID // BURN LINE — ブラウザだけで動く3Dメカアクション</h3>
+          <div class="r">Three.js / JavaScript・24,449行</div>
+          <p>index.html をダブルクリックすれば動く、ビルドもサーバも要らない3Dメカアクション。アリーナ・敵3機種＋指揮官機・多段ミッション・勝敗まで1ステージ完結。AI自動操作モードを備え、映像は無人で撮影。</p>
+        </div>
+      </div>
+      <div class="pz-item">
+        <img src="axiom-poster.jpg" alt="AXIOM FALL" style="width:66px">
+        <div class="b">
+          <h3>AXIOM FALL — 外部アセットを1つも使わない縦シューティング</h3>
+          <div class="r">Unity / C#・26,388行・外部アセット0</div>
+          <p>.fbx も .png も置かず、モデル・テクスチャ・エフェクトを全部コードで実行時に生成。9:16縦画面、プレイヤー入力は存在しない——AIが操縦する「見るための」ゲーム画面。</p>
+        </div>
+      </div>
+      <div class="pz-item">
+        <img src="kagerou-poster.jpg" alt="Kagerou">
+        <div class="b">
+          <h3>Kagerou — 走る前にコースを思い描けるランニングコース探索アプリ</h3>
+          <div class="r">MapLibre GL JS / deck.gl / Python・単一HTML 3,656行</div>
+          <p>「信号で止まらず、日陰が多く、車が来ない」道を選ぶWebアプリ。オープンデータ7種を統合し、日陰・交通量・曲がり角の景色・3D下見といった判断材料の可視化に比重を置いた。</p>
+        </div>
+      </div>
+
+      <h2>経歴サマリ</h2>
+      <div class="pz-era"><b>AI・PM期（2020–現在）</b><span>対話AI・生成AIプロダクトのPM／PdM／FDE。emotivE → rinna → ケップル → Widsley → AI Impulse → AI INNOVATION → CrestLab</span></div>
+      <div class="pz-era"><b>マーケティング期（2018–2020）</b><span>スマホアプリ広告のクリエイティブディレクション（6社コンペ受注）・マーケコンサル（新規獲得LTV 200%超）。デジタルガレージ → ソネット・メディア・ネットワークス</span></div>
+      <div class="pz-era"><b>ゲーム制作期（2003–2018）</b><span>CGデザイナー／映像演出 → レベルデザイン → プロデューサー／ディレクター。フロム・ソフトウェア、スクウェア・エニックス、Tango Gameworks、グリー、アソビモ（開発部長として112名統括）ほか</span></div>
+
+      <h2>スキル</h2>
+      <div class="pz-cols">
+        <div><h4>マネジメント</h4><p>プロダクトマネジメント／0→1・1→10・運営グロース／スクラム（PO/SM兼務）／事業計画・事業戦略／ROI試算・KPI設計／データ分析／チームビルディング・開発部統括</p></div>
+        <div><h4>開発（AI / FDE）</h4><p>生成AI／バイブコーディング（Claude Code / Cursor）／LLM API・RAG／音声合成モデル運用／SaaS開発／Python・SQL／AWS・GCP・Supabase／Unity・Unreal Engine</p></div>
+        <div><h4>クリエイティブ</h4><p>ゲームデザイン／モデリング／映像演出・カットシーン・絵コンテ／3dsmax・Maya／Adobe Premiere・AE・Photoshop・Illustrator／Blender（VRM）／生成AI（画像/楽曲/SE）</p></div>
+      </div>
+
+      <p class="pz-note">正社員フルコミットも、業務委託・複業も歓迎。フルリモートのスクラム開発で、ビデオ通話＋テキストのみでも高い生産性を出せます。<br>© 2026 Akio Horibe — このポートフォリオも生成AIのバイブコーディングで自作しています。</p>
+    </div>
+
+  </div>
+</main>
+
 <main class="page" data-page="resume" hidden>
   <header class="hero rzhead">
     <div class="wrap">
@@ -1648,6 +1837,7 @@
     if(opts.scroll) window.scrollTo(0, 0);
     if(opts.hash){
       if(name === 'resume'){ history.replaceState(null, '', '#resume'); }
+      else if(name === 'print'){ history.replaceState(null, '', '#print'); }
       else { history.replaceState(null, '', location.pathname + location.search); }
     }
   }
@@ -1660,7 +1850,7 @@
   });
 
   var h = location.hash.replace('#','');
-  var start = (h === 'resume' || h.indexOf('r-') === 0) ? 'resume' : 'portfolio';
+  var start = (h === 'print') ? 'print' : (h === 'resume' || h.indexOf('r-') === 0) ? 'resume' : 'portfolio';
   setPage(start, {});
 })();
 </script>
