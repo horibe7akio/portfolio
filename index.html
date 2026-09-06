@@ -1086,6 +1086,34 @@
       </div>
     </div>
 
+    <!-- RELAY : 商談メモ→SoR自動転記 -->
+    <div class="card" style="margin-bottom:34px">
+      <div class="split">
+      <div>
+        <video class="vid" src="relay-demo.mp4" poster="relay-poster.jpg"
+          controls preload="none" playsinline muted
+          aria-label="RELAY デモ動画（1分3秒・無音）"></video>
+        <p class="vidcap">▲ ボタン1つで4つのSoRへ同時転記し、実際のレコードまで開く（1分3秒・無音）</p>
+      </div>
+      <div>
+        <div class="role">設計・実装（個人開発） ・ 2026年9月</div>
+        <h3>RELAY — 商談メモを、どのシステムにも同時に流し込む</h3>
+        <p class="lead">高機能なCRMを入れても、営業が商談後に転記しなければ空箱になる。逆に転記が自動なら、置き場所はスプレッドシートでも成立する。<strong>選ぶべきはツールではなく「人が入力しなくて済む形」</strong>だと考えて作った。商談の文字起こしから課題・要望・次のアクション・金額・時期を構造化し、複数のSoRへ同時に書き込む。</p>
+        <ul class="tight">
+          <li><strong>4つのSoRへ同時転記</strong> — Salesforce / kintone / Googleスプレッドシート / Markdown。取引先・商談・行動履歴・文字起こしを、それぞれの作法で正しい親子関係に置く</li>
+          <li><strong>Markdown 2ms、Salesforce 4.3秒。営業の手間はどちらもゼロ</strong> — 2,000倍の差があっても、やることはボタン1つで変わらない</li>
+          <li><strong>SoRは後から差し替えられる</strong> — 転記先の手前に、どのツールにもある概念（会社・人・商談・活動）だけの中間フォーマットを挟んだ。追加はアダプタ1本で済み、2つ目以降は1時間かからなかった</li>
+          <li><strong>詰まるのは実装ではなく認証</strong> — OAuth、APIトークン、Apps Scriptのデプロイ、未検証アプリの警告。コードを書く時間より、権限を通す時間の方が長かった</li>
+        </ul>
+        <div class="badges">
+          <span class="badge"><span class="ico">🔌</span>Salesforce REST API<small>カスタムオブジェクト・権限セット</small></span>
+          <span class="badge"><span class="ico">🧩</span>kintone / Apps Script<small>API連携</small></span>
+          <span class="badge"><span class="ico">⚛️</span>Next.js / TypeScript<small>画面・アダプタ</small></span>
+        </div>
+      </div>
+      </div>
+    </div>
+
     <!-- LuminaLive : hero -->
     <div class="card detail-trigger" data-detail="lumina" style="margin-bottom:34px">
       <div class="split">
