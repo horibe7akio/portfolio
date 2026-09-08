@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>堀部 彰夫 ｜ Portfolio</title>
-<meta name="description" content="ゲーム・映像の作り手出身、グロースPMを経て、いまは生成AIプロダクトを自分で実装まで届けるAI-FDE。LuminaLive・イルーナ戦記Online等の実績。">
+<meta name="description" content="生成AIプロダクトのPdM／FDE。まだ何を作るか決まっていない段階から入り、決めて、動くものを見せて、回るようにする。いま主に受けているのは業務委託。">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.png" sizes="32x32" type="image/png">
@@ -14,16 +14,16 @@
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="堀部彰夫 Portfolio">
 <meta property="og:url" content="https://horibe7akio.github.io/portfolio/">
-<meta property="og:title" content="堀部 彰夫 ｜ Maker × Growth PM × AI-FDE">
-<meta property="og:description" content="ゲーム・映像の作り手出身、グロースPMを経て、いまは生成AIプロダクトを自分で実装まで届けるAI-FDE。LuminaLive・イルーナ戦記Online等の実績。">
+<meta property="og:title" content="堀部 彰夫 ｜ 生成AIプロダクトの PdM / FDE">
+<meta property="og:description" content="まだ何を作るか決まっていない場所に入って、決めて、作って見せて、回るようにする。業務委託。">
 <meta property="og:image" content="https://horibe7akio.github.io/portfolio/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ja_JP">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="堀部 彰夫 ｜ Maker × Growth PM × AI-FDE">
-<meta name="twitter:description" content="ゲーム・映像の作り手出身、グロースPMを経て、いまは生成AIプロダクトを自分で実装まで届けるAI-FDE。">
+<meta name="twitter:title" content="堀部 彰夫 ｜ 生成AIプロダクトの PdM / FDE">
+<meta name="twitter:description" content="まだ何を作るか決まっていない場所に入って、決めて、作って見せて、回るようにする。業務委託。">
 <meta name="twitter:image" content="https://horibe7akio.github.io/portfolio/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,6 +57,9 @@
   h1{font-family:var(--font);font-weight:900;font-size:clamp(32px,6vw,50px);line-height:1.1;margin:0;letter-spacing:-.01em}
   .role-line{color:var(--acc);font-weight:700;font-size:clamp(15px,2vw,17px);margin:.5em 0 .5em;letter-spacing:.01em}
   .tagline{font-size:clamp(15px,2vw,17px);color:var(--mut);max-width:42em;line-height:1.65}
+  .offer-line{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0;padding:0;list-style:none}
+  .offer-line li{font-size:12.5px;font-weight:600;color:var(--tx);background:var(--panel);
+    border:1px solid var(--line);border-radius:999px;padding:5px 12px}
   .cta{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
   .btn{display:inline-flex;align-items:center;gap:8px;background:var(--acc);color:#0b1410;
     padding:10px 18px;border-radius:8px;font-weight:700;font-size:14px}
@@ -456,7 +459,7 @@
 <div class="progress-bar" id="progress-bar" aria-hidden="true"></div>
 <div class="hover-bg" id="hover-bg" aria-hidden="true"><img alt=""><img alt=""></div>
 <nav class="sidenav" aria-label="グローバルナビゲーション">
-  <div class="sidenav-brand">堀部 彰夫<span>Maker × Growth PM × AI-FDE</span></div>
+  <div class="sidenav-brand">堀部 彰夫<span>生成AIプロダクトの PdM / FDE</span></div>
   <div class="sidenav-switch" role="tablist" aria-label="ページ切り替え">
     <button type="button" data-page-btn="portfolio" class="active">ポートフォリオ</button>
     <button type="button" data-page-btn="resume">職務経歴書</button>
@@ -1041,10 +1044,15 @@
 <header class="hero">
   <div class="wrap">
     <h1>堀部 彰夫</h1>
-    <div class="role-line">Maker × Growth PM × AI-FDE</div>
-    <p class="tagline">ゲーム・映像の"作り手"出身。グロースを経て、いまは生成AIプロダクトを<strong>"自分で実装まで"</strong>届ける。</p>
+    <div class="role-line">生成AIプロダクトの PdM / FDE</div>
+    <p class="tagline">まだ何を作るか決まっていない場所に入って、<strong>決めて、作って見せて、回るようにする。</strong></p>
+    <ul class="offer-line">
+      <li>いま主に受けているのは業務委託</li>
+      <li>フルタイム〜0.5人月</li>
+      <li>リモート中心（必要な出社は可）</li>
+    </ul>
     <div class="cta">
-      <a class="btn" href="#featured">携わったもの</a>
+      <a class="btn" href="#featured">仕事として出した物</a>
       <a class="btn ghost" href="#contact">連絡先</a>
     </div>
   </div>
@@ -1053,11 +1061,12 @@
 <section id="summary">
   <div class="wrap">
     <div class="kick">Summary</div>
-    <h2>作って、届ける人間</h2>
+    <h2>決めて、作って、届ける</h2>
+    <p class="lead" style="margin-bottom:18px">提言で終わるコンサルでも、決まったものを作る開発会社でもない。<strong>何を作るかが決まっていない段階から入って、決めた結果を実物で見せる。</strong></p>
     <div class="grid g3">
-      <div class="card"><h3>越境する作り手</h3><p>CGデザイナー／映像演出から、ゲームのディレクター／プロデューサー、対話AIのPM、生成AIのFDEまで、"作る側"のあらゆるポジションを横断。フロム・ソフトウェア〜スタートアップまで20年。</p></div>
-      <div class="card"><h3>数字で事業を動かす</h3><p>運営タイトルの月商を約1.5倍に伸ばし、新規IPをストア上位へ。KPIを底上げして、伸びた状態を"維持"してきた。</p></div>
-      <div class="card"><h3>その場で実装する</h3><p>バイブコーディングで、PMである自分がその場で作ってデリバリー。お客さんの"欲しいものの本質"を、動くもので返すFDE。</p></div>
+      <div class="card"><h3>いま売っているもの</h3><p>生成AIプロダクトの PdM / FDE。課題の切り出し、要件、PoC、導入、運用まで一人で通す。ゲームのPでも、実装SEでも、回すだけのPMでもない。</p></div>
+      <div class="card"><h3>作って見せる</h3><p>商談の場で動くものを出す。バイブコーディングで、聞いた人がその場で検証できる形にする。お客さんの"欲しいものの本質"を、資料ではなく実物で返す。</p></div>
+      <div class="card"><h3>数字を動かした経験がある</h3><p>運営タイトルの月商を約1.5倍、新規IPをストア上位へ。伸びた状態を維持した。これは今の商品ではなく、決めたあとに回せる証明。</p></div>
     </div>
   </div>
 </section>
@@ -1065,6 +1074,8 @@
 <section id="featured">
   <div class="wrap">
     <div class="kick">Featured</div>
+    <h2>いまの仕事と、その証明</h2>
+    <p class="lead" style="margin-bottom:18px">客先で通したもの、提案で見せる個人実装、0→1のプロダクト、BtoB SaaS、グロースの数字。個人のゲームはページ下部です。</p>
 
     <!-- ANICRA : FDE -->
     <div class="card detail-trigger" data-detail="anicra" style="margin-bottom:34px">
@@ -1079,7 +1090,7 @@
         </div>
       </div>
       <div>
-        <div class="role">FDE（商談〜要件定義〜実装〜経営戦略） ・ CrestLab（現職・業務委託）</div>
+        <div class="role">FDE（商談〜要件定義〜実装〜経営戦略） ・ CrestLab（2026.05–07・業務委託）</div>
         <h3>ANICRA — アニメ制作AI基盤を客先でその場開発、自社SaaSへ実装</h3>
         <p class="lead">原画から動画・仕上げ工程をAIで自動化する、アニメスタジオ向けAI制作基盤。docomo STARTUP発のスピンアウトとして2025年8月にシード資金調達。FDEとして客先ヒアリング〜PoC開発〜自社SaaS実装〜事業戦略まで一気通貫で担当。<span class="nda">［個別クライアントの制作進行ツールの詳細はNDAのため割愛］</span></p>
       </div>
@@ -1096,7 +1107,7 @@
         <p class="vidcap">▲ ボタン1つで4つのSoRへ同時転記し、実際のレコードまで開く（1分3秒・無音）</p>
       </div>
       <div>
-        <div class="role">設計・実装（個人開発） ・ 2026年9月</div>
+        <div class="role">個人開発（仕事ではない） ・ 提案フェーズで見せる実物 ・ 2026年9月</div>
         <h3>RELAY — 商談メモを、どのシステムにも同時に流し込む</h3>
         <p class="lead">高機能なCRMを入れても、営業が商談後に転記しなければ空箱になる。逆に転記が自動なら、置き場所はスプレッドシートでも成立する。<strong>選ぶべきはツールではなく「人が入力しなくて済む形」</strong>だと考えて作った。商談の文字起こしから課題・要望・次のアクション・金額・時期を構造化し、複数のSoRへ同時に書き込む。</p>
         <ul class="tight">
@@ -1298,9 +1309,9 @@
 
 <section id="games">
   <div class="wrap">
-    <div class="kick">Works ・ Maker軸</div>
+    <div class="kick">Works ・ 過去の本業</div>
     <h2>作品（ゲーム）</h2>
-    <p class="lead" style="margin-bottom:16px">プロデューサー／ディレクターとして手がけた運営・新規タイトル。</p>
+    <p class="lead" style="margin-bottom:16px">プロデューサー／ディレクターとして手がけた運営・新規タイトル。<strong>いま売っているのは生成AIの PdM / FDE です。</strong>ここは、数字を動かした証拠です。</p>
     <div class="card detail-trigger" data-detail="saoif" style="max-width:560px">
       <div class="frame">
         <iframe src="https://www.youtube-nocookie.com/embed/SWS26hENGds" title="SAOIF 公式映像（SAOゲーム公式）"
@@ -1339,9 +1350,9 @@
 
 <section id="personal">
   <div class="wrap">
-    <div class="kick">Personal Work ・ Maker軸</div>
-    <h2>個人制作</h2>
-    <p class="lead" style="margin-bottom:20px">仕事とは別に、作りたいものを最後まで自分で通したもの。<strong>コードはAIエージェント（Claude / Cursor）に書かせ、自分は設計・検証・判断を担っている。</strong>いずれも実際に動いていて、下の映像はその録画です。</p>
+    <div class="kick">Proof of Craft ・ 個人制作</div>
+    <h2>仕事ではない。作れることの証拠</h2>
+    <p class="lead" style="margin-bottom:20px">案件の成果物ではありません。BtoBの仕事を探している人に、実装の実物を見せるための枠です。<strong>コードはAIエージェント（Claude / Cursor）に書かせ、自分は設計・検証・判断を担っている。</strong>いずれも実際に動いていて、下の映像はその録画です。</p>
 
     <div class="kick" style="font-size:11.5px;margin-bottom:12px">ゲーム</div>
 
@@ -1416,6 +1427,7 @@
   <div class="wrap">
     <div class="kick">Career</div>
     <h2>職務経歴（逆順）</h2>
+    <p class="lead" style="margin-bottom:16px">正社員と業務委託が混在しています。短い在籍は「転々とした」ではなく、<strong>まだ何を作るか決まっていない場所に入った回数</strong>です。ゲーム期の派遣・契約は、当時のタイトル開発では一般的な就業形態でした。</p>
     <div class="era-filter" id="era-filter" role="group" aria-label="時代で絞り込み">
       <button type="button" data-era="all" class="active">すべて</button>
       <button type="button" data-era="ai">AI・PM期</button>
@@ -1496,9 +1508,9 @@
     <div class="kick">Will / Can / Must</div>
     <h2>これから</h2>
     <div class="grid g3">
-      <div class="card"><h3>Will</h3><p>新しい価値を作って世に届けたい。一人では難しくとも、たくさんの人とのコラボレーションから新しい価値を生み、商品化して社会に届ける。</p></div>
-      <div class="card"><h3>Can</h3><p>作り手の目線 × PMの事業目線 × FDEの実装力。ニーズを高速に実装で検証し、事業戦略・開発ロードマップ・営業戦略に落とす。生成AIで一人の生産量を圧縮しPMFへ導く。</p></div>
-      <div class="card"><h3>Must</h3><p>正社員フルコミットも、業務委託・複業も歓迎。フルリモートのスクラム開発で、ビデオ通話＋テキストのみでも高い生産性を出せます。</p></div>
+      <div class="card"><h3>Will</h3><p>まだ何を作るか決まっていない事業を、動くものまで持っていきたい。一人では完結しないので、事業責任者と並んで決めて、作って、回す。</p></div>
+      <div class="card"><h3>Can</h3><p>決める・作る・回すを一人で通す。作り手の目線と、数字を動かしたPMの目線と、その場で実装するFDE。提言で終わらず、決まったものを作るだけでもない。</p></div>
+      <div class="card"><h3>Must</h3><p>主戦場は業務委託。フルタイムから0.5人月まで。リモート中心で、必要な出社はする。正社員は、まだ何を作るか決まっていない席に限る。決まったものを回すPM、運用保守、実装SEの席は対象外。</p></div>
     </div>
   </div>
 </section>
@@ -1506,11 +1518,11 @@
 <footer id="contact">
   <div class="wrap">
     <div class="kick">Contact</div>
-    <p style="margin-top:10px;font-weight:700;font-size:16px">堀部 彰夫</p>
+    <p style="margin-top:10px;font-weight:700;font-size:16px">堀部 彰夫　・　生成AIプロダクトの PdM / FDE</p>
+    <p class="lead" style="margin-top:8px;max-width:42em">業務委託の話はメールで。まだ何を作るか決まっていないプロダクトの壁打ちから、動くものを見せるところまで。</p>
     <p style="margin-top:6px;font-size:15px">
       <a href="mailto:superchance1986@outlook.jp">superchance1986@outlook.jp</a>
     </p>
-    <p style="margin-top:14px;font-size:13.5px;color:var(--mut);line-height:1.95;max-width:560px">新しい価値を作り出す。月200kmランニングで集中力を研ぎ澄ます。企画によって成功確率を上げる。一人では難しくとも、たくさんの人とのコラボレーションから新しい価値が生み出す。役割としてのPM。プロジェクトの手薄な部分を雑用で埋める。どんなプロジェクトのあらゆる状況でもハード/ソフトスキルの使いどころで最良のゴールに導ける存在を目指して日々勉強中｜会社とチームの両面をかみ合わせてドライブさせるのが理想</p>
     <a href="https://www.linkedin.com/feed/update/urn:li:activity:7069707428363141122/" target="_blank" rel="noopener" class="credit has-thumb" style="margin-top:18px;max-width:420px">
       <div class="credit-thumb"><img src="linkedin-running-thumb.jpg" alt="なぜ月に200km走るのか" loading="lazy"></div>
       <div class="body"><div class="t">なぜ月に200km走るのか</div><div class="m">月200kmのランニングを続けている理由について書いたLinkedIn投稿</div><div class="c">LinkedIn投稿を読む →</div></div>
@@ -1528,17 +1540,17 @@
 
     <div class="sheet">
       <h1>堀部 彰夫</h1>
-      <div class="pz-role">Maker × Growth PM × AI-FDE</div>
+      <div class="pz-role">生成AIプロダクトの PdM / FDE　・　業務委託</div>
       <div class="pz-contact">superchance1986@outlook.jp ／ ポートフォリオ: horibe7akio.github.io/portfolio</div>
 
       <h2 style="margin-top:22px">概要</h2>
-      <p>ゲーム・映像の"作り手"出身。CGデザイナー／映像演出から、ゲームのディレクター／プロデューサー、対話AIのPM、生成AIのFDEまで、"作る側"のあらゆるポジションを横断してきました（フロム・ソフトウェア〜スタートアップまで20年）。いまは生成AIプロダクトを、PMである自分がバイブコーディングで"実装まで"届けています。</p>
-      <p>作り手の目線 × PMの事業目線 × FDEの実装力。ニーズを高速に実装で検証し、事業戦略・開発ロードマップ・営業戦略に落とす。生成AIで一人の生産量を圧縮しPMFへ導く——が持ち味です。</p>
+      <p>まだ何を作るか決まっていない場所に入って、決めて、作って見せて、回るようにする人です。提言で終わるコンサルでも、決まったものを作る開発会社でもありません。いま主に受けているのは業務委託です。</p>
+      <p>直近はアニメ制作AI基盤を客先でその場開発し、CTI SaaSではChatGPT連携をリリースしました。ゲーム期に月商約1.5倍・ストア上位を出した経験は、決めたあとに回せる証明です。作り手出身であることは原点であって、いまの職種名ではありません。</p>
 
       <div class="pz-stats">
+        <div class="pz-stat"><b>客先でその場開発</b><span>アニメ制作AI基盤をFDEとして通した（CrestLab）</span></div>
+        <div class="pz-stat"><b>ChatGPT連携をリリース</b><span>CTI SaaSの要約〜CRM連携（Comdesk）</span></div>
         <div class="pz-stat"><b>月商 約1.5倍</b><span>運営タイトルのグロース（イルーナ戦記）</span></div>
-        <div class="pz-stat"><b>iOS最高8位</b><span>新規IP MMORPGのトップセールス（SAOIF）</span></div>
-        <div class="pz-stat"><b>月次93%減衰→社内No.1</b><span>釣り★スタ for dゲーム・社内MVP</span></div>
       </div>
 
       <h2>いま何をしているか</h2>
@@ -1612,8 +1624,8 @@
     </div>
 
     <div class="sheet">
-      <h2>個人制作 — 生成AIエージェントとの開発</h2>
-      <p style="font-size:12px">コードはAIエージェント（Claude / Cursor）に書かせ、自分は設計・検証・判断を担当。いずれも実際に動いています（サイト上で映像を再生できます）。</p>
+      <h2>個人制作 — 仕事ではない。作れることの証拠</h2>
+      <p style="font-size:12px">案件の成果物ではありません。コードはAIエージェント（Claude / Cursor）に書かせ、自分は設計・検証・判断を担当。いずれも実際に動いています（サイト上で映像を再生できます）。</p>
       <div class="pz-item">
         <img src="ashgrid-poster.jpg" alt="ASHGRID">
         <div class="b">
@@ -1651,7 +1663,7 @@
         <div><h4>クリエイティブ</h4><p>ゲームデザイン／モデリング／映像演出・カットシーン・絵コンテ／3dsmax・Maya／Adobe Premiere・AE・Photoshop・Illustrator／Blender（VRM）／生成AI（画像/楽曲/SE）</p></div>
       </div>
 
-      <p class="pz-note">正社員フルコミットも、業務委託・複業も歓迎。フルリモートのスクラム開発で、ビデオ通話＋テキストのみでも高い生産性を出せます。<br>© 2026 Akio Horibe — このポートフォリオも生成AIのバイブコーディングで自作しています。</p>
+      <p class="pz-note">主戦場は業務委託。フルタイムから0.5人月まで。リモート中心で、必要な出社はする。正社員は、まだ何を作るか決まっていない席に限る。<br>© 2026 Akio Horibe — このポートフォリオも生成AIのバイブコーディングで自作しています。</p>
     </div>
 
   </div>
@@ -1661,8 +1673,8 @@
   <header class="hero rzhead">
     <div class="wrap">
       <h1>職務経歴書</h1>
-      <div class="role-line">堀部 彰夫　・　2026年7月15日現在</div>
-      <p class="tagline">CG出身の"作り手"が、事業を数字で伸ばし、いまは<strong>非エンジニアながら自分でAIを実装して届ける</strong>FDE。</p>
+      <div class="role-line">堀部 彰夫　・　2026年9月9日現在</div>
+      <p class="tagline">まだ何を作るか決まっていない場所に入って、<strong>決めて、作って見せて、回るようにする</strong> PdM / FDE。</p>
       <div class="cta">
         <a class="btn" href="#r-history">職務経歴を見る</a>
         <a class="btn ghost" href="#" data-goto="portfolio">ポートフォリオへ →</a>
@@ -1674,12 +1686,13 @@
     <div class="wrap">
       <div class="kick">Summary</div>
       <h2>概要</h2>
-      <p class="lead" style="max-width:70ch">CGデザイナーからキャリアを始め、企画・ディレクター・プロデューサー・開発部長（112名統括）、広告マーケティング、新規事業、対話AI・生成AIのPM／FDEへ——23年で職種と業界を越え続けてきました。プロデューサーとしては運営タイトルの月商を9ヶ月で約1.5倍に伸ばし、広告では大型ゲームプロモーションを6社競合で受注、マーケでは新規ユーザーLTVを他対比200%超に改善。事業を数字で伸ばす一方、いまはCGデザイナー出身の非エンジニアながらClaude Code・Cursorで自らコードを書き、アニメ制作現場へのAI導入を企画から実装・リリースまで一人で回すFDEです。越境してきた軌跡すべてが、AI領域を事業と実装の両面から解く力になっています。</p>
+      <p class="lead" style="max-width:70ch">いまの仕事は、生成AIプロダクトのPdM／FDEです。まだ何を作るか決まっていない段階から入り、決めて、動くものを見せて、検証が回る状態まで一人で通します。提言で終わるコンサルでも、決まったものを作る開発会社でもありません。</p>
+      <p class="lead" style="max-width:70ch;margin-top:10px">23年で職種と業界を越えてきた回数は、定着しなかった記録ではなく、立ち上がっていない場所に入った回数です。運営タイトルの月商を9ヶ月で約1.5倍、大型ゲームプロモを6社コンペで受注、新規獲得LTVを他対比200%超。数字を出したあとに、Claude Code・Cursorで自分で実装して届ける側へ移っています。</p>
       <div class="stats rzstats">
+        <div class="stat"><div class="n">その場開発</div><div class="l">アニメ制作AIを客先で通した（CrestLab）</div></div>
+        <div class="stat"><div class="n">ChatGPT連携</div><div class="l">CTIの要約〜CRM連携をリリース</div></div>
         <div class="stat"><div class="n">約1.5倍</div><div class="l">月商グロース（イルーナ・就任9ヶ月）</div></div>
         <div class="stat"><div class="n">6社コンペ</div><div class="l">大型広告案件を受注（DG）</div></div>
-        <div class="stat"><div class="n">200%超</div><div class="l">新規獲得LTV（他対比・SMN）</div></div>
-        <div class="stat"><div class="n">112名</div><div class="l">開発部 統括（アソビモ）</div></div>
       </div>
       <p class="lead" style="max-width:70ch;margin-top:16px">「何を作るべきか」を事業目線で決め、生成AIで自分の手で作って検証を高速に回す——現場で意思決定できる裁量の中で最も力を発揮します。事業を伸ばす嗅覚と、AIで自分で作り切る実装力の二刀流を、AI×事業開発の最前線で磨き続けます。</p>
     </div>
@@ -1695,7 +1708,7 @@
         <div class="role">2020年〜現在</div>
         <h3>生成AI・AI駆動開発 / FDE</h3>
         <ul class="tight">
-          <li>Claude Code・CursorによるAI駆動開発で、PoC/MVPから本番リリースまで一人称で完遂（CG出身の非エンジニア）</li>
+          <li>Claude Code・CursorによるAI駆動開発で、PoC/MVPから本番リリースまで一人称で完遂</li>
           <li>FDEとして、クライアント現場のヒアリング〜実装〜自社SaaS組込・定着まで一気通貫（アニメ制作へのAI導入）</li>
           <li>AI-SaaSのPdM（エンジニア60名規模のスクラム）、AITuberライブ配信アプリの0→1、CTIのAIスコアリングを考案〜実装〜リリース</li>
           <li>対話AI（rinna RCP／emotivE）のPM・クライアント導入支援</li>
