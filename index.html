@@ -477,8 +477,8 @@
   </div>
   <div class="sidenav-links" data-page="portfolio">
     <a href="#summary" data-target="summary">できること</a>
+    <a href="#demo" data-target="demo">いま作っているもの</a>
     <a href="#featured" data-target="featured">代表実績</a>
-    <a href="#demo" data-target="demo">実装デモ</a>
     <a href="#proof" data-target="proof">その他のAI実績</a>
     <a href="#games" data-target="games">事業運営・作品</a>
     <a href="#personal" data-target="personal">個人制作</a>
@@ -1078,6 +1078,43 @@
 <div class="card"><h3>製品とチームを育てる</h3><p>AI機能の企画・リリース、開発優先順位の調整、スクラム運営。ゲーム事業では112名の開発部門の統括・育成も経験しました。</p><a href="#case-product">Comdeskの実績へ →</a></div>
 </div></div></section>
 
+<section id="demo"><div class="wrap"><div class="kick">Latest</div><h2>いま作っているもの</h2><p class="lead">2026年9〜10月に、実案件とは別に制作した仕組みです。</p>
+    <!-- ハーネス : AIを並べて動かす開発の仕組み -->
+    <div class="card" style="margin-bottom:34px">
+        <div class="role">自主制作 ・ 日々の開発で運用中 ・ 2026年9月〜</div>
+        <h3>AI開発ハーネス — ClaudeとGPTを、決まりを守らせながら並べて動かす</h3>
+        <p class="lead">複数のAIに同時に開発させるための仕組みです。何を作るかと合否は人が決め、実装・確認・記録はAIが回します。</p>
+        <ul class="tight"><li><strong>担当：</strong>仕組みの設計と運用。AI同士の連絡、作業の割り振り、決まりを守らせる仕掛けを作りました。</li><li><strong>設計上の判断：</strong>守ってほしい決まりを文章で頼むだけでなく、破りそうな操作を機械で止める形にし、同じ失敗をくり返さないようにしました。重い処理は複数のMacに振り分けています。</li><li><strong>使い方：</strong>ゲーム開発や業務ツールの開発を、この仕組みで並行して進めています。</li></ul>
+        <div class="badges">
+          <span class="badge"><span class="ico">🤖</span>Claude Code / Codex<small>並行開発</small></span>
+          <span class="badge"><span class="ico">🛡️</span>フック・記憶<small>決まりの自動チェック</small></span>
+          <span class="badge"><span class="ico">🖥️</span>Mac 3台<small>重い処理の分散</small></span>
+        </div>
+    </div>
+    <!-- RELAY : 商談メモ→SoR自動転記 -->
+    <div class="card" style="margin-bottom:34px">
+      <div class="split">
+      <div>
+        <video class="vid" src="relay-demo.mp4" poster="relay-poster.jpg"
+          controls preload="none" playsinline muted
+          aria-label="RELAY デモ動画（1分3秒・無音）"></video>
+        <p class="vidcap">▲ ボタン1つで4つのSoRへ同時転記し、実際のレコードまで開く（1分3秒・無音）</p>
+      </div>
+      <div>
+        <div class="role">自主制作デモ ・ 提案時に実装を確認いただくためのもの ・ 2026年9月</div>
+        <h3>RELAY — 商談メモを、どのシステムにも同時に流し込む</h3>
+        <p class="lead">商談後の転記作業を減らすための自主制作デモです。文字起こしから課題・要望・次のアクションを構造化し、Salesforce・kintone・Googleスプレッドシート・Markdownへ同時に転記します。</p>
+        <ul class="tight"><li><strong>担当：</strong>業務の整理、共通データモデルの設計、API連携、画面の実装・検証。</li><li><strong>設計上の判断：</strong>会社・人・商談・活動の共通形式を挟み、転記先を追加・変更できる構成にしました。</li><li><strong>確認できること：</strong>動画では一括転記から、作成されたレコードを開くところまでご覧いただけます。</li></ul>
+        <div class="badges">
+          <span class="badge"><span class="ico">🔌</span>Salesforce REST API<small>カスタムオブジェクト・権限セット</small></span>
+          <span class="badge"><span class="ico">🧩</span>kintone / Apps Script<small>API連携</small></span>
+          <span class="badge"><span class="ico">⚛️</span>Next.js / TypeScript<small>画面・アダプタ</small></span>
+        </div>
+      </div>
+      </div>
+    </div>
+
+</div></section>
 <section id="featured">
   <div class="wrap">
     <div class="kick">Featured</div>
@@ -1176,30 +1213,7 @@
   </div>
 </section>
 
-<section id="demo"><div class="wrap"><div class="kick">Working demo</div><h2>現在の実装を、動画で確認する</h2><p class="lead">実案件とは別に制作した、営業業務の自動化デモです。</p>    <!-- RELAY : 商談メモ→SoR自動転記 -->
-    <div class="card" style="margin-bottom:34px">
-      <div class="split">
-      <div>
-        <video class="vid" src="relay-demo.mp4" poster="relay-poster.jpg"
-          controls preload="none" playsinline muted
-          aria-label="RELAY デモ動画（1分3秒・無音）"></video>
-        <p class="vidcap">▲ ボタン1つで4つのSoRへ同時転記し、実際のレコードまで開く（1分3秒・無音）</p>
-      </div>
-      <div>
-        <div class="role">自主制作デモ ・ 提案時に実装を確認いただくためのもの ・ 2026年9月</div>
-        <h3>RELAY — 商談メモを、どのシステムにも同時に流し込む</h3>
-        <p class="lead">商談後の転記作業を減らすための自主制作デモです。文字起こしから課題・要望・次のアクションを構造化し、Salesforce・kintone・Googleスプレッドシート・Markdownへ同時に転記します。</p>
-        <ul class="tight"><li><strong>担当：</strong>業務の整理、共通データモデルの設計、API連携、画面の実装・検証。</li><li><strong>設計上の判断：</strong>会社・人・商談・活動の共通形式を挟み、転記先を追加・変更できる構成にしました。</li><li><strong>確認できること：</strong>動画では一括転記から、作成されたレコードを開くところまでご覧いただけます。</li></ul>
-        <div class="badges">
-          <span class="badge"><span class="ico">🔌</span>Salesforce REST API<small>カスタムオブジェクト・権限セット</small></span>
-          <span class="badge"><span class="ico">🧩</span>kintone / Apps Script<small>API連携</small></span>
-          <span class="badge"><span class="ico">⚛️</span>Next.js / TypeScript<small>画面・アダプタ</small></span>
-        </div>
-      </div>
-      </div>
-    </div>
 
-</div></section>
 <section id="proof">
   <div class="wrap"><details class="archive"><summary>その他のAIプロダクト実績</summary><div class="card" style="margin:24px 0"><div class="role">Pacific Meta（2024.05–07）・複業クラウド経由</div><h3>Web3アプリのグローバルリリース支援</h3><p>Web3領域アプリのグローバルリリースに伴う、KOLマーケティングのプロジェクトマネジメントを担当いたしました。</p></div>
     <div class="kick">Proof of Work</div>
