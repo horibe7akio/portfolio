@@ -706,6 +706,22 @@
     footer p a[href^="mailto"]:hover{color:var(--acc)}
   }
 
+
+  /* アコーディオンをやめる：最初から開いておき、スクロールで順に現れる（JS が無い時は元のアコーディオンのまま） */
+  @media screen{
+    html.auto-open .archive>summary{display:none}
+    html.auto-open main.page:not([data-page="print"]) section:has(>.wrap>.archive){padding-top:88px;padding-bottom:88px}
+    .reveal{transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+    #career .tl .it.reveal{transform:translateX(-22px);
+      transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1),background .2s ease,box-shadow .3s ease}
+    #career .tl .it.reveal.in{transform:none}
+    #career .tl .it.reveal::before{transform:scale(0);transition:transform .45s cubic-bezier(.3,1.6,.5,1) .25s}
+    #career .tl .it.reveal.in::before{transform:scale(1)}
+    @media (prefers-reduced-motion: reduce){
+      .reveal,#career .tl .it.reveal{transform:none;transition:none}
+      #career .tl .it.reveal::before{transform:none;transition:none}
+    }
+  }
 </style>
 </head>
 <body>
@@ -1480,10 +1496,12 @@
 
 
 <section id="proof">
-  <div class="wrap"><details class="archive"><summary>その他のAIプロダクト実績</summary><div class="card" style="margin:24px 0"><div class="role">Pacific Meta（2024.05–07）・複業クラウド経由</div><h3>Web3アプリのグローバルリリース支援</h3><p>Web3領域アプリのグローバルリリースに伴う、KOLマーケティングのプロジェクトマネジメントを担当いたしました。</p></div>
+  <div class="wrap"><details class="archive"><summary>その他のAIプロダクト実績</summary>
     <div class="kick">Proof of Work</div>
     <h2>作って、どう届けたか</h2>
     <p class="lead" style="margin-bottom:16px">ANICRA・LuminaLive・Comdesk Leadは上を参照。それ以外の関わったプロダクト：</p>
+    <div class="card" style="margin:24px 0"><div class="role">Pacific Meta（2024.05–07）・複業クラウド経由</div><h3>Web3アプリのグローバルリリース支援</h3><p>Web3領域アプリのグローバルリリースに伴う、KOLマーケティングのプロジェクトマネジメントを担当いたしました。</p></div>
+    <div style="height:20px"></div>
     <div>
       <div class="card detail-trigger" data-detail="rcp" style="margin-bottom:20px">
         <div class="split">
@@ -1524,6 +1542,9 @@
 
 <section id="games">
   <div class="wrap"><details class="archive"><summary>事業運営・ゲーム・映像の実績</summary>
+    <div class="kick">Works ・ 過去の本業</div>
+    <h2>作品（ゲーム）</h2>
+    <p class="lead" style="margin-bottom:16px">プロデューサー／ディレクターとして手がけた運営・新規タイトル。<strong>事業運営・組織マネジメントの経験も、現在の仕事の土台です。</strong>ここは、数字を動かした証拠です。</p>
     <!-- イルーナ growth -->
     <div class="card detail-trigger" data-detail="iruna" style="background:var(--panel2)">
       <div class="split">
@@ -1589,10 +1610,7 @@
       </div>
       </div>
     </div>
-
-    <div class="kick">Works ・ 過去の本業</div>
-    <h2>作品（ゲーム）</h2>
-    <p class="lead" style="margin-bottom:16px">プロデューサー／ディレクターとして手がけた運営・新規タイトル。<strong>事業運営・組織マネジメントの経験も、現在の仕事の土台です。</strong>ここは、数字を動かした証拠です。</p>
+    <div style="height:20px"></div>
     <div class="card detail-trigger" data-detail="saoif" style="max-width:560px">
       <div class="frame">
         <iframe src="https://www.youtube-nocookie.com/embed/SWS26hENGds" title="SAOIF 公式映像（SAOゲーム公式）"
@@ -2562,6 +2580,47 @@
 (function(){
  function revealHash(){var id=decodeURIComponent(location.hash.slice(1));var target=document.getElementById(id);if(!target)return;var d=target.querySelector('details.archive');if(d)d.open=true;}
  window.addEventListener('hashchange',revealHash);revealHash();
+})();
+</script>
+<script>
+/* アコーディオンを最初から開き、中身はスクロールで順に現れるようにする */
+(function(){
+  var ds = document.querySelectorAll('details.archive');
+  if(!ds.length) return;
+  document.documentElement.classList.add('auto-open');
+  var extra = [];
+  ds.forEach(function(d){
+    d.open = true;
+    Array.prototype.forEach.call(d.children, function(c){
+      if(c.tagName === 'SUMMARY') return;
+      if(c.classList.contains('tl')){
+        Array.prototype.forEach.call(c.children, function(k){ if(k.tagName === 'H3') extra.push(k); });
+        return;
+      }
+      if(c.classList.contains('reveal') || c.querySelector('.reveal')) return;
+      extra.push(c);
+    });
+  });
+  if(!extra.length) return;
+  extra.forEach(function(el){ el.classList.add('reveal'); });
+  if(!('IntersectionObserver' in window)){ extra.forEach(function(el){ el.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {rootMargin:'0px 0px -8% 0px', threshold:0.05});
+  extra.forEach(function(el){ io.observe(el); });
+  // 速く通り過ぎて出そこねた物を残さない：画面より上にある物は出しておく
+  var tick = false;
+  window.addEventListener('scroll', function(){
+    if(tick) return; tick = true;
+    requestAnimationFrame(function(){
+      tick = false;
+      var rest = document.querySelectorAll('.reveal:not(.in)');
+      for(var i = 0; i < rest.length; i++){
+        var r = rest[i].getBoundingClientRect();
+        if(r.height > 0 && r.top < window.innerHeight * 0.9) rest[i].classList.add('in');
+      }
+    });
+  }, {passive:true});
 })();
 </script>
 <script type="module">
