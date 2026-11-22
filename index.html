@@ -27,7 +27,7 @@
 <meta name="twitter:image" content="https://horibe7akio.github.io/portfolio/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0d0f14; --panel:#151922; --panel2:#1b2130; --line:#252c3a;
@@ -461,6 +461,154 @@
   .archive[open]>summary{margin-bottom:24px;border-bottom:1px solid var(--line)}
   section:has(>.wrap>.archive){padding-top:12px;padding-bottom:12px}
   @media print{.archive>summary{display:none}.archive::details-content{display:block}}
+
+
+  /* ================= v2（2026-11）: 余白と活字で見せる。色は1色、角は立てる ================= */
+  @media screen{
+    :root{
+      --bg:#09090a; --panel:#111113; --panel2:#17171a; --line:#27272c;
+      --tx:#f2f1ec; --mut:#8f8f89; --acc:#5eead4; --acc-rgb:94,234,212; --on-acc:#06120f;
+      --maxw:1040px;
+      --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",monospace;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f4f3ee; --panel:#fbfaf7; --panel2:#eae8e1; --line:#d8d5cb;
+        --tx:#0e0e0d; --mut:#63625c; --acc:#0b7d73; --acc-rgb:11,125,115; --on-acc:#ffffff; }
+    }
+    ::selection{background:var(--acc);color:var(--on-acc)}
+    a{text-underline-offset:3px}
+    h1,h2,h3,.hero-message{font-feature-settings:"palt"}
+
+    /* 背景：光の玉をやめて、細い縦の罫だけにする */
+    .ambient-bg span{display:none}
+    .ambient-bg::before{background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);
+      background-size:calc(100% / 8) 100%;opacity:.42;
+      mask-image:linear-gradient(to bottom,#000 0%,transparent 78%);
+      -webkit-mask-image:linear-gradient(to bottom,#000 0%,transparent 78%)}
+    .progress-bar{height:1px}
+    section::before{display:none}
+
+    /* 冒頭：名前は小さく、言葉を大きく */
+    header.hero{padding:0;min-height:min(88vh,860px);display:flex;align-items:flex-end;
+      border-bottom:1px solid var(--line)}
+    header.hero .wrap{width:100%;padding-top:96px;padding-bottom:56px}
+    header.hero.rzhead{min-height:0;display:block}
+    header.hero.rzhead .wrap{padding-top:72px;padding-bottom:40px}
+    header.hero:not(.rzhead) h1{font-size:14px;font-weight:700;letter-spacing:.34em;line-height:1.6;overflow:visible}
+    header.hero:not(.rzhead) h1::after{display:none}
+    .role-line{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;
+      color:var(--mut);margin:.7em 0 0}
+    .hero-message{font-size:clamp(38px,7.2vw,88px);line-height:1.14;letter-spacing:-.02em;margin:44px 0 30px}
+    .hero-message span:last-child{color:var(--acc)}
+    .tagline{font-size:15px;max-width:38em}
+    .offer-line{gap:0;margin-top:22px}
+    .offer-line li{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.04em;
+      background:none;border:0;border-radius:0;padding:0;color:var(--mut)}
+    .offer-line{row-gap:8px}
+    .offer-line li:not(:last-child){padding-right:12px;margin-right:12px;border-right:1px solid var(--line)}
+    .cta{margin-top:34px;gap:10px}
+
+    /* ボタン：角を立てて、墨一色 */
+    .btn{border-radius:0;background:var(--tx);color:var(--bg);font-size:13px;letter-spacing:.06em;
+      padding:14px 22px;gap:12px;overflow:visible}
+    .btn::after{content:"→";position:static;width:auto;height:auto;background:none;transform:none;
+      transition:transform .2s ease;left:auto}
+    .btn:hover{background:var(--acc);color:var(--on-acc);box-shadow:none;transform:none;text-decoration:none}
+    .btn:hover::after{left:auto;transform:translateX(4px)}
+    .btn.ghost{background:transparent;color:var(--tx);border:1px solid var(--line)}
+    .btn.ghost:hover{background:transparent;color:var(--tx);border-color:var(--tx)}
+
+    /* 節：番号を振って、見出しを大きく */
+    main.page{counter-reset:sec}
+    main.page:not([data-page="print"]) section{padding:88px 0;counter-increment:sec}
+    .kick{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.16em;color:var(--mut);gap:12px}
+    .kick::before{width:18px;height:1px;border-radius:0;background:var(--acc);box-shadow:none}
+    main.page:not([data-page="print"]) section > .wrap > .kick::before,
+    main.page:not([data-page="print"]) section > .wrap > .archive > .kick::before{
+      content:counter(sec,decimal-leading-zero);width:auto;height:auto;background:none;color:var(--acc)}
+    main.page:not([data-page="print"]) h2{font-size:clamp(28px,4.6vw,50px);line-height:1.16;
+      letter-spacing:-.02em;margin:.4em 0 .7em}
+    main.page:not([data-page="print"]) h3{font-size:19px;letter-spacing:-.005em}
+    .lead{font-size:15.5px}
+    .archive>summary{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.06em}
+
+    /* 箱：角を立てる。浮かせずに線の色だけ変える */
+    .card{border-radius:2px;padding:26px;background:color-mix(in srgb,var(--panel) 72%,transparent)}
+    .card:hover{transform:none;box-shadow:none;border-color:var(--tx)}
+    .card .role{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.05em;color:var(--mut)}
+    .detail-trigger.card-active{box-shadow:none;border-color:var(--acc)}
+    #summary .grid,#wcm .grid{gap:0;border:1px solid var(--line);counter-reset:c;margin-top:28px}
+    #summary .card,#wcm .card{border:0;border-right:1px solid var(--line);border-radius:0;background:none;
+      padding:30px 26px 34px;counter-increment:c}
+    #summary .card:last-child,#wcm .card:last-child{border-right:0}
+    #summary .card::before,#wcm .card::before{content:counter(c,decimal-leading-zero);display:block;
+      font-family:var(--mono);font-size:12px;color:var(--acc);margin-bottom:40px}
+    #summary .card a{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:12px}
+    @media(max-width:760px){
+      #summary .card,#wcm .card{border-right:0;border-bottom:1px solid var(--line)}
+      #summary .card:last-child,#wcm .card:last-child{border-bottom:0}
+      #summary .card::before,#wcm .card::before{margin-bottom:18px}
+    }
+    .badge{border-radius:0;background:none;font-size:12px;padding:7px 12px}
+    .badge .ico{display:none}
+    .badge:hover{transform:none;box-shadow:none;border-color:var(--tx)}
+    .tag{border-radius:0;background:none;font-family:var(--mono);font-size:11px;color:var(--mut);padding:2px 8px}
+    .launched{border-radius:0;background:none;font-family:var(--mono);font-weight:500}
+    .stats{gap:26px}
+    .stat{background:none;border:0;border-top:1px solid var(--tx);border-radius:0;padding:14px 0 0}
+    .stat .n{font-size:30px;color:var(--tx);text-shadow:none;letter-spacing:-.03em}
+    .media,.frame,.vid,.shot,.proof-panel{border-radius:2px}
+    .short{border-radius:6px}
+    .credit{border-radius:2px;background:none}
+    a.credit:hover{transform:none;box-shadow:none;border-color:var(--tx)}
+    .credit .c{font-family:var(--mono);font-weight:500}
+    .case-facts dt{font-family:var(--mono);font-weight:500;letter-spacing:.08em;color:var(--mut)}
+    .cv-hit,.cv-meta span,.rzlist li,.rzpr,.rztable-wrap{border-radius:2px}
+    .rzlist li{border-left-width:1px}
+
+    /* 年表 */
+    .tl{border-left-width:1px}
+    .tl-fill{left:-1px;width:1px;box-shadow:none}
+    .tl .when{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.04em;color:var(--mut)}
+    .tl .it::before{width:7px;height:7px;border-radius:0;left:-26px;top:8px}
+    .tl .it.detail-trigger{border-radius:2px}
+    .tl .it.detail-trigger::before{left:-14px;top:16px}
+    .tl .it.detail-trigger:hover{transform:none;
+      box-shadow:inset 0 0 0 1px var(--tx)}
+    .tl .it.detail-trigger:hover::before{transform:none;box-shadow:0 0 0 4px var(--bg)}
+    .tl .it.detail-trigger.card-active{box-shadow:inset 2px 0 0 var(--acc),inset 0 0 0 1px var(--line)}
+    .tl .it.detail-trigger.card-active::before{transform:none;box-shadow:0 0 0 4px var(--bg)}
+    .tl .it.past::before{box-shadow:0 0 0 4px var(--bg)}
+
+    /* 切り替えのボタン類 */
+    .era-filter button,.sidenav-switch button,.mobilebar button{border-radius:0;font-family:var(--mono);
+      font-weight:500;background:none}
+    .era-filter button.active,.sidenav-switch button.active,.mobilebar button.active{
+      background:var(--tx);color:var(--bg);border-color:var(--tx)}
+    .era-filter button:hover,.sidenav-switch button:hover{border-color:var(--tx)}
+
+    /* 横のナビ・詳細 */
+    .sidenav{background:var(--bg)}
+    .sidenav-brand{font-size:13px;letter-spacing:.24em}
+    .sidenav-brand span{font-family:var(--mono);font-weight:500;letter-spacing:.04em;text-transform:none;
+      color:var(--mut);line-height:1.7;margin-top:8px}
+    .sidenav-links::before{width:1px;left:3.5px}
+    .sidenav-links a{font-size:12.5px;font-weight:500}
+    .sidenav-links a::before{border-radius:0;border-width:1px;background:var(--bg)}
+    .sidenav-links a.active{color:var(--tx)}
+    .sidenav-links a.active::before{box-shadow:none}
+    .sidenav-foot{font-family:var(--mono)}
+    .mobilebar{background:var(--bg)}
+    .detailpanel{background:var(--bg);box-shadow:none}
+    .detailpanel-close{border-radius:0;background:none}
+    .detailpanel-hint{border-radius:0;background:var(--bg);font-family:var(--mono)}
+
+    /* 連絡先：アドレスを大きく */
+    footer{padding:88px 0 96px}
+    footer p a[href^="mailto"]{font-size:clamp(20px,3.6vw,36px);font-weight:900;color:var(--tx);
+      letter-spacing:-.01em;line-height:1.3;word-break:break-all}
+    footer p a[href^="mailto"]:hover{color:var(--acc);text-decoration:none}
+  }
 
 </style>
 </head>
@@ -1705,7 +1853,7 @@
   <header class="hero rzhead">
     <div class="wrap">
       <h1>職務経歴書</h1>
-      <div class="role-line">堀部 彰夫　・　2026年9月9日現在</div>
+      <div class="role-line">堀部 彰夫　・　2026年11月22日現在</div>
       <p class="tagline">事業の課題を整理し、<strong>数字と現場をつなぎ、実装まで進める</strong> PdM / FDE。</p>
       <div class="cta">
         <a class="btn" href="#r-history">職務経歴を見る</a>
