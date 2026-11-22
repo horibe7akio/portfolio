@@ -730,6 +730,8 @@
     .cap-sample{display:inline-block;margin:6px 0 0;font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.04em;color:var(--acc);background:rgba(var(--acc-rgb),.09);border-radius:999px;padding:5px 14px}
     .cap-media{align-items:start;gap:20px}
     .cap-vid{aspect-ratio:4/5;object-fit:cover;background:#05090f}
+    .cap-loop{aspect-ratio:1/1;object-fit:contain}
+    #capacity .vidcap,#capacity .cap-note{text-shadow:0 0 4px var(--bg),0 0 12px var(--bg),0 0 20px var(--bg)}
     .cap-note{font-size:12px;color:var(--mut);line-height:1.85;margin-top:18px;max-width:72ch}
     @media(max-width:760px){.cap-stats{grid-template-columns:repeat(2,1fr);gap:10px}.cap-stats .stat{padding:14px}.cap-stats .stat .n{font-size:22px}}
     main.page:not([data-page="print"]) section .lead,main.page:not([data-page="print"]) h2{text-shadow:0 0 4px var(--bg),0 0 14px var(--bg),0 0 24px var(--bg)}
@@ -1367,8 +1369,8 @@
     <p class="vidcap">▲ この動画自体も、素材集め・台本・編集・声・BGM・書き出しまでをエージェントに任せた1件の作業です（69秒・英語・音あり）</p>
   </div>
   <div>
-    <img class="vid cap-vid" src="october-timeline.png" alt="2026年10月、4台のMac（M1・M2・M4・M5）それぞれの日別トークン利用" loading="lazy">
-    <p class="vidcap">▲ 2026年10月の4台の稼働（一例）。明るいほどその日の利用が多い</p>
+    <video class="vid cap-vid cap-loop" src="four-macs.mp4" poster="four-macs-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="2026年10月、4台のMac（M1・M2・M4・M5）の日別の稼働。動画からの切り出し"></video>
+    <p class="vidcap">▲ 4台のMac（M1・M2・M4・M5）の2026年10月の稼働（一例・左の動画から切り出し）。明るいほどその日の利用が多い</p>
   </div>
 </div>
 <p class="cap-note">数字はすべて2026年10月1〜31日（日本時間）の1か月を一例として集計したもので、更新はしていません。トークンは Codex 約299億＋Claude Code 約29億で、約98%はキャッシュ済みの入力。金額はキャッシュ割引込みの標準API単価で見積もった換算で、実際の支払額ではありません。延べ時間は、並行して動いたセッションをそれぞれ足した推計です。Claude Code は記録が残っている範囲だけを数えています。</p>
