@@ -722,6 +722,17 @@
       #career .tl .it.reveal::before{transform:none;transition:none}
     }
   }
+
+  @media screen{
+    .cap-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0 18px}
+    .cap-stats .stat .n{font-size:clamp(26px,3.4vw,38px);line-height:1.15}
+    .cap-why{margin:18px 0 26px}
+    .cap-media{align-items:start;gap:20px}
+    .cap-vid{aspect-ratio:4/5;object-fit:cover;background:#05090f}
+    .cap-note{font-size:12px;color:var(--mut);line-height:1.85;margin-top:18px;max-width:72ch}
+    @media(max-width:760px){.cap-stats{grid-template-columns:repeat(2,1fr);gap:10px}.cap-stats .stat{padding:14px}.cap-stats .stat .n{font-size:22px}}
+    main.page:not([data-page="print"]) section .lead,main.page:not([data-page="print"]) h2{text-shadow:0 0 4px var(--bg),0 0 14px var(--bg),0 0 24px var(--bg)}
+  }
 </style>
 </head>
 <body>
@@ -737,6 +748,7 @@
     <button type="button" data-page-btn="print">PDF印刷用</button>
   </div>
   <div class="sidenav-links" data-page="portfolio">
+    <a href="#capacity" data-target="capacity">体制と規模</a>
     <a href="#summary" data-target="summary">できること</a>
     <a href="#demo" data-target="demo">いま作っているもの</a>
     <a href="#featured" data-target="featured">代表実績</a>
@@ -1329,6 +1341,36 @@
     </div>
   </div>
 </header>
+
+<section id="capacity"><div class="wrap">
+<div class="kick">Capacity</div>
+<h2>お願いした仕事が、<br>確実に終わる体制です。</h2>
+<p class="lead">同じ仕事を頼むなら、最後まで終わらせられる相手に頼みたいはずです。私は4台のMacでAIエージェントを並行に動かす開発体制を自分で組み、毎日回しています。何を先にやるか・どこまでできたら完成かは私が決め、実装はエージェントが並行で進め、結果はすべて私が見てから出します。</p>
+<div class="cap-stats">
+  <div class="stat"><div class="n">約328億</div><div class="l">トークン（2026年10月の1か月）</div></div>
+  <div class="stat"><div class="n">約5,475ドル</div><div class="l">同じ量をAPIの標準単価に直した額</div></div>
+  <div class="stat"><div class="n">4台</div><div class="l">並行で動かしているMac</div></div>
+  <div class="stat"><div class="n">延べ3,254時間</div><div class="l">エージェントの稼働（1か月は744時間）</div></div>
+  <div class="stat"><div class="n">約2.54倍</div><div class="l">Codex Pro（20倍）の1か月分の枠に対する利用</div></div>
+  <div class="stat"><div class="n">796</div><div class="l">Claude Code のセッション</div></div>
+</div>
+<div class="grid g3 cap-why">
+  <div class="card"><h3>止まらない</h3><p>1台が重い処理でふさがっても、空いている別のMacへ回します。待ち時間で作業を止めません。</p></div>
+  <div class="card"><h3>並行で進む</h3><p>独立した作業は同時に、順番が要る作業は順番どおりに。複数の案件を同じ月に前へ進めています。</p></div>
+  <div class="card"><h3>出す前に人が見る</h3><p>合格の条件を先に決め、機械のチェックと私の確認を通った物だけを出します。AIの出力をそのまま渡しません。</p></div>
+</div>
+<div class="grid g2 cap-media">
+  <div>
+    <video class="vid cap-vid" src="run-it.mp4" poster="run-it-poster.jpg" controls preload="none" playsinline aria-label="I don't use AI. I run it.（69秒・英語）"></video>
+    <p class="vidcap">▲ この動画自体も、素材集め・台本・編集・声・BGM・書き出しまでをエージェントに任せた1件の作業です（69秒・英語・音あり）</p>
+  </div>
+  <div>
+    <img class="vid cap-vid" src="october-timeline.png" alt="2026年10月、4台のMac（M1・M2・M4・M5）それぞれの日別トークン利用" loading="lazy">
+    <p class="vidcap">▲ 2026年10月の4台の稼働。明るいほどその日の利用が多い</p>
+  </div>
+</div>
+<p class="cap-note">数字はすべて2026年10月1〜31日（日本時間）の記録から集計。トークンは Codex 約299億＋Claude Code 約29億で、約98%はキャッシュ済みの入力。金額はキャッシュ割引込みの標準API単価で見積もった換算で、実際の支払額ではありません。延べ時間は、並行して動いたセッションをそれぞれ足した推計です。Claude Code は記録が残っている範囲だけを数えています。</p>
+</div></section>
 
 <section id="summary"><div class="wrap">
 <div class="kick">How I can help</div><h2>決めて、作って、届ける</h2>
@@ -2317,7 +2359,7 @@
 </script>
 <script>
 (function(){
-  var els = document.querySelectorAll('#summary .card, #featured > .wrap > .card, #proof .card, #games .card, #games .credit, #personal .card, #career .tl .it, #skills .card, #wcm .card');
+  var els = document.querySelectorAll('#capacity .stat, #capacity .card, #capacity .cap-media > div, #summary .card, #featured > .wrap > .card, #proof .card, #games .card, #games .credit, #personal .card, #career .tl .it, #skills .card, #wcm .card');
   if(!els.length) return;
   els.forEach(function(el){ el.classList.add('reveal'); });
   if(!('IntersectionObserver' in window)){
