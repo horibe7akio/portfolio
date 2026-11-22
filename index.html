@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#cfe7ff">
 <title>堀部 彰夫｜事業推進・経営管理・AI実装</title>
 <meta name="description" content="事業の課題を見極め、数字と現場をつなぎ、実装まで進める。堀部彰夫の事業推進・経営管理・AIプロダクト開発の実績。">
 
@@ -610,6 +612,98 @@
     footer p a[href^="mailto"]{font-size:clamp(20px,3.6vw,36px);font-weight:900;color:var(--tx);
       letter-spacing:-.01em;line-height:1.3;word-break:break-all}
     footer p a[href^="mailto"]:hover{color:var(--acc);text-decoration:none}
+  }
+
+
+  /* ================= v3（2026-11）: 朝の空。明るく、風が通る見た目に（配色は明るい1種類だけ） ================= */
+  @media screen{
+    :root{
+      --bg:#f5fafe; --panel:#ffffff; --panel2:#ecf4fb; --line:#d7e5f1;
+      --tx:#10263a; --mut:#566c80; --acc:#1877e0; --acc-rgb:24,119,224; --on-acc:#ffffff;
+      --mint:#14b8a0; --warn:#b45309; --pt1:#1f7fe6; --pt2:#14b8a0;
+      --sky1:#cfe7ff; --sky2:#f5fafe; --sky3:#fbfdff;
+    }
+    html{background:var(--bg)}
+    body{background:transparent}
+    .ambient-bg{background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 58%,var(--sky3) 100%);z-index:-2}
+    .ambient-bg::before{display:none}
+    .hover-bg img.on{opacity:.16}
+
+    /* 冒頭 */
+    header.hero{border-bottom:0}
+    .hero-message span:last-child{background:linear-gradient(90deg,var(--acc),var(--mint));
+      -webkit-background-clip:text;background-clip:text;color:transparent}
+    header.hero .tagline,header.hero .offer-line,header.hero .role-line{
+      text-shadow:0 0 3px #fff,0 0 12px #fff,0 0 20px #fff}
+    .tagline,.role-line,.offer-line li{color:#3f566b}
+    .offer-line li:not(:last-child){border-right-color:#b9cfe2}
+
+    /* ボタン：丸く、空の青 */
+    .btn{border-radius:999px;background:var(--acc);color:#fff;padding:14px 26px;
+      box-shadow:0 10px 24px -12px rgba(var(--acc-rgb),.7)}
+    .btn:hover{background:#0f63c4;color:#fff;box-shadow:0 14px 28px -12px rgba(var(--acc-rgb),.8)}
+    .btn.ghost{background:rgba(255,255,255,.8);color:var(--tx);border:1px solid var(--line);box-shadow:none}
+    .btn.ghost:hover{background:#fff;color:var(--acc);border-color:var(--acc)}
+
+    /* 節 */
+    main.page:not([data-page="print"]) section{border-top:0}
+    .kick{color:var(--acc)}
+    .kick::before{background:var(--mint)}
+
+    /* 箱：白くて、やわらかい影 */
+    .card{border-radius:18px;background:rgba(255,255,255,.82);border:1px solid #fff;
+      box-shadow:0 1px 0 rgba(16,60,110,.04),0 18px 40px -26px rgba(16,60,110,.35);
+      -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+    .card:hover{border-color:rgba(var(--acc-rgb),.45);transform:translateY(-2px);
+      box-shadow:0 1px 0 rgba(16,60,110,.04),0 22px 44px -24px rgba(var(--acc-rgb),.45)}
+    .detail-trigger.card-active{border-color:var(--acc);
+      box-shadow:0 0 0 1px var(--acc),0 22px 44px -24px rgba(var(--acc-rgb),.5)}
+    #summary .grid,#wcm .grid{gap:16px;border:0}
+    #summary .card,#wcm .card,#summary .card:last-child,#wcm .card:last-child{
+      border:1px solid #fff;border-radius:18px;background:rgba(255,255,255,.82);padding:26px 24px 28px}
+    #summary .card::before,#wcm .card::before{margin-bottom:26px;color:var(--mint)}
+    .badge{border-radius:999px;background:var(--panel2);border-color:transparent;padding:7px 14px}
+    .badge:hover{border-color:var(--acc)}
+    .tag{border-radius:999px;background:var(--panel2);border-color:transparent;padding:3px 10px}
+    .launched{border-radius:999px;background:rgba(var(--acc-rgb),.1)}
+    .stat{background:rgba(255,255,255,.82);border:1px solid #fff;border-radius:16px;padding:16px 18px;
+      box-shadow:0 18px 40px -28px rgba(16,60,110,.35)}
+    .stat .n{color:var(--acc)}
+    .media,.frame,.vid,.shot,.proof-panel{border-radius:14px}
+    .short{border-radius:18px}
+    .credit{border-radius:14px;background:rgba(255,255,255,.82);border-color:#fff}
+    a.credit:hover{border-color:var(--acc)}
+    .cv-hit,.rzlist li,.rzpr,.rztable-wrap{border-radius:12px}
+    .cv-meta span{border-radius:999px}
+
+    /* 年表 */
+    .tl .it::before{border-radius:50%;width:9px;height:9px;left:-27px;top:7px}
+    .tl .it.detail-trigger{border-radius:14px;background:rgba(255,255,255,.6)}
+    .tl .it.detail-trigger::before{left:-15px;top:15px}
+    .tl .it.detail-trigger:hover{background:#fff;box-shadow:inset 0 0 0 1px rgba(var(--acc-rgb),.5)}
+    .tl .it.detail-trigger.card-active{background:#fff;
+      box-shadow:inset 3px 0 0 var(--acc),inset 0 0 0 1px rgba(var(--acc-rgb),.4)}
+
+    /* 切り替えのボタン類 */
+    .era-filter button,.sidenav-switch button,.mobilebar button{border-radius:999px;background:rgba(255,255,255,.7)}
+    .era-filter button.active,.sidenav-switch button.active,.mobilebar button.active{
+      background:var(--acc);color:#fff;border-color:var(--acc)}
+    .era-filter button:hover,.sidenav-switch button:hover{border-color:var(--acc);color:var(--acc)}
+    .era-filter button.active:hover,.sidenav-switch button.active:hover{color:#fff}
+
+    /* 横のナビ・詳細 */
+    .sidenav{background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+      border-right-color:rgba(255,255,255,.9)}
+    .sidenav-links a::before{border-radius:50%;background:#fff}
+    .sidenav-links a.active{color:var(--acc)}
+    .mobilebar{background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+    .detailpanel{background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+      box-shadow:-20px 0 44px -24px rgba(16,60,110,.35)}
+    .detailpanel-close{border-radius:50%;background:var(--panel2)}
+    .detailpanel-hint{border-radius:999px;background:rgba(255,255,255,.8)}
+
+    footer{border-top:0}
+    footer p a[href^="mailto"]:hover{color:var(--acc)}
   }
 
 </style>
@@ -2512,9 +2606,13 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   // 2 球
   mk(function(i){ var y = 1 - 2*(i+.5)/N, r = Math.sqrt(1 - y*y), th = i * 2.399963;
     return [Math.cos(th)*r*1.75, y*1.75, Math.sin(th)*r*1.75]; });
-  // 3 輪（巻きつく線）
-  mk(function(i, u){ var th = u*TAU, ph = u*TAU*89, R = 1.7, r = .55;
-    return tilt([(R + r*Math.cos(ph))*Math.cos(th), r*Math.sin(ph), (R + r*Math.cos(ph))*Math.sin(th)], 0.9); });
+  // 3 陸上のトラック（6レーン）
+  mk(function(i){ var lane = i % 6, r = .82 + lane * .1, L = 2.5, per = 2*L + TAU*r, d = rnd() * per, x, z;
+    if(d < L){ x = -L/2 + d; z = -r; }
+    else if(d < L + Math.PI*r){ var a1 = (d - L)/r; x = L/2 + Math.sin(a1)*r; z = -Math.cos(a1)*r; }
+    else if(d < 2*L + Math.PI*r){ x = L/2 - (d - L - Math.PI*r); z = r; }
+    else { var a2 = (d - 2*L - Math.PI*r)/r; x = -L/2 - Math.sin(a2)*r; z = Math.cos(a2)*r; }
+    return tilt([x, 0, z], 1.0); });
   // 4 波打つ地面
   mk(function(i){ var gx = i % side, gz = Math.floor(i / side);
     var x = (gx/side-.5)*7.4, z = (gz/side-.5)*5.2;
@@ -2528,6 +2626,8 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   mk(function(i){ var arm = i % 3, rad = Math.pow(rnd(), .6) * 2.7;
     var ang = arm*TAU/3 + rad*1.7 + (rnd()-.5)*.5;
     return tilt([Math.cos(ang)*rad, (rnd()-.5)*.16*(2.9-rad), Math.sin(ang)*rad], 1.05); });
+  // 並び順：風にうねる面から始めて、最後に散らばる
+  forms = [forms[4], forms[1], forms[2], forms[3], forms[5], forms[6], forms[0]];
   var K = forms.length;
 
   var seeds = new Float32Array(N * 4);
@@ -2544,7 +2644,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   geo.setAttribute('aSeed', new THREE.BufferAttribute(seeds, 4));
 
   var uni = {
-    uT:{value:0}, uTime:{value:0}, uSize:{value:13*DPR}, uOpacity:{value:.8},
+    uT:{value:0}, uTime:{value:0}, uSize:{value:17*DPR}, uOpacity:{value:.8},
     uInk:{value:new THREE.Color('#f2f1ec')}, uAcc:{value:new THREE.Color('#5eead4')}
   };
   var mat = new THREE.ShaderMaterial({
@@ -2570,7 +2670,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
       'varying float vSeed; varying float vDepth;',
       'void main(){',
       '  float a = smoothstep(0.5, 0.2, length(gl_PointCoord - 0.5));',
-      '  vec3 col = mix(uInk, uAcc, step(0.8, vSeed));',
+      '  vec3 col = mix(uInk, uAcc, step(0.62, vSeed));',
       '  float fog = smoothstep(10.0, 3.5, vDepth);',
       '  gl_FragColor = vec4(col, a * uOpacity * fog);',
       '}'
@@ -2582,7 +2682,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
 
   function readColors(){
     var cs = getComputedStyle(document.documentElement);
-    var tx = cs.getPropertyValue('--tx').trim(), ac = cs.getPropertyValue('--acc').trim();
+    var tx = (cs.getPropertyValue('--pt1') || cs.getPropertyValue('--tx')).trim(), ac = (cs.getPropertyValue('--pt2') || cs.getPropertyValue('--acc')).trim();
     if(tx) uni.uInk.value.set(tx);
     if(ac) uni.uAcc.value.set(ac);
   }
@@ -2612,7 +2712,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
       if(r.height < 4) continue;
       if(r.top <= mid){ idx = i; local = Math.min(1, Math.max(0, (mid - r.top) / r.height)); }
     }
-    var t = Math.min(1, Math.max(0, (local - 0.5) / 0.5));
+    var t = Math.min(1, Math.max(0, (local - 0.64) / 0.36));
     return idx + t;
   }
 
@@ -2622,6 +2722,12 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   document.addEventListener('click', function(){ setTimeout(function(){ dirty = true; }, 60); });
   window.addEventListener('pointermove', function(e){ mx = e.clientX / W - .5; my = e.clientY / H - .5; }, {passive:true});
 
+  var ambient = document.querySelector('.ambient-bg'), skyP = -1;
+  var SKY = [[207,231,255],[205,240,232],[255,232,208]];
+  function sky(p){
+    var f = p * (SKY.length - 1), i = Math.min(SKY.length - 2, Math.floor(f)), k = f - i, a = SKY[i], b = SKY[i+1];
+    return 'rgb(' + Math.round(a[0]+(b[0]-a[0])*k) + ',' + Math.round(a[1]+(b[1]-a[1])*k) + ',' + Math.round(a[2]+(b[2]-a[2])*k) + ')';
+  }
   var t0 = performance.now();
   function frame(now){
     requestAnimationFrame(frame);
@@ -2643,12 +2749,15 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
     var time = reduce ? 0 : (now - t0) / 1000;
     uni.uT.value = cur - b;
     uni.uTime.value = time;
-    uni.uOpacity.value = 0.7 - 0.26 * Math.min(1, cur);
+    uni.uOpacity.value = 0.78 - 0.22 * Math.min(1, cur);
     var wide = cam.aspect > 1.2 ? 1 : 0;
-    group.position.x = wide * 1.1 * Math.max(0, 1 - cur);
-    group.position.y = 0.35 * Math.max(0, 1 - cur);
+    group.position.x = wide * 0.9 * Math.max(0, 1 - cur);
+    group.position.y = 1.25 * Math.max(0, 1 - cur);
     group.rotation.y = cur * 0.55 + (window.scrollY || 0) * 0.0005 + time * 0.04 + mx * 0.12;
     group.rotation.x = 0.12 * Math.sin(cur * 0.7) + my * 0.08;
+    var maxS = Math.max(1, document.documentElement.scrollHeight - H);
+    var sp = Math.min(1, Math.max(0, (window.scrollY || 0) / maxS));
+    if(Math.abs(sp - skyP) > 0.002){ skyP = sp; ambient && ambient.style.setProperty('--sky1', sky(sp)); }
     renderer.render(scene, cam);
   }
   requestAnimationFrame(frame);
