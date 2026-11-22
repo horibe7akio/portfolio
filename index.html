@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#cfe7ff">
 <title>堀部 彰夫｜事業推進・経営管理・AI実装</title>
 <meta name="description" content="事業の課題を見極め、数字と現場をつなぎ、実装まで進める。堀部彰夫の事業推進・経営管理・AIプロダクト開発の実績。">
 
@@ -27,7 +29,7 @@
 <meta name="twitter:image" content="https://horibe7akio.github.io/portfolio/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0d0f14; --panel:#151922; --panel2:#1b2130; --line:#252c3a;
@@ -440,7 +442,7 @@
   .prz .pz-hint{max-width:820px;margin:0 auto 16px;padding:0 20px;font-size:12px;color:var(--mut)}
   /* 印刷：どのタブからでも印刷用ページだけがA4で出る */
   @media print{
-    .sidenav,.mobilebar,.ambient-bg,.progress-bar,.hover-bg,.detailpanel,.detailpanel-hint,.draft-note{display:none !important}
+    #gl,.sidenav,.mobilebar,.ambient-bg,.progress-bar,.hover-bg,.detailpanel,.detailpanel-hint,.draft-note{display:none !important}
     main.page{display:none !important}
     main.page[data-page="print"]{display:block !important;background:#fff;padding:0}
     body{background:#fff;padding-left:0 !important}
@@ -462,10 +464,283 @@
   section:has(>.wrap>.archive){padding-top:12px;padding-bottom:12px}
   @media print{.archive>summary{display:none}.archive::details-content{display:block}}
 
+
+  /* ================= v2（2026-11）: 余白と活字で見せる。色は1色、角は立てる ================= */
+  @media screen{
+    :root{
+      --bg:#09090a; --panel:#111113; --panel2:#17171a; --line:#27272c;
+      --tx:#f2f1ec; --mut:#8f8f89; --acc:#5eead4; --acc-rgb:94,234,212; --on-acc:#06120f;
+      --maxw:1040px;
+      --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",monospace;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f4f3ee; --panel:#fbfaf7; --panel2:#eae8e1; --line:#d8d5cb;
+        --tx:#0e0e0d; --mut:#63625c; --acc:#0b7d73; --acc-rgb:11,125,115; --on-acc:#ffffff; }
+    }
+    ::selection{background:var(--acc);color:var(--on-acc)}
+    a{text-underline-offset:3px}
+    h1,h2,h3,.hero-message{font-feature-settings:"palt"}
+
+    #gl{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;display:block}
+    /* 背景：光の玉をやめて、細い縦の罫だけにする */
+    .ambient-bg span{display:none}
+    .ambient-bg::before{background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);
+      background-size:calc(100% / 8) 100%;opacity:.28;
+      mask-image:linear-gradient(to bottom,#000 0%,transparent 78%);
+      -webkit-mask-image:linear-gradient(to bottom,#000 0%,transparent 78%)}
+    .progress-bar{height:1px}
+    section::before{display:none}
+
+    /* 冒頭：名前は小さく、言葉を大きく */
+    header.hero{padding:0;min-height:min(88vh,860px);display:flex;align-items:flex-end;
+      border-bottom:1px solid var(--line)}
+    header.hero .wrap{width:100%;padding-top:96px;padding-bottom:56px}
+    header.hero.rzhead{min-height:0;display:block}
+    header.hero.rzhead .wrap{padding-top:72px;padding-bottom:40px}
+    header.hero:not(.rzhead) h1{font-size:14px;font-weight:700;letter-spacing:.34em;line-height:1.6;overflow:visible}
+    header.hero:not(.rzhead) h1::after{display:none}
+    .role-line{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;
+      color:var(--mut);margin:.7em 0 0}
+    .hero-message{font-size:clamp(38px,7.2vw,88px);line-height:1.14;letter-spacing:-.02em;margin:44px 0 30px}
+    .hero-message span:last-child{color:var(--acc)}
+    .tagline{font-size:15px;max-width:38em}
+    header.hero .tagline,header.hero .offer-line,header.hero .role-line{text-shadow:0 0 3px var(--bg),0 0 10px var(--bg),0 0 18px var(--bg)}
+    .offer-line{gap:0;margin-top:22px}
+    .offer-line li{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.04em;
+      background:none;border:0;border-radius:0;padding:0;color:var(--mut)}
+    .offer-line{row-gap:8px}
+    .offer-line li:not(:last-child){padding-right:12px;margin-right:12px;border-right:1px solid var(--line)}
+    .cta{margin-top:34px;gap:10px}
+
+    /* ボタン：角を立てて、墨一色 */
+    .btn{border-radius:0;background:var(--tx);color:var(--bg);font-size:13px;letter-spacing:.06em;
+      padding:14px 22px;gap:12px;overflow:visible}
+    .btn::after{content:"→";position:static;width:auto;height:auto;background:none;transform:none;
+      transition:transform .2s ease;left:auto}
+    .btn:hover{background:var(--acc);color:var(--on-acc);box-shadow:none;transform:none;text-decoration:none}
+    .btn:hover::after{left:auto;transform:translateX(4px)}
+    .btn.ghost{background:transparent;color:var(--tx);border:1px solid var(--line)}
+    .btn.ghost:hover{background:transparent;color:var(--tx);border-color:var(--tx)}
+
+    /* 節：番号を振って、見出しを大きく */
+    main.page{counter-reset:sec}
+    main.page:not([data-page="print"]) section{padding:88px 0;counter-increment:sec}
+    .kick{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.16em;color:var(--mut);gap:12px}
+    .kick::before{width:18px;height:1px;border-radius:0;background:var(--acc);box-shadow:none}
+    main.page:not([data-page="print"]) section > .wrap > .kick::before,
+    main.page:not([data-page="print"]) section > .wrap > .archive > .kick::before{
+      content:counter(sec,decimal-leading-zero);width:auto;height:auto;background:none;color:var(--acc)}
+    main.page:not([data-page="print"]) h2{font-size:clamp(28px,4.6vw,50px);line-height:1.16;
+      letter-spacing:-.02em;margin:.4em 0 .7em}
+    main.page:not([data-page="print"]) h3{font-size:19px;letter-spacing:-.005em}
+    .lead{font-size:15.5px}
+    .archive>summary{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.06em}
+
+    /* 箱：角を立てる。浮かせずに線の色だけ変える */
+    .card{border-radius:2px;padding:26px;background:color-mix(in srgb,var(--panel) 72%,transparent)}
+    .card:hover{transform:none;box-shadow:none;border-color:var(--tx)}
+    .card .role{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.05em;color:var(--mut)}
+    .detail-trigger.card-active{box-shadow:none;border-color:var(--acc)}
+    #summary .grid,#wcm .grid{gap:0;border:1px solid var(--line);counter-reset:c;margin-top:28px}
+    #summary .card,#wcm .card{border:0;border-right:1px solid var(--line);border-radius:0;background:none;
+      padding:30px 26px 34px;counter-increment:c}
+    #summary .card:last-child,#wcm .card:last-child{border-right:0}
+    #summary .card::before,#wcm .card::before{content:counter(c,decimal-leading-zero);display:block;
+      font-family:var(--mono);font-size:12px;color:var(--acc);margin-bottom:40px}
+    #summary .card a{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:12px}
+    @media(max-width:760px){
+      #summary .card,#wcm .card{border-right:0;border-bottom:1px solid var(--line)}
+      #summary .card:last-child,#wcm .card:last-child{border-bottom:0}
+      #summary .card::before,#wcm .card::before{margin-bottom:18px}
+    }
+    .badge{border-radius:0;background:none;font-size:12px;padding:7px 12px}
+    .badge .ico{display:none}
+    .badge:hover{transform:none;box-shadow:none;border-color:var(--tx)}
+    .tag{border-radius:0;background:none;font-family:var(--mono);font-size:11px;color:var(--mut);padding:2px 8px}
+    .launched{border-radius:0;background:none;font-family:var(--mono);font-weight:500}
+    .stats{gap:26px}
+    .stat{background:none;border:0;border-top:1px solid var(--tx);border-radius:0;padding:14px 0 0}
+    .stat .n{font-size:30px;color:var(--tx);text-shadow:none;letter-spacing:-.03em}
+    .media,.frame,.vid,.shot,.proof-panel{border-radius:2px}
+    .short{border-radius:6px}
+    .credit{border-radius:2px;background:none}
+    a.credit:hover{transform:none;box-shadow:none;border-color:var(--tx)}
+    .credit .c{font-family:var(--mono);font-weight:500}
+    .case-facts dt{font-family:var(--mono);font-weight:500;letter-spacing:.08em;color:var(--mut)}
+    .cv-hit,.cv-meta span,.rzlist li,.rzpr,.rztable-wrap{border-radius:2px}
+    .rzlist li{border-left-width:1px}
+
+    /* 年表 */
+    .tl{border-left-width:1px}
+    .tl-fill{left:-1px;width:1px;box-shadow:none}
+    .tl .when{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.04em;color:var(--mut)}
+    .tl .it::before{width:7px;height:7px;border-radius:0;left:-26px;top:8px}
+    .tl .it.detail-trigger{border-radius:2px}
+    .tl .it.detail-trigger::before{left:-14px;top:16px}
+    .tl .it.detail-trigger:hover{transform:none;
+      box-shadow:inset 0 0 0 1px var(--tx)}
+    .tl .it.detail-trigger:hover::before{transform:none;box-shadow:0 0 0 4px var(--bg)}
+    .tl .it.detail-trigger.card-active{box-shadow:inset 2px 0 0 var(--acc),inset 0 0 0 1px var(--line)}
+    .tl .it.detail-trigger.card-active::before{transform:none;box-shadow:0 0 0 4px var(--bg)}
+    .tl .it.past::before{box-shadow:0 0 0 4px var(--bg)}
+
+    /* 切り替えのボタン類 */
+    .era-filter button,.sidenav-switch button,.mobilebar button{border-radius:0;font-family:var(--mono);
+      font-weight:500;background:none}
+    .era-filter button.active,.sidenav-switch button.active,.mobilebar button.active{
+      background:var(--tx);color:var(--bg);border-color:var(--tx)}
+    .era-filter button:hover,.sidenav-switch button:hover{border-color:var(--tx)}
+
+    /* 横のナビ・詳細 */
+    .sidenav{background:var(--bg)}
+    .sidenav-brand{font-size:13px;letter-spacing:.24em}
+    .sidenav-brand span{font-family:var(--mono);font-weight:500;letter-spacing:.04em;text-transform:none;
+      color:var(--mut);line-height:1.7;margin-top:8px}
+    .sidenav-links::before{width:1px;left:3.5px}
+    .sidenav-links a{font-size:12.5px;font-weight:500}
+    .sidenav-links a::before{border-radius:0;border-width:1px;background:var(--bg)}
+    .sidenav-links a.active{color:var(--tx)}
+    .sidenav-links a.active::before{box-shadow:none}
+    .sidenav-foot{font-family:var(--mono)}
+    .mobilebar{background:var(--bg)}
+    .detailpanel{background:var(--bg);box-shadow:none}
+    .detailpanel-close{border-radius:0;background:none}
+    .detailpanel-hint{border-radius:0;background:var(--bg);font-family:var(--mono)}
+
+    /* 連絡先：アドレスを大きく */
+    footer{padding:88px 0 96px}
+    footer p a[href^="mailto"]{font-size:clamp(20px,3.6vw,36px);font-weight:900;color:var(--tx);
+      letter-spacing:-.01em;line-height:1.3;word-break:break-all}
+    footer p a[href^="mailto"]:hover{color:var(--acc);text-decoration:none}
+  }
+
+
+  /* ================= v3（2026-11）: 朝の空。明るく、風が通る見た目に（配色は明るい1種類だけ） ================= */
+  @media screen{
+    :root{
+      --bg:#f5fafe; --panel:#ffffff; --panel2:#ecf4fb; --line:#d7e5f1;
+      --tx:#10263a; --mut:#566c80; --acc:#1877e0; --acc-rgb:24,119,224; --on-acc:#ffffff;
+      --mint:#14b8a0; --warn:#b45309; --pt1:#1f7fe6; --pt2:#14b8a0;
+      --sky1:#cfe7ff; --sky2:#f5fafe; --sky3:#fbfdff;
+    }
+    html{background:var(--bg)}
+    body{background:transparent}
+    .ambient-bg{background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 58%,var(--sky3) 100%);z-index:-2}
+    .ambient-bg::before{display:none}
+    .hover-bg img.on{opacity:.16}
+
+    /* 冒頭 */
+    header.hero{border-bottom:0}
+    .hero-message span:last-child{background:linear-gradient(90deg,var(--acc),var(--mint));
+      -webkit-background-clip:text;background-clip:text;color:transparent}
+    header.hero .tagline,header.hero .offer-line,header.hero .role-line{
+      text-shadow:0 0 3px #fff,0 0 12px #fff,0 0 20px #fff}
+    .tagline,.role-line,.offer-line li{color:#3f566b}
+    .offer-line li:not(:last-child){border-right-color:#b9cfe2}
+
+    /* ボタン：丸く、空の青 */
+    .btn{border-radius:999px;background:var(--acc);color:#fff;padding:14px 26px;
+      box-shadow:0 10px 24px -12px rgba(var(--acc-rgb),.7)}
+    .btn:hover{background:#0f63c4;color:#fff;box-shadow:0 14px 28px -12px rgba(var(--acc-rgb),.8)}
+    .btn.ghost{background:rgba(255,255,255,.8);color:var(--tx);border:1px solid var(--line);box-shadow:none}
+    .btn.ghost:hover{background:#fff;color:var(--acc);border-color:var(--acc)}
+
+    /* 節 */
+    main.page:not([data-page="print"]) section{border-top:0}
+    .kick{color:var(--acc)}
+    .kick::before{background:var(--mint)}
+
+    /* 箱：白くて、やわらかい影 */
+    .card{border-radius:18px;background:rgba(255,255,255,.82);border:1px solid #fff;
+      box-shadow:0 1px 0 rgba(16,60,110,.04),0 18px 40px -26px rgba(16,60,110,.35);
+      -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+    .card:hover{border-color:rgba(var(--acc-rgb),.45);transform:translateY(-2px);
+      box-shadow:0 1px 0 rgba(16,60,110,.04),0 22px 44px -24px rgba(var(--acc-rgb),.45)}
+    .detail-trigger.card-active{border-color:var(--acc);
+      box-shadow:0 0 0 1px var(--acc),0 22px 44px -24px rgba(var(--acc-rgb),.5)}
+    #summary .grid,#wcm .grid{gap:16px;border:0}
+    #summary .card,#wcm .card,#summary .card:last-child,#wcm .card:last-child{
+      border:1px solid #fff;border-radius:18px;background:rgba(255,255,255,.82);padding:26px 24px 28px}
+    #summary .card::before,#wcm .card::before{margin-bottom:26px;color:var(--mint)}
+    .badge{border-radius:999px;background:var(--panel2);border-color:transparent;padding:7px 14px}
+    .badge:hover{border-color:var(--acc)}
+    .tag{border-radius:999px;background:var(--panel2);border-color:transparent;padding:3px 10px}
+    .launched{border-radius:999px;background:rgba(var(--acc-rgb),.1)}
+    .stat{background:rgba(255,255,255,.82);border:1px solid #fff;border-radius:16px;padding:16px 18px;
+      box-shadow:0 18px 40px -28px rgba(16,60,110,.35)}
+    .stat .n{color:var(--acc)}
+    .media,.frame,.vid,.shot,.proof-panel{border-radius:14px}
+    .short{border-radius:18px}
+    .credit{border-radius:14px;background:rgba(255,255,255,.82);border-color:#fff}
+    a.credit:hover{border-color:var(--acc)}
+    .cv-hit,.rzlist li,.rzpr,.rztable-wrap{border-radius:12px}
+    .cv-meta span{border-radius:999px}
+
+    /* 年表 */
+    .tl .it::before{border-radius:50%;width:9px;height:9px;left:-27px;top:7px}
+    .tl .it.detail-trigger{border-radius:14px;background:rgba(255,255,255,.6)}
+    .tl .it.detail-trigger::before{left:-15px;top:15px}
+    .tl .it.detail-trigger:hover{background:#fff;box-shadow:inset 0 0 0 1px rgba(var(--acc-rgb),.5)}
+    .tl .it.detail-trigger.card-active{background:#fff;
+      box-shadow:inset 3px 0 0 var(--acc),inset 0 0 0 1px rgba(var(--acc-rgb),.4)}
+
+    /* 切り替えのボタン類 */
+    .era-filter button,.sidenav-switch button,.mobilebar button{border-radius:999px;background:rgba(255,255,255,.7)}
+    .era-filter button.active,.sidenav-switch button.active,.mobilebar button.active{
+      background:var(--acc);color:#fff;border-color:var(--acc)}
+    .era-filter button:hover,.sidenav-switch button:hover{border-color:var(--acc);color:var(--acc)}
+    .era-filter button.active:hover,.sidenav-switch button.active:hover{color:#fff}
+
+    /* 横のナビ・詳細 */
+    .sidenav{background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+      border-right-color:rgba(255,255,255,.9)}
+    .sidenav-links a::before{border-radius:50%;background:#fff}
+    .sidenav-links a.active{color:var(--acc)}
+    .mobilebar{background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+    .detailpanel{background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+      box-shadow:-20px 0 44px -24px rgba(16,60,110,.35)}
+    .detailpanel-close{border-radius:50%;background:var(--panel2)}
+    .detailpanel-hint{border-radius:999px;background:rgba(255,255,255,.8)}
+
+    footer{border-top:0}
+    footer p a[href^="mailto"]:hover{color:var(--acc)}
+  }
+
+
+  /* アコーディオンをやめる：最初から開いておき、スクロールで順に現れる（JS が無い時は元のアコーディオンのまま） */
+  @media screen{
+    html.auto-open .archive>summary{display:none}
+    html.auto-open main.page:not([data-page="print"]) section:has(>.wrap>.archive){padding-top:88px;padding-bottom:88px}
+    .reveal{transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+    #career .tl .it.reveal{transform:translateX(-22px);
+      transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1),background .2s ease,box-shadow .3s ease}
+    #career .tl .it.reveal.in{transform:none}
+    #career .tl .it.reveal::before{transform:scale(0);transition:transform .45s cubic-bezier(.3,1.6,.5,1) .25s}
+    #career .tl .it.reveal.in::before{transform:scale(1)}
+    @media (prefers-reduced-motion: reduce){
+      .reveal,#career .tl .it.reveal{transform:none;transition:none}
+      #career .tl .it.reveal::before{transform:none;transition:none}
+    }
+  }
+
+  @media screen{
+    .cap-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0 18px}
+    .cap-stats .stat .n{font-size:clamp(26px,3.4vw,38px);line-height:1.15}
+    .cap-why{margin:18px 0 26px}
+    .cap-sample{display:inline-block;margin:6px 0 0;font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.04em;color:var(--acc);background:rgba(var(--acc-rgb),.09);border-radius:999px;padding:5px 14px}
+    .cap-media{align-items:start;gap:20px}
+    .cap-vid{aspect-ratio:4/5;object-fit:cover;background:#05090f}
+    .cap-loop{aspect-ratio:1/1;object-fit:contain}
+    #capacity .vidcap,#capacity .cap-note{text-shadow:0 0 4px var(--bg),0 0 12px var(--bg),0 0 20px var(--bg)}
+    .cap-note{font-size:12px;color:var(--mut);line-height:1.85;margin-top:18px;max-width:72ch}
+    @media(max-width:760px){.cap-stats{grid-template-columns:repeat(2,1fr);gap:10px}.cap-stats .stat{padding:14px}.cap-stats .stat .n{font-size:22px}}
+    main.page:not([data-page="print"]) section .lead,main.page:not([data-page="print"]) h2{text-shadow:0 0 4px var(--bg),0 0 14px var(--bg),0 0 24px var(--bg)}
+  }
 </style>
 </head>
 <body>
 <div class="ambient-bg" aria-hidden="true"><span></span><span></span><span></span></div>
+<canvas id="gl" aria-hidden="true"></canvas>
 <div class="progress-bar" id="progress-bar" aria-hidden="true"></div>
 <div class="hover-bg" id="hover-bg" aria-hidden="true"><img alt=""><img alt=""></div>
 <nav class="sidenav" aria-label="グローバルナビゲーション">
@@ -476,6 +751,7 @@
     <button type="button" data-page-btn="print">PDF印刷用</button>
   </div>
   <div class="sidenav-links" data-page="portfolio">
+    <a href="#capacity" data-target="capacity">体制（10月の実績）</a>
     <a href="#summary" data-target="summary">できること</a>
     <a href="#demo" data-target="demo">いま作っているもの</a>
     <a href="#featured" data-target="featured">代表実績</a>
@@ -1058,9 +1334,9 @@
     <div class="role-line">事業推進・経営管理・AI実装 / PdM・FDE</div>
     <p class="hero-message"><span>事業を見立て、</span><span>数字で捉え、</span><br><span>実装まで進める。</span></p><p class="tagline">AI事業の推進・経営管理から、プロダクトの企画・開発・導入まで。経営・営業・開発・現場の皆様と認識を揃え、課題の整理から実行まで携わっております。</p>
     <ul class="offer-line">
-      <li>業務委託を中心にご相談</li>
-      <li>フルタイム〜0.5人月</li>
-      <li>リモート中心（必要な出社は可）</li>
+      <li>副業（業務委託）でご相談</li>
+      <li>平日夜間・土日</li>
+      <li>リモート中心</li>
     </ul>
     <div class="cta">
       <a class="btn" href="#featured">代表実績を見る</a>
@@ -1068,6 +1344,37 @@
     </div>
   </div>
 </header>
+
+<section id="capacity"><div class="wrap">
+<div class="kick">Capacity</div>
+<h2>お願いした仕事が、<br>確実に終わる体制です。</h2>
+<p class="cap-sample">一例：2026年10月の稼働実績</p>
+<p class="lead">同じ仕事を頼むなら、最後まで終わらせられる相手に頼みたいはずです。私は4台のMacでAIエージェントを並行に動かす開発体制を自分で組み、回しています。下の数字は、その一例として2026年10月の1か月を集計したものです。何を先にやるか・どこまでできたら完成かは私が決め、実装はエージェントが並行で進め、結果はすべて私が見てから出します。</p>
+<div class="cap-stats">
+  <div class="stat"><div class="n">約328億</div><div class="l">トークン</div></div>
+  <div class="stat"><div class="n">約5,475ドル</div><div class="l">同じ量をAPIの標準単価に直した額</div></div>
+  <div class="stat"><div class="n">4台</div><div class="l">並行で動かしているMac</div></div>
+  <div class="stat"><div class="n">延べ3,254時間</div><div class="l">エージェントの稼働（1か月は744時間）</div></div>
+  <div class="stat"><div class="n">約2.54倍</div><div class="l">Codex Pro（20倍）の1か月分の枠に対する利用</div></div>
+  <div class="stat"><div class="n">796</div><div class="l">Claude Code のセッション</div></div>
+</div>
+<div class="grid g3 cap-why">
+  <div class="card"><h3>止まらない</h3><p>1台が重い処理でふさがっても、空いている別のMacへ回します。待ち時間で作業を止めません。</p></div>
+  <div class="card"><h3>並行で進む</h3><p>独立した作業は同時に、順番が要る作業は順番どおりに。複数の案件を同じ月に前へ進めています。</p></div>
+  <div class="card"><h3>出す前に人が見る</h3><p>合格の条件を先に決め、機械のチェックと私の確認を通った物だけを出します。AIの出力をそのまま渡しません。</p></div>
+</div>
+<div class="grid g2 cap-media">
+  <div>
+    <video class="vid cap-vid" src="run-it.mp4" poster="run-it-poster.jpg" controls preload="none" playsinline aria-label="I don't use AI. I run it.（69秒・英語）"></video>
+    <p class="vidcap">▲ この動画自体も、素材集め・台本・編集・声・BGM・書き出しまでをエージェントに任せた1件の作業です（69秒・英語・音あり）</p>
+  </div>
+  <div>
+    <video class="vid cap-vid cap-loop" src="four-macs.mp4" poster="four-macs-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="2026年10月、4台のMac（M1・M2・M4・M5）の日別の稼働。動画からの切り出し"></video>
+    <p class="vidcap">▲ 4台のMac（M1・M2・M4・M5）の2026年10月の稼働（一例・左の動画から切り出し）。明るいほどその日の利用が多い</p>
+  </div>
+</div>
+<p class="cap-note">数字はすべて2026年10月1〜31日（日本時間）の1か月を一例として集計したもので、更新はしていません。トークンは Codex 約299億＋Claude Code 約29億で、約98%はキャッシュ済みの入力。金額はキャッシュ割引込みの標準API単価で見積もった換算で、実際の支払額ではありません。延べ時間は、並行して動いたセッションをそれぞれ足した推計です。Claude Code は記録が残っている範囲だけを数えています。</p>
+</div></section>
 
 <section id="summary"><div class="wrap">
 <div class="kick">How I can help</div><h2>決めて、作って、届ける</h2>
@@ -1235,10 +1542,12 @@
 
 
 <section id="proof">
-  <div class="wrap"><details class="archive"><summary>その他のAIプロダクト実績</summary><div class="card" style="margin:24px 0"><div class="role">Pacific Meta（2024.05–07）・複業クラウド経由</div><h3>Web3アプリのグローバルリリース支援</h3><p>Web3領域アプリのグローバルリリースに伴う、KOLマーケティングのプロジェクトマネジメントを担当いたしました。</p></div>
+  <div class="wrap"><details class="archive"><summary>その他のAIプロダクト実績</summary>
     <div class="kick">Proof of Work</div>
     <h2>作って、どう届けたか</h2>
     <p class="lead" style="margin-bottom:16px">ANICRA・LuminaLive・Comdesk Leadは上を参照。それ以外の関わったプロダクト：</p>
+    <div class="card" style="margin:24px 0"><div class="role">Pacific Meta（2024.05–07）・複業クラウド経由</div><h3>Web3アプリのグローバルリリース支援</h3><p>Web3領域アプリのグローバルリリースに伴う、KOLマーケティングのプロジェクトマネジメントを担当いたしました。</p></div>
+    <div style="height:20px"></div>
     <div>
       <div class="card detail-trigger" data-detail="rcp" style="margin-bottom:20px">
         <div class="split">
@@ -1279,6 +1588,9 @@
 
 <section id="games">
   <div class="wrap"><details class="archive"><summary>事業運営・ゲーム・映像の実績</summary>
+    <div class="kick">Works ・ 過去の本業</div>
+    <h2>作品（ゲーム）</h2>
+    <p class="lead" style="margin-bottom:16px">プロデューサー／ディレクターとして手がけた運営・新規タイトル。<strong>事業運営・組織マネジメントの経験も、現在の仕事の土台です。</strong>ここは、数字を動かした証拠です。</p>
     <!-- イルーナ growth -->
     <div class="card detail-trigger" data-detail="iruna" style="background:var(--panel2)">
       <div class="split">
@@ -1344,10 +1656,7 @@
       </div>
       </div>
     </div>
-
-    <div class="kick">Works ・ 過去の本業</div>
-    <h2>作品（ゲーム）</h2>
-    <p class="lead" style="margin-bottom:16px">プロデューサー／ディレクターとして手がけた運営・新規タイトル。<strong>事業運営・組織マネジメントの経験も、現在の仕事の土台です。</strong>ここは、数字を動かした証拠です。</p>
+    <div style="height:20px"></div>
     <div class="card detail-trigger" data-detail="saoif" style="max-width:560px">
       <div class="frame">
         <iframe src="https://www.youtube-nocookie.com/embed/SWS26hENGds" title="SAOIF 公式映像（SAOゲーム公式）"
@@ -1473,6 +1782,8 @@
     <div class="tl">
       <div class="tl-fill" id="tl-fill" aria-hidden="true"></div>
       <h3 data-era-head="ai" style="margin:2px 0 -4px">AI・PM期 <span style="font-weight:400;color:var(--mut);font-size:14px">（2020–現在）</span></h3>
+      <div class="it"><div class="when">2026.11 – 現在 ・ GMO AI&amp;ロボティクス商事（正社員）</div><p><strong>ロボットFDE。</strong>フィジカルAI（ロボット）を顧客の現場へ導入・活用するための支援。</p><div><span class="tag">FDE</span><span class="tag">フィジカルAI</span><span class="tag">ロボット</span></div></div>
+      <div class="it"><div class="when">2026.07 – 現在 ・ フリーランス（個人事業主・業務委託）</div><p><strong>アドバイザー／講師。</strong>ゲーム開発会社でのオリジナルIPゲームの立ち上げ（生成AIを活用したゲーム開発・ゲームデザインの助言）、生成AIスクールでのワークショップ企画・登壇、国内大手モビリティメーカー向けのゲーム性・課金設計の助言。</p><div><span class="tag">ゲームデザイン</span><span class="tag">生成AI</span><span class="tag">講師</span></div></div>
       <div class="it detail-trigger" data-detail="cv-crestlab"><div class="when">2026.05 – 2026.07 ・ CrestLab（業務委託）</div><p><strong>FDE。</strong>アニメ制作領域のAI活用プロダクトを、客先で"その場で開発"してデリバリー＋自社SaaSへ実装。ビジョン/事業戦略/営業戦略の経営MTGまで。</p><div><span class="tag">FDE</span><span class="tag">生成AI</span><span class="tag">事業戦略</span></div></div>
       <div class="it detail-trigger" data-detail="cv-aiinnovation"><div class="when">2025.09 – 2026.04 ・ AI INNOVATION（正社員）</div><p><strong>PdM（SES）。</strong>営業特化・マルチエージェント/マルチプロバイダーのAI SaaS。開発ロードマップ・ROI試算・スクラム・Looker分析基盤。</p><div><span class="tag">PdM</span><span class="tag">AI SaaS</span><span class="tag">スクラム</span></div></div>
       <div class="it detail-trigger" data-detail="cv-aiimpulse"><div class="when">2024.02 – 2025.08 ・ AI Impulse（業務委託）</div><p><strong>事業推進・経営管理／開発Dir・PO。</strong>簡易PL・BS・KPIによる事業管理、営業戦略と開発計画の調整。LuminaLiveと法人向けサービスを企画・開発。</p><div><span class="tag">開発Dir/PO</span><span class="tag">0→1</span><span class="tag">AI VTuber</span></div></div>
@@ -1542,7 +1853,7 @@
 <section id="wcm"><div class="wrap"><div class="kick">Working together</div><h2>ご相談いただけること</h2><div class="grid g3">
 <div class="card"><h3>事業・経営管理</h3><p>事業の現状整理、KPI・数値管理、営業と開発の優先順位の調整。既存の資料や業務の背景を理解するところから進めます。</p></div>
 <div class="card"><h3>AI・プロダクト開発</h3><p>AI活用の検討、業務改善、PoCから製品化・導入まで。課題の整理や意思決定から関わり、実行まで進める役割を希望しております。</p></div>
-<div class="card"><h3>関わり方</h3><p>業務委託を中心に、役割・稼働量をご相談させてください。リモート中心で、必要な出社にも対応します。正社員は期待される役割との相性を踏まえて検討しております。</p></div>
+<div class="card"><h3>関わり方</h3><p>現在は正社員として勤務しており、副業（業務委託）としてご相談を承ります。平日夜間・土日、リモート中心で、役割・稼働量はご相談させてください。</p></div>
 </div></div></section>
 
 <footer id="contact">
@@ -1574,7 +1885,7 @@
       <div class="pz-contact">superchance1986@outlook.jp ／ ポートフォリオ: horibe7akio.github.io/portfolio</div>
 
       <h2 style="margin-top:22px">概要</h2>
-      <p>事業の課題を見極め、数字と現場をつなぎ、実装まで進めます。AI事業の推進・経営管理から、プロダクトの企画・開発・導入まで担当してまいりました。業務委託を中心にご相談です。</p>
+      <p>事業の課題を見極め、数字と現場をつなぎ、実装まで進めます。AI事業の推進・経営管理から、プロダクトの企画・開発・導入まで担当してまいりました。副業（業務委託）としてご相談を承ります。</p>
       <p>直近はアニメ制作AI基盤を客先でその場開発し、CTI SaaSではChatGPT連携をリリースしました。ゲーム期に月商約1.5倍・ストア上位を出した経験は、決めたあとに回せる証明です。作り手出身であることは原点であって、いまの職種名ではありません。</p>
 
       <div class="pz-stats">
@@ -1703,7 +2014,7 @@
   <header class="hero rzhead">
     <div class="wrap">
       <h1>職務経歴書</h1>
-      <div class="role-line">堀部 彰夫　・　2026年9月9日現在</div>
+      <div class="role-line">堀部 彰夫　・　2026年11月22日現在</div>
       <p class="tagline">事業の課題を整理し、<strong>数字と現場をつなぎ、実装まで進める</strong> PdM / FDE。</p>
       <div class="cta">
         <a class="btn" href="#r-history">職務経歴を見る</a>
@@ -1781,10 +2092,12 @@
   <section id="r-history">
     <div class="wrap">
       <div class="kick">Full History</div>
-      <h2>全経歴（22社）</h2>
+      <h2>全経歴（23社）</h2>
       <p class="lead" style="max-width:70ch;margin-bottom:8px">在籍したすべての会社と、それぞれで担当した職務内容です（逆年代順）。</p>
       <div class="tl" style="margin-top:16px">
         <h3 style="margin:2px 0 -4px">AI・PM期 <span style="font-weight:400;color:var(--mut);font-size:14px">（2020–現在）</span></h3>
+        <div class="it"><div class="when">2026.11 – 現在 ・ GMO AI&amp;ロボティクス商事株式会社（正社員）｜ロボットFDE</div><p>フィジカルAI（ロボット）を顧客の現場へ導入・活用するための支援。</p></div>
+        <div class="it"><div class="when">2026.07 – 現在 ・ フリーランス（個人事業主・業務委託）｜アドバイザー／講師</div><p>ゲーム開発会社でのオリジナルIPゲームの立ち上げ（2026.10〜）、生成AIスクールでのワークショップ企画・登壇（2026.09〜）、国内大手モビリティメーカー向けのゲーム性・課金設計の助言（2026.07〜08）。</p></div>
         <div class="it"><div class="when">2026.05 – 2026.07 ・ 株式会社CrestLab（業務委託）｜FDE</div><p>アニメ制作へのAI活用プロダクト（ANICRA）を客先で開発し、自社SaaSへ実装。商談ヒアリング〜PoC/MVP開発〜運用、業界ニーズを反映した事業戦略・経営MTGまで一気通貫（3名体制）。</p></div>
         <div class="it"><div class="when">2025.09 – 2026.04 ・ 株式会社AI INNOVATION（正社員）｜PdM</div><p>営業特化AI-SaaSのPdM。ロードマップ・ROI試算・優先度設計・スクラム運用（PO/PdM 9名・エンジニア60名・QA 4名体制）。開発ディレクター兼エンジニアも兼務。</p></div>
         <div class="it"><div class="when">2024.02 – 2025.08 ・ 株式会社AI Impulse（業務委託）｜開発ディレクター／PO</div><p>AITuberライブ配信アプリ「LuminaLive」（iOS/Android/Web）を0→1。ゲーム設計・スクラム・音声/キャラクター生成・AIアーキテクチャ・AWS調整。ECライブコマース等のBtoB派生プロダクト4種も企画・開発。</p></div>
@@ -2050,7 +2363,7 @@
 </script>
 <script>
 (function(){
-  var els = document.querySelectorAll('#summary .card, #featured > .wrap > .card, #proof .card, #games .card, #games .credit, #personal .card, #career .tl .it, #skills .card, #wcm .card');
+  var els = document.querySelectorAll('#capacity .stat, #capacity .card, #capacity .cap-media > div, #summary .card, #featured > .wrap > .card, #proof .card, #games .card, #games .credit, #personal .card, #career .tl .it, #skills .card, #wcm .card');
   if(!els.length) return;
   els.forEach(function(el){ el.classList.add('reveal'); });
   if(!('IntersectionObserver' in window)){
@@ -2314,5 +2627,246 @@
  function revealHash(){var id=decodeURIComponent(location.hash.slice(1));var target=document.getElementById(id);if(!target)return;var d=target.querySelector('details.archive');if(d)d.open=true;}
  window.addEventListener('hashchange',revealHash);revealHash();
 })();
-</script></body>
+</script>
+<script>
+/* アコーディオンを最初から開き、中身はスクロールで順に現れるようにする */
+(function(){
+  var ds = document.querySelectorAll('details.archive');
+  if(!ds.length) return;
+  document.documentElement.classList.add('auto-open');
+  var extra = [];
+  ds.forEach(function(d){
+    d.open = true;
+    Array.prototype.forEach.call(d.children, function(c){
+      if(c.tagName === 'SUMMARY') return;
+      if(c.classList.contains('tl')){
+        Array.prototype.forEach.call(c.children, function(k){ if(k.tagName === 'H3') extra.push(k); });
+        return;
+      }
+      if(c.classList.contains('reveal') || c.querySelector('.reveal')) return;
+      extra.push(c);
+    });
+  });
+  if(!extra.length) return;
+  extra.forEach(function(el){ el.classList.add('reveal'); });
+  if(!('IntersectionObserver' in window)){ extra.forEach(function(el){ el.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {rootMargin:'0px 0px -8% 0px', threshold:0.05});
+  extra.forEach(function(el){ io.observe(el); });
+  // 速く通り過ぎて出そこねた物を残さない：画面より上にある物は出しておく
+  var tick = false;
+  window.addEventListener('scroll', function(){
+    if(tick) return; tick = true;
+    requestAnimationFrame(function(){
+      tick = false;
+      var rest = document.querySelectorAll('.reveal:not(.in)');
+      for(var i = 0; i < rest.length; i++){
+        var r = rest[i].getBoundingClientRect();
+        if(r.height > 0 && r.top < window.innerHeight * 0.9) rest[i].classList.add('in');
+      }
+    });
+  }, {passive:true});
+})();
+</script>
+<script type="module">
+/* 背景の点群：スクロールで節が変わるたびに、点の並びが次の形へ組み替わる */
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+(function(){
+  var cv = document.getElementById('gl');
+  if(!cv) return;
+  var renderer;
+  try{
+    renderer = new THREE.WebGLRenderer({canvas:cv, alpha:true, antialias:false, powerPreference:'low-power'});
+  }catch(e){ cv.remove(); return; }
+  THREE.ColorManagement.enabled = false;
+
+  var small  = matchMedia('(max-width:760px)').matches;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var N = small ? 3200 : 7200;
+  var DPR = Math.min(window.devicePixelRatio || 1, 2);
+  renderer.setPixelRatio(DPR);
+
+  var scene = new THREE.Scene();
+  var cam = new THREE.PerspectiveCamera(50, 1, 0.1, 50);
+  var group = new THREE.Group(); scene.add(group);
+
+  // 毎回同じ並びになる乱数
+  var seed = 20261122;
+  function rnd(){ seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }
+  function tilt(p, a){ var c = Math.cos(a), s = Math.sin(a); return [p[0], p[1]*c - p[2]*s, p[1]*s + p[2]*c]; }
+
+  var forms = [];
+  function mk(fn){
+    var a = new Float32Array(N * 3);
+    for(var i = 0; i < N; i++){ var p = fn(i, i / N); a[i*3] = p[0]; a[i*3+1] = p[1]; a[i*3+2] = p[2]; }
+    forms.push(a);
+  }
+  var side = Math.ceil(Math.sqrt(N)), TAU = Math.PI * 2;
+  // 0 散らばり
+  mk(function(){ return [(rnd()-.5)*7.6, (rnd()-.5)*4.6, (rnd()-.5)*4.2]; });
+  // 1 格子の面
+  mk(function(i){ var x = i % side, y = Math.floor(i / side);
+    return tilt([(x/side-.5)*5.6, (y/side-.5)*3.6, 0], -0.55); });
+  // 2 球
+  mk(function(i){ var y = 1 - 2*(i+.5)/N, r = Math.sqrt(1 - y*y), th = i * 2.399963;
+    return [Math.cos(th)*r*1.75, y*1.75, Math.sin(th)*r*1.75]; });
+  // 3 陸上のトラック（6レーン）
+  mk(function(i){ var lane = i % 6, r = .82 + lane * .1, L = 2.5, per = 2*L + TAU*r, d = rnd() * per, x, z;
+    if(d < L){ x = -L/2 + d; z = -r; }
+    else if(d < L + Math.PI*r){ var a1 = (d - L)/r; x = L/2 + Math.sin(a1)*r; z = -Math.cos(a1)*r; }
+    else if(d < 2*L + Math.PI*r){ x = L/2 - (d - L - Math.PI*r); z = r; }
+    else { var a2 = (d - 2*L - Math.PI*r)/r; x = -L/2 - Math.sin(a2)*r; z = Math.cos(a2)*r; }
+    return tilt([x, 0, z], 1.0); });
+  // 4 波打つ地面
+  mk(function(i){ var gx = i % side, gz = Math.floor(i / side);
+    var x = (gx/side-.5)*7.4, z = (gz/side-.5)*5.2;
+    return [x, Math.sin(x*1.6)*.36 + Math.cos(z*2.1)*.3 - .9, z]; });
+  // 5 二重らせん
+  mk(function(i, u){ var st = i % 3, ang = u*TAU*5, r = .95, x = (u-.5)*7.2;
+    if(st === 2){ var k = 1 - 2*rnd(); return [x, Math.cos(ang)*r*k, Math.sin(ang)*r*k]; }
+    if(st === 1) ang += Math.PI;
+    return [x, Math.cos(ang)*r, Math.sin(ang)*r]; });
+  // 6 渦
+  mk(function(i){ var arm = i % 3, rad = Math.pow(rnd(), .6) * 2.7;
+    var ang = arm*TAU/3 + rad*1.7 + (rnd()-.5)*.5;
+    return tilt([Math.cos(ang)*rad, (rnd()-.5)*.16*(2.9-rad), Math.sin(ang)*rad], 1.05); });
+  // 並び順：風にうねる面から始めて、最後に散らばる
+  forms = [forms[4], forms[1], forms[2], forms[3], forms[5], forms[6], forms[0]];
+  var K = forms.length;
+
+  var seeds = new Float32Array(N * 4);
+  for(var i = 0; i < N; i++){
+    seeds[i*4] = rnd()*2-1; seeds[i*4+1] = rnd()*2-1; seeds[i*4+2] = rnd()*2-1; seeds[i*4+3] = rnd();
+  }
+  var geo = new THREE.BufferGeometry();
+  var attrA = new THREE.BufferAttribute(new Float32Array(forms[0]), 3);
+  var attrB = new THREE.BufferAttribute(new Float32Array(forms[1]), 3);
+  attrA.setUsage(THREE.DynamicDrawUsage); attrB.setUsage(THREE.DynamicDrawUsage);
+  geo.setAttribute('position', new THREE.BufferAttribute(forms[0], 3));
+  geo.setAttribute('aA', attrA);
+  geo.setAttribute('aB', attrB);
+  geo.setAttribute('aSeed', new THREE.BufferAttribute(seeds, 4));
+
+  var uni = {
+    uT:{value:0}, uTime:{value:0}, uSize:{value:17*DPR}, uOpacity:{value:.8},
+    uInk:{value:new THREE.Color('#f2f1ec')}, uAcc:{value:new THREE.Color('#5eead4')}
+  };
+  var mat = new THREE.ShaderMaterial({
+    uniforms: uni, transparent: true, depthWrite: false, depthTest: false,
+    vertexShader: [
+      'attribute vec3 aA; attribute vec3 aB; attribute vec4 aSeed;',
+      'uniform float uT, uTime, uSize;',
+      'varying float vSeed; varying float vDepth;',
+      'void main(){',
+      '  float d = clamp(uT*1.6 - aSeed.w*0.6, 0.0, 1.0);',
+      '  d = d*d*(3.0 - 2.0*d);',
+      '  vec3 p = mix(aA, aB, d);',
+      '  p += aSeed.xyz * sin(d*3.14159265) * 0.55;',
+      '  p += 0.035 * vec3(sin(uTime*0.6 + aSeed.x*20.0), cos(uTime*0.5 + aSeed.y*20.0), sin(uTime*0.4 + aSeed.z*20.0));',
+      '  vec4 mv = modelViewMatrix * vec4(p, 1.0);',
+      '  gl_Position = projectionMatrix * mv;',
+      '  gl_PointSize = uSize * (0.6 + aSeed.w*0.9) / -mv.z;',
+      '  vSeed = aSeed.w; vDepth = -mv.z;',
+      '}'
+    ].join('\n'),
+    fragmentShader: [
+      'uniform vec3 uInk; uniform vec3 uAcc; uniform float uOpacity;',
+      'varying float vSeed; varying float vDepth;',
+      'void main(){',
+      '  float a = smoothstep(0.5, 0.2, length(gl_PointCoord - 0.5));',
+      '  vec3 col = mix(uInk, uAcc, step(0.62, vSeed));',
+      '  float fog = smoothstep(10.0, 3.5, vDepth);',
+      '  gl_FragColor = vec4(col, a * uOpacity * fog);',
+      '}'
+    ].join('\n')
+  });
+  var pts = new THREE.Points(geo, mat);
+  pts.frustumCulled = false;
+  group.add(pts);
+
+  function readColors(){
+    var cs = getComputedStyle(document.documentElement);
+    var tx = (cs.getPropertyValue('--pt1') || cs.getPropertyValue('--tx')).trim(), ac = (cs.getPropertyValue('--pt2') || cs.getPropertyValue('--acc')).trim();
+    if(tx) uni.uInk.value.set(tx);
+    if(ac) uni.uAcc.value.set(ac);
+  }
+  readColors();
+  var mq = matchMedia('(prefers-color-scheme: light)');
+  if(mq.addEventListener) mq.addEventListener('change', readColors);
+
+  var W = 0, H = 0;
+  function resize(){
+    W = window.innerWidth; H = window.innerHeight;
+    renderer.setSize(W, H, false);
+    cam.aspect = W / H;
+    cam.position.z = cam.aspect < 0.8 ? 8.2 : (cam.aspect < 1.2 ? 6.6 : 5.4);
+    cam.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // いま画面の真ん中にある節の番号＋その節の中での進み具合
+  function target(){
+    var page = document.querySelector('main.page:not([hidden])');
+    if(!page) return 0;
+    var list = page.querySelectorAll('header.hero, section, footer');
+    var mid = H * 0.5, idx = 0, local = 0;
+    for(var i = 0; i < list.length; i++){
+      var r = list[i].getBoundingClientRect();
+      if(r.height < 4) continue;
+      if(r.top <= mid){ idx = i; local = Math.min(1, Math.max(0, (mid - r.top) / r.height)); }
+    }
+    var t = Math.min(1, Math.max(0, (local - 0.64) / 0.36));
+    return idx + t;
+  }
+
+  var want = 0, cur = 0, base = -1, mx = 0, my = 0, dirty = true;
+  window.addEventListener('scroll', function(){ dirty = true; }, {passive:true});
+  window.addEventListener('resize', function(){ dirty = true; });
+  document.addEventListener('click', function(){ setTimeout(function(){ dirty = true; }, 60); });
+  window.addEventListener('pointermove', function(e){ mx = e.clientX / W - .5; my = e.clientY / H - .5; }, {passive:true});
+
+  var ambient = document.querySelector('.ambient-bg'), skyP = -1;
+  var SKY = [[207,231,255],[205,240,232],[255,232,208]];
+  function sky(p){
+    var f = p * (SKY.length - 1), i = Math.min(SKY.length - 2, Math.floor(f)), k = f - i, a = SKY[i], b = SKY[i+1];
+    return 'rgb(' + Math.round(a[0]+(b[0]-a[0])*k) + ',' + Math.round(a[1]+(b[1]-a[1])*k) + ',' + Math.round(a[2]+(b[2]-a[2])*k) + ')';
+  }
+  var t0 = performance.now();
+  function frame(now){
+    requestAnimationFrame(frame);
+    if(document.hidden) return;
+    var pr = document.querySelector('main.page[data-page="print"]');
+    var off = pr && !pr.hidden;
+    cv.style.display = off ? 'none' : '';
+    if(off) return;
+
+    if(dirty){ want = target(); dirty = false; }
+    cur += (want - cur) * (reduce ? 1 : 0.07);
+    if(Math.abs(want - cur) > 0.0005) dirty = dirty || false;
+    var b = Math.floor(cur + 1e-6);
+    if(b !== base){
+      base = b;
+      attrA.array.set(forms[b % K]); attrA.needsUpdate = true;
+      attrB.array.set(forms[(b + 1) % K]); attrB.needsUpdate = true;
+    }
+    var time = reduce ? 0 : (now - t0) / 1000;
+    uni.uT.value = cur - b;
+    uni.uTime.value = time;
+    uni.uOpacity.value = 0.78 - 0.22 * Math.min(1, cur);
+    var wide = cam.aspect > 1.2 ? 1 : 0;
+    group.position.x = wide * 0.9 * Math.max(0, 1 - cur);
+    group.position.y = 1.25 * Math.max(0, 1 - cur);
+    group.rotation.y = cur * 0.55 + (window.scrollY || 0) * 0.0005 + time * 0.04 + mx * 0.12;
+    group.rotation.x = 0.12 * Math.sin(cur * 0.7) + my * 0.08;
+    var maxS = Math.max(1, document.documentElement.scrollHeight - H);
+    var sp = Math.min(1, Math.max(0, (window.scrollY || 0) / maxS));
+    if(Math.abs(sp - skyP) > 0.002){ skyP = sp; ambient && ambient.style.setProperty('--sky1', sky(sp)); }
+    renderer.render(scene, cam);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
 </html>
